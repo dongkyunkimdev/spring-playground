@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  playground-mysql:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: db_playground
+      MYSQL_CHARSET: utf8mb4
+      MYSQL_COLLATION: utf8mb4_unicode_ci
+    ports:
+      - 3308:3306
+    volumes:
+      - ./mysql/conf:/etc/mysql/conf.d
+      - ./mysql/init:/docker-entrypoint-initdb.d

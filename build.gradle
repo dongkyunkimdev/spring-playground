@@ -1,35 +1,90 @@
+buildscript {
+    ext {
+        playgroundVersion = '1.0.0'
+    }
+}
+
 plugins {
     id 'java'
     id 'org.springframework.boot' version '3.1.2'
     id 'io.spring.dependency-management' version '1.1.2'
 }
 
-group = 'com.mark'
-version = '0.0.1-SNAPSHOT'
-
-java {
-    sourceCompatibility = '17'
-}
-
-configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
-    }
-}
-
 repositories {
     mavenCentral()
 }
 
-dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    compileOnly 'org.projectlombok:lombok'
-    runtimeOnly 'com.mysql:mysql-connector-j'
-    annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+springBoot {
+    mainClass = 'com.playground'
 }
 
-tasks.named('test') {
-    useJUnitPlatform()
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    group = 'com.playground'
+    version = playgroundVersion
+    sourceCompatibility = '17'
+    targetCompatibility = '17'
+    compileJava.options.encoding = 'UTF-8'
+
+    configurations {
+        compileOnly {
+            extendsFrom annotationProcessor
+        }
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
+
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    }
+
+    tasks.named('test') {
+        test.configure {
+            systemProperty "spring.profiles.active", System.getProperty('profile', "local")
+        }
+
+        useJUnitPlatform()
+    }
+}
+
+project(':core-web') {
+    dependencies {
+        implementation project(':core')
+    }
+}
+
+project(':user-service') {
+    dependencies {
+        implementation project(':core')
+        implementation project(':core-web')
+    }
+}
+
+project(':product-service') {
+    dependencies {
+        implementation project(':core')
+        implementation project(':core-web')
+    }
+}
+
+project(':order-service') {
+    dependencies {
+        implementation project(':core')
+        implementation project(':core-web')
+    }
+}
+
+project(':delivery-service') {
+    dependencies {
+        implementation project(':core')
+        implementation project(':core-web')
+    }
 }

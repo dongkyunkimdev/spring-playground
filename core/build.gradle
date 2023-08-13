@@ -1,3 +1,7 @@
+plugins {
+    id "org.flywaydb.flyway" version "9.8.1"
+}
+
 bootJar {
     enabled = false
 }
@@ -11,4 +15,12 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation'
 
     runtimeOnly 'com.mysql:mysql-connector-j'
+}
+
+flyway {
+    url = 'jdbc:mysql://127.0.0.1:3308/db_flyway'
+    user = 'app_playground'
+    password = 'password'
+    schemas = ['db_flyway', 'db_playground']
+    cleanDisabled = false
 }

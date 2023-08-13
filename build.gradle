@@ -2,6 +2,9 @@ buildscript {
     ext {
         playgroundVersion = '1.0.0'
     }
+    dependencies {
+        classpath 'org.flywaydb:flyway-mysql:9.8.1'
+    }
 }
 
 plugins {

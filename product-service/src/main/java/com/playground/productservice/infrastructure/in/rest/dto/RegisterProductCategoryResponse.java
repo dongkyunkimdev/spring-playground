@@ -1,4 +1,4 @@
-package com.playground.productservice.application.port.in.usecase.dto;
+package com.playground.productservice.infrastructure.in.rest.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @Builder
-public class RegisterProductCategoryInfo {
+public class RegisterProductCategoryResponse {
 
     private Long id;
 

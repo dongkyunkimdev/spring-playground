@@ -5,6 +5,7 @@ import com.playground.productservice.application.port.in.usecase.RegisterProduct
 import com.playground.productservice.application.port.in.usecase.dto.RegisterProductCategoryCommand;
 import com.playground.productservice.application.port.in.usecase.dto.RegisterProductCategoryInfo;
 import com.playground.productservice.application.port.out.persistence.ProductPersistencePort;
+import com.playground.productservice.util.mapper.RegisterProductCategoryMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,15 +15,17 @@ public class RegisterProductCategoryService implements RegisterProductCategoryUs
 
     private final ProductPersistencePort productPersistencePort;
 
+    private final RegisterProductCategoryMapper mapper;
+
     @Override
     public RegisterProductCategoryInfo execute(RegisterProductCategoryCommand command) {
         if (productPersistencePort.isExistsProductCategoryByName(command.getName())) {
             throw new DuplicateProductCategoryNameException(command.getName());
         }
 
-        var savedProductCategory = productPersistencePort.saveProductCategory(command.toEntity());
+        var savedProductCategory = productPersistencePort.saveProductCategory(mapper.commandToEntity(command));
 
-        return RegisterProductCategoryInfo.from(savedProductCategory);
+        return mapper.entityToInfo(savedProductCategory);
     }
 
 }

@@ -32,4 +32,7 @@ public class Order {
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
     private List<OrderItem> orderItemList;
 
+    @OneToOne(mappedBy = "order", fetch = FetchType.LAZY)
+    private Payment payment;
+
 }

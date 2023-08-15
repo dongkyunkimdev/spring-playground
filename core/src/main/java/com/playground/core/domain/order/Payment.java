@@ -18,7 +18,8 @@ public class Payment {
     @Column(name = "user_payment_card_id")
     private Long userPaymentCardId;
 
-    @OneToOne(mappedBy = "payment", fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id")
     private Order order;
 
 }

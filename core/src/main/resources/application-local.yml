@@ -3,12 +3,5 @@ spring:
     url: jdbc:mysql://127.0.0.1:3308/db_playground?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&useTimezone=true&serverTimezone=UTC&useLegacyDatetimeCode=false&cacheDefaultTimezone=false&allowMultiQueries=true
     username: app_playground
     password: password
-  jpa:
-    hibernate:
-      ddl-auto: none
-    properties:
-      hibernate:
-        format_sql: true
-        show_sql: true
   flyway:
     locations: classpath:db/migration

@@ -1,3 +1,8 @@
+DROP SCHEMA IF EXISTS `db_playground`;
+
+CREATE
+    DATABASE IF NOT EXISTS `db_playground` DEFAULT CHARACTER SET utf8mb4;
+
 use db_playground;
 
 CREATE TABLE `delivery`

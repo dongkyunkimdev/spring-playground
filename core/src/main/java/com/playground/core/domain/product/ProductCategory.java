@@ -2,6 +2,7 @@ package com.playground.core.domain.product;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -21,5 +22,10 @@ public class ProductCategory {
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "product_id")
     private Product product;
+
+    @Builder
+    public ProductCategory(String name) {
+        this.name = name;
+    }
 
 }

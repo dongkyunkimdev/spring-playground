@@ -37,4 +37,4 @@ out/
 .vscode/
 
 ### MapStruct ###
-!**/src/main/generated/
+**/src/main/generated/

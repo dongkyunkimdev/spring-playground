@@ -11,9 +11,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.nio.charset.StandardCharsets;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -24,7 +22,7 @@ class RegisterProductCategoryRestAdapterTest extends ControllerTest {
     @Test
     void 상품_카테고리_등록_성공() throws Exception {
         // given
-        String name = "의류";
+        final String name = "Toys";
         RegisterProductCategoryRequest requestDto = RegisterProductCategoryRequest.builder()
                 .name(name)
                 .build();
@@ -38,13 +36,13 @@ class RegisterProductCategoryRestAdapterTest extends ControllerTest {
         ResultActions result = mvc.perform(request);
 
         // then
-        result.andExpect(status().isOk());
+        result.andExpect(status().isCreated());
 
-        String responseMessage = result.andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
+        String responseMessage = result.andReturn().getResponse().getContentAsString();
         RegisterProductCategoryResponse responseDto = objectMapper.readValue(responseMessage, new TypeReference<>() {
         });
 
-        assertEquals(name, responseDto.getName());
+        assertThat(responseDto.getName()).isEqualTo(name);
     }
 
 }

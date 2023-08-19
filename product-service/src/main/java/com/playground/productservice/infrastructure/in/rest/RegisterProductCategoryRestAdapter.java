@@ -25,7 +25,7 @@ public class RegisterProductCategoryRestAdapter {
 
     @Operation(summary = "상품 카테고리 등록")
     @PostMapping("/v1/product/category")
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.CREATED)
     public RegisterProductCategoryResponse registerProductCategory(
             @io.swagger.v3.oas.annotations.parameters.RequestBody(
                     required = true, description = "상품 카테고리 등록 정보",

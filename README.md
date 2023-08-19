@@ -2,7 +2,9 @@
 Playground for Java and Spring Framework
 
 # Run Configuration
-- flyway: ```core:flywayClean core:flywayMigrate```
+- flyway: `core:flywayClean core:flywayMigrate`
+- test : `clean core:flywayClean core:flywayMigrate test --continue`
+- all service build : `clean bootJar -x test`
 
 # 실행하기
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/) 설치

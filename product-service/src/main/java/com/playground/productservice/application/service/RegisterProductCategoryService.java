@@ -8,6 +8,7 @@ import com.playground.productservice.application.port.out.persistence.ProductPer
 import com.playground.productservice.util.mapper.RegisterProductCategoryMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -17,6 +18,7 @@ public class RegisterProductCategoryService implements RegisterProductCategoryUs
 
     private final RegisterProductCategoryMapper mapper;
 
+    @Transactional
     @Override
     public RegisterProductCategoryInfo execute(RegisterProductCategoryCommand command) {
         if (productPersistencePort.isExistsProductCategoryByName(command.getName())) {

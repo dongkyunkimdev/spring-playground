@@ -6,6 +6,8 @@ import com.playground.productservice.infrastructure.dao.ProductCategoryRepositor
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 @RequiredArgsConstructor
 public class ProductPersistenceAdapter implements ProductPersistencePort {
@@ -15,6 +17,11 @@ public class ProductPersistenceAdapter implements ProductPersistencePort {
     @Override
     public boolean isExistsProductCategoryByName(String name) {
         return productCategoryRepository.existsByName(name);
+    }
+
+    @Override
+    public Optional<ProductCategory> getProductCategoryById(Long productCategoryId) {
+        return productCategoryRepository.findById(productCategoryId);
     }
 
     @Override

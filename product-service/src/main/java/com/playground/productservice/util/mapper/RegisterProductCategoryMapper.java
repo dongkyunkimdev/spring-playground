@@ -7,7 +7,6 @@ import com.playground.productservice.infrastructure.in.rest.dto.RegisterProductC
 import com.playground.productservice.infrastructure.in.rest.dto.RegisterProductCategoryResponse;
 import com.playground.productservice.util.mapper.config.UnmappedIgnoreConfig;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring", config = UnmappedIgnoreConfig.class)
 public interface RegisterProductCategoryMapper {
@@ -16,7 +15,6 @@ public interface RegisterProductCategoryMapper {
 
     ProductCategory commandToEntity(RegisterProductCategoryCommand command);
 
-    @Mapping(source = "productCategoryId", target = "id")
     RegisterProductCategoryInfo entityToInfo(ProductCategory productCategory);
 
     RegisterProductCategoryResponse infoToResponse(RegisterProductCategoryInfo info);

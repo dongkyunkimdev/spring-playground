@@ -7,10 +7,8 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @Builder
-public class RegisterProductCategoryInfo {
+public class GetProductCategoryCommand {
 
     private Long productCategoryId;
-
-    private String name;
 
 }

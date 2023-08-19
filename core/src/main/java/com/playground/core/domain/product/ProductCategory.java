@@ -19,10 +19,6 @@ public class ProductCategory {
     @Column(name = "name")
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    @JoinColumn(name = "product_id")
-    private Product product;
-
     @Builder
     public ProductCategory(String name) {
         this.name = name;

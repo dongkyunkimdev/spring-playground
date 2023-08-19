@@ -1,9 +1,11 @@
 package com.playground.productservice.infrastructure.in.rest;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.playground.core.domain.product.exception.DuplicateProductCategoryNameException;
 import com.playground.productservice.infrastructure.in.rest.dto.RegisterProductCategoryRequest;
 import com.playground.productservice.infrastructure.in.rest.dto.RegisterProductCategoryResponse;
 import com.playground.productservice.support.ControllerTest;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
@@ -43,6 +45,24 @@ class RegisterProductCategoryRestAdapterTest extends ControllerTest {
         });
 
         assertThat(responseDto.getName()).isEqualTo(name);
+    }
+
+    @Test
+    void 상품_카테고리_등록_실패_중복된_이름() throws Exception {
+        // given
+        final String name = "Clothing";
+        RegisterProductCategoryRequest requestDto = RegisterProductCategoryRequest.builder()
+                .name(name)
+                .build();
+
+        // when
+        MockHttpServletRequestBuilder request = post("/v1/product/category")
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(requestDto));
+
+        // then
+        Assertions.assertThrows(DuplicateProductCategoryNameException.class, () -> mvc.perform(request));
     }
 
 }

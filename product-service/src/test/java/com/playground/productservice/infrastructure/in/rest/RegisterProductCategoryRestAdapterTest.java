@@ -1,17 +1,20 @@
 package com.playground.productservice.infrastructure.in.rest;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.playground.core.domain.product.exception.DuplicateProductCategoryNameException;
+import com.playground.core.domain.product.ProductCategory;
+import com.playground.core.domain.product.exception.ProductErrorCode;
+import com.playground.core.dto.ErrorResponse;
+import com.playground.core.dto.SuccessResponse;
 import com.playground.productservice.infrastructure.in.rest.dto.RegisterProductCategoryRequest;
-import com.playground.productservice.infrastructure.in.rest.dto.RegisterProductCategoryResponse;
 import com.playground.productservice.support.ControllerTest;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.nio.charset.StandardCharsets;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -40,11 +43,16 @@ class RegisterProductCategoryRestAdapterTest extends ControllerTest {
         // then
         result.andExpect(status().isCreated());
 
-        String responseMessage = result.andReturn().getResponse().getContentAsString();
-        RegisterProductCategoryResponse responseDto = objectMapper.readValue(responseMessage, new TypeReference<>() {
+        String responseMessage = result.andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
+        SuccessResponse responseDto = objectMapper.readValue(responseMessage, new TypeReference<>() {
         });
 
-        assertThat(responseDto.getName()).isEqualTo(name);
+        assertThat(responseDto.isSuccess()).isTrue();
+        assertThat(responseDto.getStatus()).isEqualTo(201);
+
+        ProductCategory productCategory = objectMapper.convertValue(responseDto.getData(), new TypeReference<>() {
+        });
+        assertThat(productCategory.getName()).isEqualTo(name);
     }
 
     @Test
@@ -55,14 +63,28 @@ class RegisterProductCategoryRestAdapterTest extends ControllerTest {
                 .name(name)
                 .build();
 
+        final String url = "/v1/product/category";
+
         // when
-        MockHttpServletRequestBuilder request = post("/v1/product/category")
+        MockHttpServletRequestBuilder request = post(url)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(requestDto));
 
+        ResultActions result = mvc.perform(request);
+
         // then
-        Assertions.assertThrows(DuplicateProductCategoryNameException.class, () -> mvc.perform(request));
+        result.andExpect(status().isConflict());
+
+        String responseMessage = result.andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
+        ErrorResponse responseDto = objectMapper.readValue(responseMessage, new TypeReference<>() {
+        });
+
+        assertThat(responseDto.isSuccess()).isFalse();
+        assertThat(responseDto.getStatus()).isEqualTo(409);
+        assertThat(responseDto.getCode()).isEqualTo(ProductErrorCode.PRODUCT_CATEGORY_NAME_DUPLICATED.getCode());
+        assertThat(responseDto.getReason()).isEqualTo(ProductErrorCode.PRODUCT_CATEGORY_NAME_DUPLICATED.getReason());
+        assertThat(responseDto.getPath()).isEqualTo("http://localhost" + url);
     }
 
 }

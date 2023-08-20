@@ -33,6 +33,17 @@ import java.util.stream.Collectors;
 @Slf4j
 public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
+    @ExceptionHandler(BusinessException.class)
+    public ResponseEntity<ErrorResponse> BusinessExceptionHandler(
+            BusinessException e, HttpServletRequest request
+    ) {
+        BaseErrorCode code = e.getErrorCode();
+        ErrorReason errorReason = code.getErrorReason();
+        ErrorResponse errorResponse = new ErrorResponse(errorReason, request.getRequestURL().toString());
+
+        return ResponseEntity.status(HttpStatus.valueOf(errorReason.getStatus())).body(errorResponse);
+    }
+
     @Override
     protected ResponseEntity<Object> handleExceptionInternal(
             Exception ex, Object body, HttpHeaders headers, HttpStatusCode statusCode, WebRequest request
@@ -60,17 +71,6 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
         ErrorResponse errorResponse = new ErrorResponse(statusCode.value(), HttpStatus.valueOf(statusCode.value()).name(), errorsToJsonString, url);
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
-    }
-
-    @ExceptionHandler(BusinessException.class)
-    public ResponseEntity<ErrorResponse> BusinessExceptionHandler(
-            BusinessException e, HttpServletRequest request
-    ) {
-        BaseErrorCode code = e.getErrorCode();
-        ErrorReason errorReason = code.getErrorReason();
-        ErrorResponse errorResponse = new ErrorResponse(errorReason, request.getRequestURL().toString());
-
-        return ResponseEntity.status(HttpStatus.valueOf(errorReason.getStatus())).body(errorResponse);
     }
 
     @ExceptionHandler(ConstraintViolationException.class)

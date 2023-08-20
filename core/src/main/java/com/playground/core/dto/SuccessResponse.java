@@ -1,16 +1,18 @@
 package com.playground.core.dto;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.ZonedDateTime;
 
 @Getter
+@NoArgsConstructor
 public class SuccessResponse {
 
-    private final boolean success = true;
-    private final int status;
-    private final Object data;
-    private final ZonedDateTime timeStamp;
+    private boolean success = true;
+    private int status;
+    private Object data;
+    private ZonedDateTime timeStamp;
 
     public SuccessResponse(int status, Object data) {
         this.status = status;

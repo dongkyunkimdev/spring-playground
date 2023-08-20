@@ -22,7 +22,7 @@ public class RegisterProductCategoryService implements RegisterProductCategoryUs
     @Override
     public RegisterProductCategoryInfo execute(RegisterProductCategoryCommand command) {
         if (productPersistencePort.isExistsProductCategoryByName(command.getName())) {
-            throw new DuplicateProductCategoryNameException(command.getName());
+            throw new DuplicateProductCategoryNameException();
         }
 
         var savedProductCategory = productPersistencePort.saveProductCategory(mapper.commandToEntity(command));

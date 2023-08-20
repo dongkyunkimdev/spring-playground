@@ -1,18 +1,20 @@
 package com.playground.core.dto;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.ZonedDateTime;
 
 @Getter
+@NoArgsConstructor
 public class ErrorResponse {
 
-    private final boolean success = false;
-    private final int status;
-    private final String code;
-    private final String reason;
-    private final ZonedDateTime timeStamp;
-    private final String path;
+    private boolean success = false;
+    private int status;
+    private String code;
+    private String reason;
+    private ZonedDateTime timeStamp;
+    private String path;
 
     public ErrorResponse(ErrorReason errorReason, String path) {
         this.status = errorReason.getStatus();

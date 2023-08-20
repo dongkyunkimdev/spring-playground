@@ -1,7 +1,8 @@
 package com.playground.productservice.infrastructure.in.rest;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.playground.productservice.infrastructure.in.rest.dto.GetProductCategoryResponse;
+import com.playground.core.domain.product.ProductCategory;
+import com.playground.core.dto.SuccessResponse;
 import com.playground.productservice.support.ControllerTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
@@ -36,11 +37,16 @@ class GetProductCategoryRestAdapterTest extends ControllerTest {
         result.andExpect(status().isOk());
 
         String responseMessage = result.andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
-        GetProductCategoryResponse responseDto = objectMapper.readValue(responseMessage, new TypeReference<>() {
+        SuccessResponse responseDto = objectMapper.readValue(responseMessage, new TypeReference<>() {
         });
 
-        assertThat(responseDto.getProductCategoryId()).isEqualTo(productCategoryId);
-        assertThat(responseDto.getName()).isEqualTo("Clothing");
+        assertThat(responseDto.isSuccess()).isTrue();
+        assertThat(responseDto.getStatus()).isEqualTo(200);
+
+        ProductCategory productCategory = objectMapper.convertValue(responseDto.getData(), new TypeReference<>() {
+        });
+        assertThat(productCategory.getProductCategoryId()).isEqualTo(productCategoryId);
+        assertThat(productCategory.getName()).isEqualTo("Clothing");
     }
 
 }

@@ -4,8 +4,8 @@ import com.playground.core.common.exception.BusinessException;
 
 public class ProductCategoryNotFoundException extends BusinessException {
 
-    public ProductCategoryNotFoundException(Long id) {
-        super("상품 카테고리가 존재하지 않습니다. :" + id);
+    public ProductCategoryNotFoundException() {
+        super(ProductErrorCode.PRODUCT_CATEGORY_NOT_FOUND);
     }
 
 }

@@ -23,3 +23,17 @@ dependencies {
     // MySQL
     runtimeOnly 'com.mysql:mysql-connector-j'
 }
+
+def mapStructDir = "src/main/generated"
+
+sourceSets {
+    main.java.srcDirs += [ mapStructDir ]
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.getGeneratedSourceOutputDirectory().set(file(mapStructDir))
+}
+
+clean.doLast {
+    file(mapStructDir).deleteDir()
+}

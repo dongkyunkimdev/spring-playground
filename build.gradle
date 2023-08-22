@@ -65,36 +65,26 @@ subprojects {
     }
 }
 
-project(':core-web') {
-    dependencies {
-        implementation project(':core')
-    }
-}
-
 project(':user-service') {
     dependencies {
         implementation project(':core')
-        implementation project(':core-web')
     }
 }
 
 project(':product-service') {
     dependencies {
         implementation project(':core')
-        implementation project(':core-web')
     }
 }
 
 project(':order-service') {
     dependencies {
         implementation project(':core')
-        implementation project(':core-web')
     }
 }
 
 project(':delivery-service') {
     dependencies {
         implementation project(':core')
-        implementation project(':core-web')
     }
 }

@@ -1,4 +1,4 @@
-package com.playground.deliveryservice.config;
+package com.playground.core.config;
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Configuration;

@@ -1,5 +1,6 @@
 package com.playground.core.domain.delivery;
 
+import com.playground.core.common.entity.BaseTimeEntity;
 import com.playground.core.type.DeliveryStatus;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -12,7 +13,7 @@ import java.util.Date;
 @Table(name = "delivery")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Delivery {
+public class Delivery extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,5 +1,6 @@
 package com.playground.core.domain.user;
 
+import com.playground.core.common.entity.BaseTimeEntity;
 import com.playground.core.type.CardProvider;
 import com.playground.core.type.CardType;
 import jakarta.persistence.*;
@@ -11,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "user_payment_card")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class UserPaymentCard {
+public class UserPaymentCard extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

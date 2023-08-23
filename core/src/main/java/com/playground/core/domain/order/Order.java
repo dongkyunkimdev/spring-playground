@@ -1,5 +1,6 @@
 package com.playground.core.domain.order;
 
+import com.playground.core.common.entity.BaseTimeEntity;
 import com.playground.core.type.OrderStatus;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -13,7 +14,7 @@ import java.util.List;
 @Table(name = "orders")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Order {
+public class Order extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

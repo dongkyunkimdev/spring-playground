@@ -1,5 +1,6 @@
 package com.playground.core.domain.product;
 
+import com.playground.core.common.entity.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -10,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "product_category")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ProductCategory {
+public class ProductCategory extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

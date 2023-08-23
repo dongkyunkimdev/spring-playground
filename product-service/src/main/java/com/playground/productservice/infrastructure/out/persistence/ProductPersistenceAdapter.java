@@ -5,6 +5,8 @@ import com.playground.productservice.application.port.out.persistence.ProductPer
 import com.playground.productservice.infrastructure.dao.ProductCategoryRepository;
 import com.playground.productservice.infrastructure.dao.ProductCategoryRepositorySupport;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -29,8 +31,8 @@ public class ProductPersistenceAdapter implements ProductPersistencePort {
     }
 
     @Override
-    public List<ProductCategory> findProductCategoryListByIdRangeAndName(Long fromProductCategoryId, Long toProductCategoryId, String productCategoryName) {
-        return productCategoryRepositorySupport.findAllByIdRangeAndName(fromProductCategoryId, toProductCategoryId, productCategoryName);
+    public Slice<ProductCategory> findProductCategoryListByIdRangeAndName(Long fromProductCategoryId, Long toProductCategoryId, String productCategoryName, Pageable pageable) {
+        return productCategoryRepositorySupport.findAllByIdRangeAndName(fromProductCategoryId, toProductCategoryId, productCategoryName, pageable);
     }
 
     @Override

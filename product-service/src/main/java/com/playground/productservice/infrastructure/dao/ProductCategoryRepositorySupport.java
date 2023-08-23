@@ -2,10 +2,13 @@ package com.playground.productservice.infrastructure.dao;
 
 import com.playground.core.domain.product.ProductCategory;
 import com.playground.core.domain.product.QProductCategory;
+import com.playground.core.util.SliceUtil;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -16,13 +19,17 @@ public class ProductCategoryRepositorySupport {
 
     private final JPAQueryFactory queryFactory;
 
-    public List<ProductCategory> findAllByIdRangeAndName(Long fromProductCategoryId, Long toProductCategoryId, String productCategoryName) {
-        return queryFactory.selectFrom(QProductCategory.productCategory)
+    public Slice<ProductCategory> findAllByIdRangeAndName(Long fromProductCategoryId, Long toProductCategoryId, String productCategoryName, Pageable pageable) {
+        List<ProductCategory> content = queryFactory.selectFrom(QProductCategory.productCategory)
                 .where(
                         productCategoryIdInRange(fromProductCategoryId, toProductCategoryId),
                         nameContains(productCategoryName)
                 )
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize() + 1)
                 .fetch();
+
+        return SliceUtil.createSlice(content, pageable);
     }
 
     private BooleanExpression productCategoryIdInRange(Long from, Long to) {

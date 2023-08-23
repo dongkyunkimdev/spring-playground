@@ -2,11 +2,11 @@ package com.playground.productservice.application.port.in.usecase;
 
 import com.playground.productservice.application.port.in.usecase.dto.GetProductCategoryInfo;
 import com.playground.productservice.application.port.in.usecase.dto.GetProductCategoryListCommand;
-
-import java.util.List;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 
 public interface GetProductCategoryListUseCase {
 
-    List<GetProductCategoryInfo> execute(GetProductCategoryListCommand command);
+    Slice<GetProductCategoryInfo> execute(GetProductCategoryListCommand command, Pageable pageable);
 
 }

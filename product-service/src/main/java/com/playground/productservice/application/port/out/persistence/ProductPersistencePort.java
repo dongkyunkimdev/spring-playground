@@ -1,8 +1,9 @@
 package com.playground.productservice.application.port.out.persistence;
 
 import com.playground.core.domain.product.ProductCategory;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 
-import java.util.List;
 import java.util.Optional;
 
 public interface ProductPersistencePort {
@@ -11,7 +12,7 @@ public interface ProductPersistencePort {
 
     Optional<ProductCategory> findProductCategoryById(Long productCategoryId);
 
-    List<ProductCategory> findProductCategoryListByIdRangeAndName(Long fromProductCategoryId, Long toProductCategoryId, String productCategoryName);
+    Slice<ProductCategory> findProductCategoryListByIdRangeAndName(Long fromProductCategoryId, Long toProductCategoryId, String productCategoryName, Pageable pageable);
 
     ProductCategory saveProductCategory(ProductCategory productCategory);
 

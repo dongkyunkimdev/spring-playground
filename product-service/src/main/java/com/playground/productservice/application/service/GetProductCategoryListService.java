@@ -7,12 +7,12 @@ import com.playground.productservice.application.port.in.usecase.dto.GetProductC
 import com.playground.productservice.application.port.out.persistence.ProductPersistencePort;
 import com.playground.productservice.util.mapper.GetProductCategoryMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -24,10 +24,10 @@ public class GetProductCategoryListService implements GetProductCategoryListUseC
 
     @Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRED, readOnly = true)
     @Override
-    public List<GetProductCategoryInfo> execute(GetProductCategoryListCommand command) {
-        List<ProductCategory> productCategoryList = productPersistencePort.findProductCategoryListByIdRangeAndName(command.getFromProductCategoryId(), command.getToProductCategoryId(), command.getProductCategoryName());
+    public Slice<GetProductCategoryInfo> execute(GetProductCategoryListCommand command, Pageable pageable) {
+        Slice<ProductCategory> productCategorySlice = productPersistencePort.findProductCategoryListByIdRangeAndName(command.getFromProductCategoryId(), command.getToProductCategoryId(), command.getProductCategoryName(), pageable);
 
-        return productCategoryList.stream().map(mapper::entityToInfo).toList();
+        return productCategorySlice.map(mapper::entityToInfo);
     }
 
 }

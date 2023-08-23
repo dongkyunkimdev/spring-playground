@@ -13,7 +13,8 @@ CREATE TABLE `delivery`
     `order_id`    BIGINT       NOT NULL,
     `created_at`  datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `updated_at`  datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 CREATE TABLE `orders`
 (
@@ -23,7 +24,8 @@ CREATE TABLE `orders`
     `consumer_id` BIGINT         NOT NULL,
     `created_at`  datetime       NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `updated_at`  datetime       NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 CREATE TABLE `order_item`
 (
@@ -36,7 +38,8 @@ CREATE TABLE `order_item`
     `created_at`    datetime       NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `updated_at`    datetime       NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     CONSTRAINT `fk_order_item_order_order_id` FOREIGN KEY (`order_id`) REFERENCES orders (`order_id`)
-);
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 CREATE TABLE `payment`
 (
@@ -46,7 +49,8 @@ CREATE TABLE `payment`
     `created_at`           datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `updated_at`           datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     CONSTRAINT `payment_order_order_id` FOREIGN KEY (`order_id`) REFERENCES orders (`order_id`)
-);
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 CREATE TABLE `product_category`
 (
@@ -54,7 +58,8 @@ CREATE TABLE `product_category`
     `name`                VARCHAR(255) NOT NULL,
     `created_at`          datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `updated_at`          datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 CREATE TABLE `product`
 (
@@ -66,7 +71,8 @@ CREATE TABLE `product`
     `created_at`          datetime       NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `updated_at`          datetime       NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     CONSTRAINT `product_product_category_product_category_id` FOREIGN KEY (`product_category_id`) REFERENCES product_category (`product_category_id`)
-);
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 CREATE TABLE `user`
 (
@@ -76,7 +82,8 @@ CREATE TABLE `user`
     `nickname`   VARCHAR(255),
     `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 CREATE TABLE `user_payment_card`
 (
@@ -88,4 +95,5 @@ CREATE TABLE `user_payment_card`
     `created_at`           datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `updated_at`           datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     CONSTRAINT `user_payment_card_user_user_id` FOREIGN KEY (`user_id`) REFERENCES user (`user_id`)
-);
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;

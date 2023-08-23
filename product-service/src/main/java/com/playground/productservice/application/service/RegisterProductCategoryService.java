@@ -1,5 +1,6 @@
 package com.playground.productservice.application.service;
 
+import com.playground.core.domain.product.ProductCategory;
 import com.playground.core.domain.product.exception.DuplicateProductCategoryNameException;
 import com.playground.productservice.application.port.in.usecase.RegisterProductCategoryUseCase;
 import com.playground.productservice.application.port.in.usecase.dto.RegisterProductCategoryCommand;
@@ -25,7 +26,7 @@ public class RegisterProductCategoryService implements RegisterProductCategoryUs
             throw new DuplicateProductCategoryNameException();
         }
 
-        var savedProductCategory = productPersistencePort.saveProductCategory(mapper.commandToEntity(command));
+        ProductCategory savedProductCategory = productPersistencePort.saveProductCategory(mapper.commandToEntity(command));
 
         return mapper.entityToInfo(savedProductCategory);
     }

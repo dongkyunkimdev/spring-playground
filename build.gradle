@@ -47,12 +47,16 @@ subprojects {
     }
 
     dependencies {
+        // Lombok
         compileOnly 'org.projectlombok:lombok'
         annotationProcessor 'org.projectlombok:lombok'
         testAnnotationProcessor "org.projectlombok:lombok"
 
-        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        // Commons-lang3
+        implementation 'org.apache.commons:commons-lang3:3.0'
 
+        // Spring
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
         annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     }
 

@@ -21,7 +21,7 @@ public class GetProductCategoryRestAdapter {
 
     private final GetProductCategoryMapper mapper;
 
-    @Operation(summary = "상품 카테고리 조회")
+    @Operation(summary = "상품 카테고리 조회.")
     @GetMapping("/v1/product/category/{productCategoryId}")
     @ResponseStatus(HttpStatus.OK)
     public GetProductCategoryResponse getProductCategory(

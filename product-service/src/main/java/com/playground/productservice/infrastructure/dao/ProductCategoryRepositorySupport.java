@@ -5,6 +5,7 @@ import com.playground.core.domain.product.QProductCategory;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -41,7 +42,7 @@ public class ProductCategoryRepositorySupport {
     }
 
     private BooleanExpression nameContains(String name) {
-        return name.isBlank() ? null : QProductCategory.productCategory.name.containsIgnoreCase(name);
+        return StringUtils.isBlank(name) ? null : QProductCategory.productCategory.name.containsIgnoreCase(name);
     }
 
 }

@@ -23,10 +23,9 @@ public class GetProductCategoryListService implements GetProductCategoryListUseC
     @Transactional(readOnly = true)
     @Override
     public List<GetProductCategoryInfo> execute(GetProductCategoryListCommand command) {
-        List<ProductCategory> productCategory = productPersistencePort.findProductCategoryListByIdRangeAndName(command.getFromProductCategoryId(), command.getToProductCategoryId(), command.getProductCategoryName());
+        List<ProductCategory> productCategoryList = productPersistencePort.findProductCategoryListByIdRangeAndName(command.getFromProductCategoryId(), command.getToProductCategoryId(), command.getProductCategoryName());
 
-//        return mapper.entityToInfo(productCategory);
-        return null;
+        return productCategoryList.stream().map(mapper::entityToInfo).toList();
     }
 
 }

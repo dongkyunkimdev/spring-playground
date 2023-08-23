@@ -8,6 +8,8 @@ import com.playground.productservice.application.port.out.persistence.ProductPer
 import com.playground.productservice.util.mapper.GetProductCategoryMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -20,7 +22,7 @@ public class GetProductCategoryListService implements GetProductCategoryListUseC
 
     private final GetProductCategoryMapper mapper;
 
-    @Transactional(readOnly = true)
+    @Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRED, readOnly = true)
     @Override
     public List<GetProductCategoryInfo> execute(GetProductCategoryListCommand command) {
         List<ProductCategory> productCategoryList = productPersistencePort.findProductCategoryListByIdRangeAndName(command.getFromProductCategoryId(), command.getToProductCategoryId(), command.getProductCategoryName());

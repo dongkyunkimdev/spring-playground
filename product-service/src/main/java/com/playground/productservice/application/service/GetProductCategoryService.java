@@ -9,6 +9,8 @@ import com.playground.productservice.application.port.out.persistence.ProductPer
 import com.playground.productservice.util.mapper.GetProductCategoryMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
@@ -19,7 +21,7 @@ public class GetProductCategoryService implements GetProductCategoryUseCase {
 
     private final GetProductCategoryMapper mapper;
 
-    @Transactional(readOnly = true)
+    @Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRED, readOnly = true)
     @Override
     public GetProductCategoryInfo execute(GetProductCategoryCommand command) {
         ProductCategory productCategory = productPersistencePort.findProductCategoryById(command.getProductCategoryId())

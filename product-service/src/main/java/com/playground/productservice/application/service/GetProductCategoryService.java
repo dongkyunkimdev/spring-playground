@@ -24,10 +24,10 @@ public class GetProductCategoryService implements GetProductCategoryUseCase {
     @Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRED, readOnly = true)
     @Override
     public GetProductCategoryInfo execute(GetProductCategoryCommand command) {
-        ProductCategory productCategory = productPersistencePort.findProductCategoryById(command.getProductCategoryId())
+        ProductCategory savedProductCategory = productPersistencePort.findProductCategoryById(command.getProductCategoryId())
                 .orElseThrow(ProductCategoryNotFoundException::new);
 
-        return mapper.entityToInfo(productCategory);
+        return mapper.entityToInfo(savedProductCategory);
     }
 
 }

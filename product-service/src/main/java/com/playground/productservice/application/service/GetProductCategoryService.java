@@ -1,7 +1,7 @@
 package com.playground.productservice.application.service;
 
-import com.playground.core.domain.product.ProductCategory;
-import com.playground.core.domain.product.exception.ProductCategoryNotFoundException;
+import com.playground.productservice.domain.ProductCategory;
+import com.playground.productservice.domain.exception.ProductCategoryNotFoundException;
 import com.playground.productservice.application.port.in.usecase.GetProductCategoryUseCase;
 import com.playground.productservice.application.port.in.usecase.dto.GetProductCategoryCommand;
 import com.playground.productservice.application.port.in.usecase.dto.GetProductCategoryInfo;

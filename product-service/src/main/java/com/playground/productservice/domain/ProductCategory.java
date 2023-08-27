@@ -1,4 +1,4 @@
-package com.playground.core.domain.product;
+package com.playground.productservice.domain;
 
 import com.playground.core.common.entity.BaseTimeEntity;
 import jakarta.persistence.*;

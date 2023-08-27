@@ -1,6 +1,6 @@
 package com.playground.productservice.application.service;
 
-import com.playground.core.domain.product.ProductCategory;
+import com.playground.productservice.domain.ProductCategory;
 import com.playground.productservice.application.port.in.usecase.GetProductCategoryListUseCase;
 import com.playground.productservice.application.port.in.usecase.dto.GetProductCategoryInfo;
 import com.playground.productservice.application.port.in.usecase.dto.GetProductCategoryListCommand;

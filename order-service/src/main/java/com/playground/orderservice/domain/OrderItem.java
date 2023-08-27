@@ -1,4 +1,4 @@
-package com.playground.core.domain.product;
+package com.playground.orderservice.domain;
 
 import com.playground.core.common.entity.BaseTimeEntity;
 import jakarta.persistence.*;
@@ -9,26 +9,29 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "product")
+@Table(name = "order_item")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Product extends BaseTimeEntity {
+public class OrderItem extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long productId;
+    private Long orderItemId;
 
     @Column(name = "name")
     private String name;
 
-    @Column(name = "stock")
-    private Long stock;
-
     @Column(name = "price")
     private BigDecimal price;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    @JoinColumn(name = "product_category_id")
-    private ProductCategory productCategory;
+    @Column(name = "count")
+    private Long count;
+
+    @Column(name = "product_id")
+    private Long productId;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "order_id")
+    private Order order;
 
 }

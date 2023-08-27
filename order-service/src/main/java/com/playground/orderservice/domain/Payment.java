@@ -1,4 +1,4 @@
-package com.playground.core.domain.order;
+package com.playground.orderservice.domain;
 
 import com.playground.core.common.entity.BaseTimeEntity;
 import jakarta.persistence.*;

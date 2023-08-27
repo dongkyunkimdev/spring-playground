@@ -1,4 +1,4 @@
-package com.playground.core.domain.product.exception;
+package com.playground.productservice.domain.exception;
 
 import com.playground.core.annotation.ExplainError;
 import com.playground.core.dto.ErrorReason;

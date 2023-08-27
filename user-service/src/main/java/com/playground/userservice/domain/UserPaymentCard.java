@@ -1,4 +1,4 @@
-package com.playground.core.domain.user;
+package com.playground.userservice.domain;
 
 import com.playground.core.common.entity.BaseTimeEntity;
 import com.playground.core.type.CardProvider;

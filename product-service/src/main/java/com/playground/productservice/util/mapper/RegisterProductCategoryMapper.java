@@ -1,6 +1,6 @@
 package com.playground.productservice.util.mapper;
 
-import com.playground.core.domain.product.ProductCategory;
+import com.playground.productservice.domain.ProductCategory;
 import com.playground.productservice.application.port.in.usecase.dto.RegisterProductCategoryCommand;
 import com.playground.productservice.application.port.in.usecase.dto.RegisterProductCategoryInfo;
 import com.playground.productservice.infrastructure.in.rest.dto.RegisterProductCategoryRequest;

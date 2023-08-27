@@ -1,5 +1,4 @@
-use
-db_playground;
+use db_product;
 
 INSERT INTO `product_category`(product_category_id, name)
 VALUES (1, 'Clothing'),

@@ -1,6 +1,6 @@
 package com.playground.productservice.application.port.out.persistence;
 
-import com.playground.core.domain.product.ProductCategory;
+import com.playground.productservice.domain.ProductCategory;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 

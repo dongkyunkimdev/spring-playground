@@ -1,6 +1,6 @@
 package com.playground.productservice.infrastructure.out.persistence;
 
-import com.playground.core.domain.product.ProductCategory;
+import com.playground.productservice.domain.ProductCategory;
 import com.playground.productservice.application.port.out.persistence.ProductPersistencePort;
 import com.playground.productservice.infrastructure.dao.ProductCategoryRepository;
 import com.playground.productservice.infrastructure.dao.ProductCategoryRepositorySupport;
@@ -9,7 +9,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.Optional;
 
 @Component

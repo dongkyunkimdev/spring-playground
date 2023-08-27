@@ -33,7 +33,7 @@ flyway {
     url = 'jdbc:mysql://127.0.0.1:3308/db_flyway'
     user = 'app_playground'
     password = 'password'
-    schemas = ['db_flyway', 'db_playground']
+    schemas = ['db_flyway', 'db_user', 'db_product', 'db_order', 'db_delivery']
     cleanDisabled = false
 }
 

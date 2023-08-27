@@ -1,8 +1,8 @@
 package com.playground.productservice.infrastructure.in.rest;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.playground.core.domain.product.ProductCategory;
-import com.playground.core.domain.product.exception.ProductErrorCode;
+import com.playground.productservice.domain.ProductCategory;
+import com.playground.productservice.domain.exception.ProductErrorCode;
 import com.playground.core.dto.ErrorResponse;
 import com.playground.core.dto.SuccessResponse;
 import com.playground.productservice.infrastructure.in.rest.dto.RegisterProductCategoryRequest;

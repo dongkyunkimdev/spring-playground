@@ -1,7 +1,7 @@
 package com.playground.productservice.application.service;
 
-import com.playground.core.domain.product.ProductCategory;
-import com.playground.core.domain.product.exception.DuplicateProductCategoryNameException;
+import com.playground.productservice.domain.ProductCategory;
+import com.playground.productservice.domain.exception.DuplicateProductCategoryNameException;
 import com.playground.productservice.application.port.in.usecase.RegisterProductCategoryUseCase;
 import com.playground.productservice.application.port.in.usecase.dto.RegisterProductCategoryCommand;
 import com.playground.productservice.application.port.in.usecase.dto.RegisterProductCategoryInfo;

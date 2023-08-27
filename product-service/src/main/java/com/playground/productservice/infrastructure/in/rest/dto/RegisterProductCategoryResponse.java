@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class RegisterProductCategoryResponse {
 
-    private Long id;
+    private Long productCategoryId;
 
     private String name;
 

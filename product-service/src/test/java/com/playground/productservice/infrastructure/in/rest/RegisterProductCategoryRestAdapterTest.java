@@ -27,7 +27,7 @@ class RegisterProductCategoryRestAdapterTest extends ControllerTest {
     @Test
     void 상품_카테고리_등록_성공() throws Exception {
         // given
-        final String name = "Toys";
+        final String name = "Test Toys";
         RegisterProductCategoryRequest requestDto = RegisterProductCategoryRequest.builder()
                 .name(name)
                 .build();
@@ -52,6 +52,7 @@ class RegisterProductCategoryRestAdapterTest extends ControllerTest {
 
         ProductCategory productCategory = objectMapper.convertValue(responseDto.getData(), new TypeReference<>() {
         });
+        assertThat(productCategory.getProductCategoryId()).isNotNull();
         assertThat(productCategory.getName()).isEqualTo(name);
     }
 

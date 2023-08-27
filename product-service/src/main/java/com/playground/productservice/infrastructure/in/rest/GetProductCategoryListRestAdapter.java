@@ -1,5 +1,6 @@
 package com.playground.productservice.infrastructure.in.rest;
 
+import com.playground.core.paging.SliceResponse;
 import com.playground.productservice.application.port.in.usecase.GetProductCategoryListUseCase;
 import com.playground.productservice.application.port.in.usecase.dto.GetProductCategoryInfo;
 import com.playground.productservice.application.port.in.usecase.dto.GetProductCategoryListCommand;
@@ -29,15 +30,15 @@ public class GetProductCategoryListRestAdapter {
     @Operation(summary = "상품 카테고리 리스트 조회.")
     @GetMapping("/v1/product/category")
     @ResponseStatus(HttpStatus.OK)
-    public Slice<GetProductCategoryResponse> getProductCategory(
+    public SliceResponse<GetProductCategoryResponse> getProductCategory(
             @Parameter(required = false, description = "상품 카테고리 시작 ID.") @RequestParam(required = false) final Long fromProductCategoryId,
             @Parameter(required = false, description = "상품 카테고리 종료 ID.") @RequestParam(required = false) final Long toProductCategoryId,
             @Parameter(required = false, description = "상품 카테고리 이름.") @RequestParam(required = false) final String productCategoryName,
             @ParameterObject @PageableDefault Pageable pageable
     ) {
-        Slice<GetProductCategoryInfo> productCategoryInfoSlice = getProductCategoryListUseCase.execute(new GetProductCategoryListCommand(fromProductCategoryId, toProductCategoryId, productCategoryName), pageable);
+        Slice<GetProductCategoryInfo> getProductCategoryInfoSlice = getProductCategoryListUseCase.execute(new GetProductCategoryListCommand(fromProductCategoryId, toProductCategoryId, productCategoryName), pageable);
 
-        return productCategoryInfoSlice.map(mapper::infoToResponse);
+        return SliceResponse.of(getProductCategoryInfoSlice.map(mapper::infoToResponse));
     }
 
 }

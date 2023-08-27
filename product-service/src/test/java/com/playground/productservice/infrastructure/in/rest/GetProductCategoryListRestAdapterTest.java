@@ -2,6 +2,7 @@ package com.playground.productservice.infrastructure.in.rest;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.playground.core.exception.dto.SuccessResponse;
+import com.playground.core.paging.SliceResponse;
 import com.playground.productservice.domain.ProductCategory;
 import com.playground.productservice.support.ControllerTest;
 import org.junit.jupiter.api.Test;
@@ -41,10 +42,15 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
         assertThat(responseDto.isSuccess()).isTrue();
         assertThat(responseDto.getStatus()).isEqualTo(200);
 
-        List<ProductCategory> productCategoryList = objectMapper.convertValue(responseDto.getData(), new TypeReference<>() {
+        SliceResponse<ProductCategory> productCategorySliceResponse = objectMapper.convertValue(responseDto.getData(), new TypeReference<>() {
         });
+        assertThat(productCategorySliceResponse.getContent().size()).isEqualTo(10);
+        assertThat(productCategorySliceResponse.getPage()).isEqualTo(0);
+        assertThat(productCategorySliceResponse.getSize()).isEqualTo(10);
+        assertThat(productCategorySliceResponse.isHasPrevious()).isEqualTo(false);
+        assertThat(productCategorySliceResponse.isHasNext()).isEqualTo(true);
 
-        assertThat(productCategoryList).hasSizeLessThanOrEqualTo(30);
+        List<ProductCategory> productCategoryList = productCategorySliceResponse.getContent();
         productCategoryList.forEach(productCategory -> {
             assertThat(productCategory.getProductCategoryId()).isNotNull();
             assertThat(productCategory.getName()).isNotNull();
@@ -74,18 +80,24 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
         assertThat(responseDto.isSuccess()).isTrue();
         assertThat(responseDto.getStatus()).isEqualTo(200);
 
-        List<ProductCategory> productCategoryList = objectMapper.convertValue(responseDto.getData(), new TypeReference<>() {
+        SliceResponse<ProductCategory> productCategorySliceResponse = objectMapper.convertValue(responseDto.getData(), new TypeReference<>() {
         });
+        assertThat(productCategorySliceResponse.getContent().size()).isEqualTo(10);
+        assertThat(productCategorySliceResponse.getPage()).isEqualTo(0);
+        assertThat(productCategorySliceResponse.getSize()).isEqualTo(10);
+        assertThat(productCategorySliceResponse.isHasPrevious()).isEqualTo(false);
+        assertThat(productCategorySliceResponse.isHasNext()).isEqualTo(true);
 
+        List<ProductCategory> productCategoryList = productCategorySliceResponse.getContent();
         productCategoryList.forEach(productCategory -> {
             assertThat(productCategory.getProductCategoryId()).isGreaterThanOrEqualTo(fromProductCategoryId);
         });
     }
 
     @Test
-    void 상품_카테고리_리스트_조회_성공_toId_name_필터링() throws Exception {
+    void 상품_카테고리_리스트_조회_성공_toId_필터링() throws Exception {
         // given
-        final Long toProductCategoryId = 10L;
+        final Long toProductCategoryId = 11L;
 
         // when
         MockHttpServletRequestBuilder request = get("/v1/product/category")
@@ -105,9 +117,15 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
         assertThat(responseDto.isSuccess()).isTrue();
         assertThat(responseDto.getStatus()).isEqualTo(200);
 
-        List<ProductCategory> productCategoryList = objectMapper.convertValue(responseDto.getData(), new TypeReference<>() {
+        SliceResponse<ProductCategory> productCategorySliceResponse = objectMapper.convertValue(responseDto.getData(), new TypeReference<>() {
         });
+        assertThat(productCategorySliceResponse.getContent().size()).isEqualTo(10);
+        assertThat(productCategorySliceResponse.getPage()).isEqualTo(0);
+        assertThat(productCategorySliceResponse.getSize()).isEqualTo(10);
+        assertThat(productCategorySliceResponse.isHasPrevious()).isEqualTo(false);
+        assertThat(productCategorySliceResponse.isHasNext()).isEqualTo(true);
 
+        List<ProductCategory> productCategoryList = productCategorySliceResponse.getContent();
         productCategoryList.forEach(productCategory -> {
             assertThat(productCategory.getProductCategoryId()).isLessThanOrEqualTo(toProductCategoryId);
         });
@@ -122,7 +140,8 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
         MockHttpServletRequestBuilder request = get("/v1/product/category")
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
-                .param("productCategoryName", productCategoryName);
+                .param("productCategoryName", productCategoryName)
+                .param("size", String.valueOf(1));
 
         ResultActions result = mvc.perform(request);
 
@@ -136,9 +155,15 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
         assertThat(responseDto.isSuccess()).isTrue();
         assertThat(responseDto.getStatus()).isEqualTo(200);
 
-        List<ProductCategory> productCategoryList = objectMapper.convertValue(responseDto.getData(), new TypeReference<>() {
+        SliceResponse<ProductCategory> productCategorySliceResponse = objectMapper.convertValue(responseDto.getData(), new TypeReference<>() {
         });
+        assertThat(productCategorySliceResponse.getContent().size()).isEqualTo(1);
+        assertThat(productCategorySliceResponse.getPage()).isEqualTo(0);
+        assertThat(productCategorySliceResponse.getSize()).isEqualTo(1);
+        assertThat(productCategorySliceResponse.isHasPrevious()).isEqualTo(false);
+        assertThat(productCategorySliceResponse.isHasNext()).isEqualTo(true);
 
+        List<ProductCategory> productCategoryList = productCategorySliceResponse.getContent();
         productCategoryList.forEach(productCategory -> {
             assertThat(productCategory.getName()).containsIgnoringCase(productCategoryName);
         });
@@ -149,7 +174,7 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
         // given
         final Long fromProductCategoryId = 1L;
         final Long toProductCategoryId = 10L;
-        final String productCategoryName = "co";
+        final String productCategoryName = "es";
 
         // when
         MockHttpServletRequestBuilder request = get("/v1/product/category")
@@ -157,7 +182,8 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .param("fromProductCategoryId", String.valueOf(fromProductCategoryId))
                 .param("toProductCategoryId", String.valueOf(toProductCategoryId))
-                .param("productCategoryName", productCategoryName);
+                .param("productCategoryName", productCategoryName)
+                .param("size", String.valueOf(1));
 
         ResultActions result = mvc.perform(request);
 
@@ -171,9 +197,15 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
         assertThat(responseDto.isSuccess()).isTrue();
         assertThat(responseDto.getStatus()).isEqualTo(200);
 
-        List<ProductCategory> productCategoryList = objectMapper.convertValue(responseDto.getData(), new TypeReference<>() {
+        SliceResponse<ProductCategory> productCategorySliceResponse = objectMapper.convertValue(responseDto.getData(), new TypeReference<>() {
         });
+        assertThat(productCategorySliceResponse.getContent().size()).isGreaterThanOrEqualTo(1);
+        assertThat(productCategorySliceResponse.getPage()).isEqualTo(0);
+        assertThat(productCategorySliceResponse.getSize()).isGreaterThanOrEqualTo(1);
+        assertThat(productCategorySliceResponse.isHasPrevious()).isEqualTo(false);
+        assertThat(productCategorySliceResponse.isHasNext()).isEqualTo(true);
 
+        List<ProductCategory> productCategoryList = productCategorySliceResponse.getContent();
         productCategoryList.forEach(productCategory -> {
             assertThat(productCategory.getProductCategoryId()).isBetween(fromProductCategoryId, toProductCategoryId);
             assertThat(productCategory.getName()).containsIgnoringCase(productCategoryName);

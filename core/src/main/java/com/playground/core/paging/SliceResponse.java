@@ -1,20 +1,26 @@
 package com.playground.core.paging;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.data.domain.Slice;
 
 import java.util.List;
 
+@Getter
+@NoArgsConstructor
 public class SliceResponse<T> {
 
-    private final List<T> content;
-    private final long page;
-    private final int size;
-    private final boolean hasNext;
+    private List<T> content;
+    private long page;
+    private int size;
+    private boolean hasPrevious;
+    private boolean hasNext;
 
-    public SliceResponse(List<T> content, long page, int size, boolean hasNext) {
+    public SliceResponse(List<T> content, long page, int size, boolean hasPrevious, boolean hasNext) {
         this.content = content;
         this.page = page;
         this.size = size;
+        this.hasPrevious = hasPrevious;
         this.hasNext = hasNext;
     }
 
@@ -23,6 +29,7 @@ public class SliceResponse<T> {
                 slice.getContent(),
                 slice.getNumber(),
                 slice.getNumberOfElements(),
+                slice.hasPrevious(),
                 slice.hasNext());
     }
 

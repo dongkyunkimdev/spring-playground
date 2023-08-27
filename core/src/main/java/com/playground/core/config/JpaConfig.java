@@ -8,4 +8,5 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @EntityScan(basePackages = "com.playground")
 @EnableJpaAuditing
 public class JpaConfig {
+
 }

@@ -1,11 +1,14 @@
 package com.playground.productservice.infrastructure.in.rest;
 
+import com.playground.core.annotation.ApiErrorExceptionsExample;
 import com.playground.core.annotation.RestAdapter;
 import com.playground.productservice.application.port.in.usecase.RegisterProductCategoryUseCase;
+import com.playground.productservice.infrastructure.in.rest.dto.RegisterProductCategoryExceptionDocs;
 import com.playground.productservice.infrastructure.in.rest.dto.RegisterProductCategoryRequest;
 import com.playground.productservice.infrastructure.in.rest.dto.RegisterProductCategoryResponse;
 import com.playground.productservice.util.mapper.RegisterProductCategoryMapper;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,6 +25,8 @@ public class RegisterProductCategoryRestAdapter {
     private final RegisterProductCategoryMapper mapper;
 
     @Operation(summary = "상품 카테고리 등록.")
+    @Tag(name = "2-1. [상품 카테고리 등록]")
+    @ApiErrorExceptionsExample(RegisterProductCategoryExceptionDocs.class)
     @PostMapping("/v1/product/category")
     @ResponseStatus(HttpStatus.CREATED)
     public RegisterProductCategoryResponse registerProductCategory(

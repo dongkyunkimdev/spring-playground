@@ -64,6 +64,9 @@ subprojects {
 
         // Swagger
         implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
+
+        // Apache common collections
+        implementation 'org.apache.commons:commons-collections4:4.4'
     }
 
     tasks.named('test') {

@@ -16,6 +16,7 @@ public class UserPaymentCard extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_payment_card_id")
     private Long userPaymentCardId;
 
     @Column(name = "type")

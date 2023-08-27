@@ -15,6 +15,7 @@ public class ProductCategory extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "product_category_id")
     private Long productCategoryId;
 
     @Column(name = "name")

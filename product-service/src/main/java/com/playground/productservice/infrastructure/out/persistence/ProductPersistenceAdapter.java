@@ -39,4 +39,9 @@ public class ProductPersistenceAdapter implements ProductPersistencePort {
         return productCategoryRepository.save(productCategory);
     }
 
+    @Override
+    public void deleteProductCategory(ProductCategory productCategory) {
+        productCategoryRepository.delete(productCategory);
+    }
+
 }

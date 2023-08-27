@@ -16,4 +16,6 @@ public interface ProductPersistencePort {
 
     ProductCategory saveProductCategory(ProductCategory productCategory);
 
+    void deleteProductCategory(ProductCategory savedProductCategory);
+
 }

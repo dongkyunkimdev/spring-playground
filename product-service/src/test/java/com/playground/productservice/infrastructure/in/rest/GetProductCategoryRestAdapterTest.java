@@ -2,7 +2,7 @@ package com.playground.productservice.infrastructure.in.rest;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.playground.productservice.domain.ProductCategory;
-import com.playground.core.dto.SuccessResponse;
+import com.playground.core.exception.dto.SuccessResponse;
 import com.playground.productservice.support.ControllerTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;

@@ -1,6 +1,6 @@
 package com.playground.productservice.domain;
 
-import com.playground.core.common.entity.BaseTimeEntity;
+import com.playground.core.entity.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;

@@ -1,6 +1,6 @@
 package com.playground.deliveryservice.domain;
 
-import com.playground.core.common.entity.BaseTimeEntity;
+import com.playground.core.entity.BaseTimeEntity;
 import com.playground.core.enums.DeliveryStatus;
 import jakarta.persistence.*;
 import lombok.AccessLevel;

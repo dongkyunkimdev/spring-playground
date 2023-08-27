@@ -1,6 +1,6 @@
 package com.playground.core.advice;
 
-import com.playground.core.dto.SuccessResponse;
+import com.playground.core.exception.dto.SuccessResponse;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;

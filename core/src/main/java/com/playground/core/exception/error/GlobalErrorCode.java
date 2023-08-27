@@ -1,8 +1,7 @@
-package com.playground.productservice.domain.exception;
+package com.playground.core.exception.error;
 
 import com.playground.core.annotation.ExplainError;
 import com.playground.core.exception.dto.ErrorReason;
-import com.playground.core.exception.error.BaseErrorCode;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
@@ -10,12 +9,12 @@ import org.springframework.http.HttpStatus;
 import java.lang.reflect.Field;
 import java.util.Objects;
 
+// TODO: Get All ErrorCode API 작성하여 클라에서 고유 에러코드를 조회할 수 있도록 함
 @Getter
 @AllArgsConstructor
-public enum ProductErrorCode implements BaseErrorCode {
+public enum GlobalErrorCode implements BaseErrorCode {
 
-    PRODUCT_CATEGORY_NOT_FOUND(HttpStatus.NOT_FOUND.value(), "PRODUCT_001", "존재하지 않는 상품 카테고리입니다."),
-    PRODUCT_CATEGORY_NAME_DUPLICATED(HttpStatus.CONFLICT.value(), "PRODUCT_002", "중복된 상품 카테고리 이름입니다.");
+    INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR.value(), "GLOBAL_001", "서버 오류. 관리자에게 문의 부탁드립니다.");
 
     private final int status;
     private final String code;

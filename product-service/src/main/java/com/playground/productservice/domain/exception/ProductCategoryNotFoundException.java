@@ -1,6 +1,6 @@
 package com.playground.productservice.domain.exception;
 
-import com.playground.core.common.exception.BusinessException;
+import com.playground.core.exception.BusinessException;
 
 public class ProductCategoryNotFoundException extends BusinessException {
 

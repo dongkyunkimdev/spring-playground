@@ -1,4 +1,4 @@
-package com.playground.productservice.infrastructure.in.rest.dto;
+package com.playground.productservice.infrastructure.in.rest.docs;
 
 import com.playground.core.annotation.ExceptionDoc;
 import com.playground.core.annotation.ExplainError;
@@ -10,6 +10,6 @@ import com.playground.productservice.domain.exception.DuplicateProductCategoryNa
 public class RegisterProductCategoryExceptionDocs implements SwaggerExampleExceptions {
 
     @ExplainError("기존의 상품 카테고리와 이름이 중복된 경우.")
-    public BusinessException 이름_중복 = DuplicateProductCategoryNameException.EXCEPTION;
+    public BusinessException 이름이_중복됨 = DuplicateProductCategoryNameException.EXCEPTION;
 
 }

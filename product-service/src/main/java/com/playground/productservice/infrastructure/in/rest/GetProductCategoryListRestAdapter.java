@@ -9,6 +9,7 @@ import com.playground.productservice.infrastructure.in.rest.dto.GetProductCatego
 import com.playground.productservice.util.mapper.GetProductCategoryMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Pageable;
@@ -28,6 +29,7 @@ public class GetProductCategoryListRestAdapter {
     private final GetProductCategoryMapper mapper;
 
     @Operation(summary = "상품 카테고리 리스트 조회.")
+    @Tag(name = "2-4. [상품 카테고리 리스트 조회]")
     @GetMapping("/v1/product/category")
     @ResponseStatus(HttpStatus.OK)
     public SliceResponse<GetProductCategoryResponse> getProductCategory(

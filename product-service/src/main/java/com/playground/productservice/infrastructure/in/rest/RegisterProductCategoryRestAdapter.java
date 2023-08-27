@@ -3,7 +3,7 @@ package com.playground.productservice.infrastructure.in.rest;
 import com.playground.core.annotation.ApiErrorExceptionsExample;
 import com.playground.core.annotation.RestAdapter;
 import com.playground.productservice.application.port.in.usecase.RegisterProductCategoryUseCase;
-import com.playground.productservice.infrastructure.in.rest.dto.RegisterProductCategoryExceptionDocs;
+import com.playground.productservice.infrastructure.in.rest.docs.RegisterProductCategoryExceptionDocs;
 import com.playground.productservice.infrastructure.in.rest.dto.RegisterProductCategoryRequest;
 import com.playground.productservice.infrastructure.in.rest.dto.RegisterProductCategoryResponse;
 import com.playground.productservice.util.mapper.RegisterProductCategoryMapper;

@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @Configuration
-@EntityScan(basePackages = "com.playground.core.domain")
+@EntityScan(basePackages = "com.playground")
 @EnableJpaAuditing
 public class JpaConfig {
 }

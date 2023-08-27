@@ -1,8 +1,8 @@
 package com.playground.productservice.infrastructure.dao;
 
-import com.playground.productservice.domain.ProductCategory;
-import com.playground.core.domain.product.QProductCategory;
 import com.playground.core.util.SliceUtil;
+import com.playground.productservice.domain.ProductCategory;
+import com.playground.productservice.domain.QProductCategory;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;

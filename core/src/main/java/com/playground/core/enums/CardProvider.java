@@ -1,4 +1,4 @@
-package com.playground.core.type;
+package com.playground.core.enums;
 
 public enum CardProvider {
 

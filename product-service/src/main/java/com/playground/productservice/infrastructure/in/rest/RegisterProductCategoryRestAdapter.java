@@ -5,8 +5,6 @@ import com.playground.productservice.infrastructure.in.rest.dto.RegisterProductC
 import com.playground.productservice.infrastructure.in.rest.dto.RegisterProductCategoryResponse;
 import com.playground.productservice.util.mapper.RegisterProductCategoryMapper;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -27,10 +25,7 @@ public class RegisterProductCategoryRestAdapter {
     @PostMapping("/v1/product/category")
     @ResponseStatus(HttpStatus.CREATED)
     public RegisterProductCategoryResponse registerProductCategory(
-            @io.swagger.v3.oas.annotations.parameters.RequestBody(
-                    required = true, description = "상품 카테고리 등록 정보.",
-                    content = @Content(schema = @Schema(implementation = RegisterProductCategoryRequest.class))
-            ) @RequestBody(required = true) @Valid final RegisterProductCategoryRequest request
+            @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "상품 카테고리 등록 정보.") @RequestBody(required = true) @Valid final RegisterProductCategoryRequest request
     ) {
         return mapper.infoToResponse(registerProductCategoryUseCase.execute(mapper.requestToCommand(request)));
     }

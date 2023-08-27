@@ -3,7 +3,7 @@ package com.playground.core.exception.dto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
@@ -13,14 +13,14 @@ public class ErrorResponse {
     private int status;
     private String code;
     private String reason;
-    private ZonedDateTime timeStamp;
+    private LocalDateTime timeStamp;
     private String path;
 
     public ErrorResponse(ErrorReason errorReason, String path) {
         this.status = errorReason.getStatus();
         this.code = errorReason.getCode();
         this.reason = errorReason.getReason();
-        this.timeStamp = ZonedDateTime.now();
+        this.timeStamp = LocalDateTime.now();
         this.path = path;
     }
 
@@ -28,7 +28,7 @@ public class ErrorResponse {
         this.status = status;
         this.code = code;
         this.reason = reason;
-        this.timeStamp = ZonedDateTime.now();
+        this.timeStamp = LocalDateTime.now();
         this.path = path;
     }
 

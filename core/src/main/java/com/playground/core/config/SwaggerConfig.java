@@ -2,6 +2,7 @@ package com.playground.core.config;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.info.License;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,9 +23,14 @@ public class SwaggerConfig {
     }
 
     private Info info() {
+        License license = new License();
+        license.setUrl("https://github.com/dongkyunkimdev/spring-playground");
+        license.setName("Github");
+
         return new Info()
                 .title(this.title)
-                .version(this.version);
+                .version(this.version)
+                .license(license);
     }
 
 }

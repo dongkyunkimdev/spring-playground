@@ -1,3 +1,9 @@
 playground:
   title: Order API
   version: 1.0.0
+
+springdoc:
+  default-produces-media-type: application/json
+  default-consumes-media-type: application/json
+  swagger-ui:
+    tags-sorter: alpha

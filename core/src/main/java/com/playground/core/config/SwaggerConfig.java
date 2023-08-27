@@ -1,10 +1,12 @@
 package com.playground.core.config;
 
+import com.playground.core.annotation.ApiErrorCodeExample;
 import com.playground.core.annotation.ApiErrorExceptionsExample;
 import com.playground.core.annotation.ExplainError;
 import com.playground.core.exception.BusinessException;
 import com.playground.core.exception.dto.ErrorReason;
 import com.playground.core.exception.dto.ErrorResponse;
+import com.playground.core.exception.error.BaseErrorCode;
 import com.playground.core.swagger.ExampleHolder;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.models.OpenAPI;
@@ -66,6 +68,8 @@ public class SwaggerConfig {
     public OperationCustomizer customize() {
         return (Operation operation, HandlerMethod handlerMethod) -> {
             ApiErrorExceptionsExample apiErrorExceptionsExample = handlerMethod.getMethodAnnotation(ApiErrorExceptionsExample.class);
+            ApiErrorCodeExample apiErrorCodeExample = handlerMethod.getMethodAnnotation(ApiErrorCodeExample.class);
+
             List<String> tags = getTags(handlerMethod);
 
             if (CollectionUtils.isNotEmpty(tags)) {
@@ -74,6 +78,10 @@ public class SwaggerConfig {
 
             if (apiErrorExceptionsExample != null) {
                 generateExceptionResponseExample(operation, apiErrorExceptionsExample.value());
+            }
+
+            if (apiErrorCodeExample != null) {
+                generateErrorCodeResponseExample(operation, apiErrorCodeExample.value());
             }
 
             return operation;
@@ -151,6 +159,33 @@ public class SwaggerConfig {
                     apiResponse.setContent(content);
                     responses.addApiResponse(status.toString(), apiResponse);
                 });
+    }
+
+    private void generateErrorCodeResponseExample(Operation operation, Class<? extends BaseErrorCode> type) {
+        ApiResponses responses = operation.getResponses();
+        BaseErrorCode[] errorCodes = type.getEnumConstants();
+
+        Map<Integer, List<ExampleHolder>> statusWithExampleHolders =
+                Arrays.stream(errorCodes)
+                        .map(
+                                baseErrorCode -> {
+                                    try {
+                                        ErrorReason errorReason = baseErrorCode.getErrorReason();
+                                        return ExampleHolder.builder()
+                                                .example(
+                                                        getSwaggerExample(
+                                                                baseErrorCode.getExplainError(),
+                                                                errorReason))
+                                                .code(errorReason.getStatus())
+                                                .name(errorReason.getCode())
+                                                .build();
+                                    } catch (NoSuchFieldException e) {
+                                        throw new RuntimeException(e);
+                                    }
+                                })
+                        .collect(groupingBy(ExampleHolder::getCode));
+
+        addExamplesToResponses(responses, statusWithExampleHolders);
     }
 
 }

@@ -1,7 +1,7 @@
 package com.playground.productservice.infrastructure.out.persistence;
 
-import com.playground.productservice.domain.ProductCategory;
 import com.playground.productservice.application.port.out.persistence.ProductPersistencePort;
+import com.playground.productservice.domain.ProductCategory;
 import com.playground.productservice.infrastructure.dao.ProductCategoryRepository;
 import com.playground.productservice.infrastructure.dao.ProductCategoryRepositorySupport;
 import lombok.RequiredArgsConstructor;

@@ -1,10 +1,10 @@
 package com.playground.productservice.application.service;
 
-import com.playground.productservice.domain.ProductCategory;
 import com.playground.productservice.application.port.in.usecase.GetProductCategoryListUseCase;
 import com.playground.productservice.application.port.in.usecase.dto.GetProductCategoryInfo;
 import com.playground.productservice.application.port.in.usecase.dto.GetProductCategoryListCommand;
 import com.playground.productservice.application.port.out.persistence.ProductPersistencePort;
+import com.playground.productservice.domain.ProductCategory;
 import com.playground.productservice.util.mapper.GetProductCategoryMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;

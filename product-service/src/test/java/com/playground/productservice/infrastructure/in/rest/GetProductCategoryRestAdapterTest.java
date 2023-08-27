@@ -1,8 +1,10 @@
 package com.playground.productservice.infrastructure.in.rest;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.playground.core.exception.dto.ErrorResponse;
 import com.playground.core.exception.dto.SuccessResponse;
 import com.playground.productservice.domain.ProductCategory;
+import com.playground.productservice.domain.exception.ProductErrorCode;
 import com.playground.productservice.support.ControllerTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
@@ -47,6 +49,31 @@ class GetProductCategoryRestAdapterTest extends ControllerTest {
         });
         assertThat(productCategory.getProductCategoryId()).isEqualTo(productCategoryId);
         assertThat(productCategory.getName()).isEqualTo("Clothing");
+    }
+
+    @Test
+    void 상품_카테고리_조회_실패_상품_카테고리가_존재하지_않음() throws Exception {
+        // given
+        final Long productCategoryId = 98123L;
+
+        // when
+        MockHttpServletRequestBuilder request = get("/v1/product/category/{productCategoryId}", productCategoryId)
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON);
+
+        ResultActions result = mvc.perform(request);
+
+        // then
+        result.andExpect(status().isNotFound());
+
+        String responseMessage = result.andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
+        ErrorResponse responseDto = objectMapper.readValue(responseMessage, new TypeReference<>() {
+        });
+
+        assertThat(responseDto.isSuccess()).isFalse();
+        assertThat(responseDto.getStatus()).isEqualTo(404);
+        assertThat(responseDto.getCode()).isEqualTo(ProductErrorCode.PRODUCT_CATEGORY_NOT_FOUND.getCode());
+        assertThat(responseDto.getReason()).isEqualTo(ProductErrorCode.PRODUCT_CATEGORY_NOT_FOUND.getReason());
     }
 
 }

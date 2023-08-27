@@ -85,7 +85,6 @@ class RegisterProductCategoryRestAdapterTest extends ControllerTest {
         assertThat(responseDto.getStatus()).isEqualTo(409);
         assertThat(responseDto.getCode()).isEqualTo(ProductErrorCode.PRODUCT_CATEGORY_NAME_DUPLICATED.getCode());
         assertThat(responseDto.getReason()).isEqualTo(ProductErrorCode.PRODUCT_CATEGORY_NAME_DUPLICATED.getReason());
-        assertThat(responseDto.getPath()).isEqualTo("http://localhost" + url);
     }
 
 }

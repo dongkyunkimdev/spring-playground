@@ -1,5 +1,6 @@
 package com.playground.productservice.infrastructure.in.rest;
 
+import com.playground.core.annotation.RestAdapter;
 import com.playground.core.paging.SliceResponse;
 import com.playground.productservice.application.port.in.usecase.GetProductCategoryListUseCase;
 import com.playground.productservice.application.port.in.usecase.dto.GetProductCategoryInfo;
@@ -17,9 +18,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@RestAdapter
 @RequiredArgsConstructor
 public class GetProductCategoryListRestAdapter {
 

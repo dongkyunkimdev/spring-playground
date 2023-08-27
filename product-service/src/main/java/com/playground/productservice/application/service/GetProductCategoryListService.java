@@ -1,5 +1,6 @@
 package com.playground.productservice.application.service;
 
+import com.playground.core.annotation.UseCase;
 import com.playground.productservice.application.port.in.usecase.GetProductCategoryListUseCase;
 import com.playground.productservice.application.port.in.usecase.dto.GetProductCategoryInfo;
 import com.playground.productservice.application.port.in.usecase.dto.GetProductCategoryListCommand;
@@ -9,12 +10,11 @@ import com.playground.productservice.util.mapper.GetProductCategoryMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service
+@UseCase
 @RequiredArgsConstructor
 public class GetProductCategoryListService implements GetProductCategoryListUseCase {
 

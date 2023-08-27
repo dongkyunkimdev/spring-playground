@@ -1,5 +1,6 @@
 package com.playground.productservice.infrastructure.in.rest;
 
+import com.playground.core.annotation.RestAdapter;
 import com.playground.productservice.application.port.in.usecase.RegisterProductCategoryUseCase;
 import com.playground.productservice.infrastructure.in.rest.dto.RegisterProductCategoryRequest;
 import com.playground.productservice.infrastructure.in.rest.dto.RegisterProductCategoryResponse;
@@ -11,9 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@RestAdapter
 @RequiredArgsConstructor
 public class RegisterProductCategoryRestAdapter {
 

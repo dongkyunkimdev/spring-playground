@@ -1,5 +1,6 @@
 package com.playground.productservice.application.service;
 
+import com.playground.core.annotation.UseCase;
 import com.playground.productservice.application.port.in.usecase.GetProductCategoryUseCase;
 import com.playground.productservice.application.port.in.usecase.dto.GetProductCategoryCommand;
 import com.playground.productservice.application.port.in.usecase.dto.GetProductCategoryInfo;
@@ -8,12 +9,11 @@ import com.playground.productservice.domain.ProductCategory;
 import com.playground.productservice.domain.exception.ProductCategoryNotFoundException;
 import com.playground.productservice.util.mapper.GetProductCategoryMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service
+@UseCase
 @RequiredArgsConstructor
 public class GetProductCategoryService implements GetProductCategoryUseCase {
 

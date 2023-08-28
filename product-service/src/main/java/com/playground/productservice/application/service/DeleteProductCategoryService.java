@@ -6,7 +6,9 @@ import com.playground.productservice.application.port.in.usecase.dto.DeleteProdu
 import com.playground.productservice.application.port.out.persistence.ProductPersistencePort;
 import com.playground.productservice.domain.ProductCategory;
 import com.playground.productservice.domain.exception.ProductCategoryNotFoundException;
+import com.playground.productservice.domain.exception.ProductCategoryReferencedException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,7 +25,15 @@ public class DeleteProductCategoryService implements DeleteProductCategoryUseCas
         ProductCategory savedProductCategory = productPersistencePort.findProductCategoryById(command.getProductCategoryId())
                 .orElseThrow(ProductCategoryNotFoundException::new);
 
-        productPersistencePort.deleteProductCategory(savedProductCategory);
+        try {
+            productPersistencePort.deleteProductCategory(savedProductCategory);
+        } catch (DataIntegrityViolationException e) {
+            if (e.getMessage().contains("CONSTRAINT `product_product_category_product_category_id`")) {
+                throw new ProductCategoryReferencedException();
+            } else {
+                throw new IllegalStateException(e);
+            }
+        }
     }
 
 }

@@ -1,10 +1,10 @@
 package com.playground.core.exception.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.playground.core.exception.dto.ErrorReason;
-import com.playground.core.exception.dto.ErrorResponse;
 import com.playground.core.exception.BusinessDynamicException;
 import com.playground.core.exception.BusinessException;
+import com.playground.core.exception.dto.ErrorReason;
+import com.playground.core.exception.dto.ErrorResponse;
 import com.playground.core.exception.error.BaseErrorCode;
 import com.playground.core.exception.error.GlobalErrorCode;
 import jakarta.servlet.http.HttpServletRequest;
@@ -25,7 +25,6 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,9 +35,7 @@ import java.util.stream.Collectors;
 public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(BusinessException.class)
-    public ResponseEntity<ErrorResponse> BusinessExceptionHandler(
-            BusinessException e, HttpServletRequest request
-    ) {
+    public ResponseEntity<ErrorResponse> BusinessExceptionHandler(BusinessException e, HttpServletRequest request) {
         BaseErrorCode code = e.getErrorCode();
         ErrorReason errorReason = code.getErrorReason();
         ErrorResponse errorResponse = new ErrorResponse(errorReason, request.getRequestURL().toString());
@@ -47,9 +44,7 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
     }
 
     @Override
-    protected ResponseEntity<Object> handleExceptionInternal(
-            Exception ex, Object body, HttpHeaders headers, HttpStatusCode statusCode, WebRequest request
-    ) {
+    protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body, HttpHeaders headers, HttpStatusCode statusCode, WebRequest request) {
         ServletWebRequest servletWebRequest = (ServletWebRequest) request;
         String url = UriComponentsBuilder.fromHttpRequest(
                 new ServletServerHttpRequest(servletWebRequest.getRequest())).build().toUriString();
@@ -60,9 +55,7 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
 
     @SneakyThrows
     @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(
-            MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode statusCode, WebRequest request
-    ) {
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode statusCode, WebRequest request) {
         List<FieldError> errors = ex.getBindingResult().getFieldErrors();
         ServletWebRequest servletWebRequest = (ServletWebRequest) request;
         String url = UriComponentsBuilder.fromHttpRequest(
@@ -76,9 +69,7 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
-    public ResponseEntity<ErrorResponse> ConstraintViolationExceptionHandler(
-            ConstraintViolationException e, HttpServletRequest request
-    ) {
+    public ResponseEntity<ErrorResponse> ConstraintViolationExceptionHandler(ConstraintViolationException e, HttpServletRequest request) {
         Map<String, Object> bindingErrors = new HashMap<>();
         e.getConstraintViolations()
                 .forEach(
@@ -110,17 +101,14 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
     }
 
     @ExceptionHandler(BusinessDynamicException.class)
-    public ResponseEntity<ErrorResponse> BusinessDynamicExceptionHandler(
-            BusinessDynamicException e, HttpServletRequest request
-    ) {
+    public ResponseEntity<ErrorResponse> BusinessDynamicExceptionHandler(BusinessDynamicException e, HttpServletRequest request) {
         ErrorResponse errorResponse = new ErrorResponse(e.getStatus(), e.getCode(), e.getReason(), request.getRequestURL().toString());
 
         return ResponseEntity.status(HttpStatus.valueOf(e.getStatus())).body(errorResponse);
     }
 
     @ExceptionHandler(Exception.class)
-    protected ResponseEntity<ErrorResponse> handleException(Exception e, HttpServletRequest request)
-            throws IOException {
+    protected ResponseEntity<ErrorResponse> handleException(Exception e, HttpServletRequest request) {
         log.error("INTERNAL_SERVER_ERROR", e);
 
         String url = UriComponentsBuilder.fromHttpRequest(new ServletServerHttpRequest(request)).build().toUriString();

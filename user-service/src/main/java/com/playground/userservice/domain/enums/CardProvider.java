@@ -1,4 +1,4 @@
-package com.playground.core.enums;
+package com.playground.userservice.domain.enums;
 
 public enum CardProvider {
 

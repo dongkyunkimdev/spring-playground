@@ -1,4 +1,4 @@
-package com.playground.core.enums;
+package com.playground.orderservice.domain.enums;
 
 public enum OrderStatus {
 

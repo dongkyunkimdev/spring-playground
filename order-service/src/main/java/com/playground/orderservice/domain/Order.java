@@ -1,7 +1,7 @@
 package com.playground.orderservice.domain;
 
 import com.playground.core.entity.BaseTimeEntity;
-import com.playground.core.enums.OrderStatus;
+import com.playground.orderservice.domain.enums.OrderStatus;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;

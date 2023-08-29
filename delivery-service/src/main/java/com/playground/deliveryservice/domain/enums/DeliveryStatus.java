@@ -1,4 +1,4 @@
-package com.playground.core.enums;
+package com.playground.deliveryservice.domain.enums;
 
 public enum DeliveryStatus {
 

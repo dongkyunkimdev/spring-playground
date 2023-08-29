@@ -1,8 +1,8 @@
 package com.playground.userservice.domain;
 
 import com.playground.core.entity.BaseTimeEntity;
-import com.playground.core.enums.CardProvider;
-import com.playground.core.enums.CardType;
+import com.playground.userservice.domain.enums.CardProvider;
+import com.playground.userservice.domain.enums.CardType;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;

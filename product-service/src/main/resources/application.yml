@@ -5,6 +5,11 @@ spring:
   application:
     name: product-service
 
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
 playground:
   title: Product API
   version: 1.0.0

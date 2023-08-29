@@ -3,7 +3,14 @@ playground:
   version: 1.0.0
 
 springdoc:
+  api-docs:
+    path: /api-docs
   default-produces-media-type: application/json
   default-consumes-media-type: application/json
   swagger-ui:
+    operations-sorter: alpha
     tags-sorter: alpha
+    path: /swagger-ui.html
+    disable-swagger-default-url: true
+  paths-to-match:
+    - /**

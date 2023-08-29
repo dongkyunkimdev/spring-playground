@@ -21,6 +21,10 @@ repositories {
     mavenCentral()
 }
 
+ext {
+    set('springCloudVersion', "2022.0.3")
+}
+
 springBoot {
     mainClass = 'com.playground'
 }
@@ -56,24 +60,18 @@ subprojects {
         implementation 'org.apache.commons:commons-collections4:4.4'
     }
 
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        }
+    }
+
     tasks.named('test') {
         test.configure {
             systemProperty "spring.profiles.active", System.getProperty('profile', "local")
         }
 
         useJUnitPlatform()
-    }
-}
-
-project(':gateway-server') {
-    dependencies {
-        implementation project(':core')
-    }
-}
-
-project(':discovery-server') {
-    dependencies {
-        implementation project(':core')
     }
 }
 

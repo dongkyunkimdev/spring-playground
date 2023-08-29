@@ -71,6 +71,12 @@ project(':gateway-server') {
     }
 }
 
+project(':discovery-server') {
+    dependencies {
+        implementation project(':core')
+    }
+}
+
 project(':user-service') {
     dependencies {
         implementation project(':core')

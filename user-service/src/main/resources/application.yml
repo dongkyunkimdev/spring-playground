@@ -1,6 +1,10 @@
 server:
   port: 8080
 
+spring:
+  application:
+    name: user-service
+
 playground:
   title: User API
   version: 1.0.0

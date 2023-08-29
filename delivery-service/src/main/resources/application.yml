@@ -1,6 +1,10 @@
 server:
   port: 8080
 
+spring:
+  application:
+    name: delivery-service
+
 playground:
   title: Delivery API
   version: 1.0.0

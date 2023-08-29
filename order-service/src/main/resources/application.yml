@@ -14,3 +14,12 @@ springdoc:
     disable-swagger-default-url: true
   paths-to-match:
     - /**
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+          - info
+          - metrics

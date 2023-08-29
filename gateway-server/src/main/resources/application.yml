@@ -35,3 +35,12 @@ cloud:
         uri: lb://delivery-service
         predicates:
           - Path=/delivery/**
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+          - info
+          - metrics

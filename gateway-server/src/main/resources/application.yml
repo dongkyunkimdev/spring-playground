@@ -13,26 +13,28 @@ spring:
         - id: user-service
           uri: lb://user-service
           predicates:
-            - Path=/user/**
+            - Path=/v*/user/**
 
         - id: product-service
           uri: lb://product-service
           predicates:
-            - Path=/product/**
+            - Path=/v*/product/**
 
         - id: order-service
           uri: lb://order-service
           predicates:
-            - Path=/order/**
+            - Path=/v*/order/**
 
         - id: delivery-service
           uri: lb://delivery-service
           predicates:
-            - Path=/delivery/**
+            - Path=/v*/delivery/**
 
 eureka:
   client:
     service-url:
+      register-with-eureka: true
+      fetch-registry: true
       defaultZone: http://localhost:8761/eureka/
 
 management:

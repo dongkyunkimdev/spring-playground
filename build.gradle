@@ -52,19 +52,6 @@ subprojects {
         annotationProcessor 'org.projectlombok:lombok'
         testAnnotationProcessor "org.projectlombok:lombok"
 
-        // Spring
-        implementation 'org.springframework.boot:spring-boot-starter-web'
-        implementation 'org.springframework.boot:spring-boot-starter-validation'
-        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-        testImplementation 'org.springframework.boot:spring-boot-starter-test'
-        annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-
-        // MySQL
-        runtimeOnly 'com.mysql:mysql-connector-j'
-
-        // Swagger
-        implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
-
         // Apache common collections
         implementation 'org.apache.commons:commons-collections4:4.4'
     }

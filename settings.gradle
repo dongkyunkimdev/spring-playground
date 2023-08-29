@@ -1,8 +1,8 @@
 rootProject.name = 'spring-playground'
 
 include 'core'
-include 'gateway-server'
 include 'discovery-server'
+include 'gateway-server'
 include 'user-service'
 include 'product-service'
 include 'order-service'

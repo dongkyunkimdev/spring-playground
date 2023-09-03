@@ -8,6 +8,8 @@ services:
 
   gateway-server:
     image: gateway-server-image
+    environment:
+      DISCOVERY_SERVER_URI: "http://discovery-server:8761/eureka/"
     ports:
       - 8080:8080
     depends_on:

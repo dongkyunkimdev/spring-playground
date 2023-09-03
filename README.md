@@ -38,5 +38,9 @@
 
 # 실행하기
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/) 설치
-- 프로젝트 root 경로에서 ```docker-compose -f infra/docker/playground.local.yml up -d``` 명령어 실행
-- Run Configuration 에서 구성한 flyway 실행
+- 프로젝트 root 경로에서 아래 순서대로 실행
+  - `docker-compose -f infra/docker/playground-local-infra.yml up -d`
+  - Run Configuration 에서 구성한 flyway 실행
+  - `sh infra/gradle-build.sh`
+  - `sh infra/docker/docker-image-build.sh`
+  - `docker-compose -f infra/docker/playground-local-service.yml up -d`

@@ -15,3 +15,7 @@ services:
     volumes:
       - ./mysql/conf:/etc/mysql/conf.d
       - ./mysql/init:/docker-entrypoint-initdb.d
+
+networks:
+  shared-network:
+    external: true

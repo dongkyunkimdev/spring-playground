@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  discovery-server:
+    image: discovery-server-image
+    ports:
+      - 8761:8761
+    depends_on:
+      - playground-mysql
+
+  gateway-server:
+    image: gateway-server-image
+    ports:
+      - 8080:8080
+    depends_on:
+      - discovery-server
+
+  user-service:
+    image: user-service-image
+    ports:
+      - 8081:8080
+    depends_on:
+      - gateway-server
+
+  product-service:
+    image: product-service-image
+    ports:
+      - 8082:8080
+    depends_on:
+      - gateway-server
+
+  order-service:
+    image: order-service-image
+    ports:
+      - 8083:8080
+    depends_on:
+      - gateway-server
+
+  delivery-service:
+    image: delivery-service-image
+    ports:
+      - 8084:8080
+    depends_on:
+      - gateway-server
+
+networks:
+  shared-network:
+    external: true

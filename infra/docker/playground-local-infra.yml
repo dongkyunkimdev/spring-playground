@@ -15,7 +15,9 @@ services:
     volumes:
       - ./mysql/conf:/etc/mysql/conf.d
       - ./mysql/init:/docker-entrypoint-initdb.d
+    networks:
+      - playground-net
 
 networks:
-  shared-network:
-    external: true
+  playground-net:
+    driver: bridge

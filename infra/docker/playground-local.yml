@@ -18,11 +18,13 @@ services:
 
   discovery-server:
     image: discovery-server-image
+    restart: always
     ports:
       - 8761:8761
 
   gateway-server:
     image: gateway-server-image
+    restart: always
     environment:
       - DISCOVERY_SERVER_URI=http://discovery-server:8761/eureka/
     ports:
@@ -32,6 +34,7 @@ services:
 
   user-service:
     image: user-service-image
+    restart: always
     environment:
       - spring.profiles.active=local
       - DISCOVERY_SERVER_URI=http://discovery-server:8761/eureka/
@@ -43,6 +46,7 @@ services:
 
   product-service:
     image: product-service-image
+    restart: always
     environment:
       - spring.profiles.active=local
       - DISCOVERY_SERVER_URI=http://discovery-server:8761/eureka/
@@ -54,6 +58,7 @@ services:
 
   order-service:
     image: order-service-image
+    restart: always
     environment:
       - spring.profiles.active=local
       - DISCOVERY_SERVER_URI=http://discovery-server:8761/eureka/
@@ -65,6 +70,7 @@ services:
 
   delivery-service:
     image: delivery-service-image
+    restart: always
     environment:
       - spring.profiles.active=local
       - DISCOVERY_SERVER_URI=http://discovery-server:8761/eureka/

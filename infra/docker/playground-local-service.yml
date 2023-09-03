@@ -9,7 +9,7 @@ services:
   gateway-server:
     image: gateway-server-image
     environment:
-      DISCOVERY_SERVER_URI: "http://discovery-server:8761/eureka/"
+      - DISCOVERY_SERVER_URI=http://discovery-server:8761/eureka/
     ports:
       - 8080:8080
     depends_on:
@@ -19,6 +19,7 @@ services:
     image: user-service-image
     environment:
       - spring.profiles.active=local
+      - DISCOVERY_SERVER_URI=http://discovery-server:8761/eureka/
     ports:
       - 8081:8080
     depends_on:
@@ -28,6 +29,7 @@ services:
     image: product-service-image
     environment:
       - spring.profiles.active=local
+      - DISCOVERY_SERVER_URI=http://discovery-server:8761/eureka/
     ports:
       - 8082:8080
     depends_on:
@@ -37,6 +39,7 @@ services:
     image: order-service-image
     environment:
       - spring.profiles.active=local
+      - DISCOVERY_SERVER_URI=http://discovery-server:8761/eureka/
     ports:
       - 8083:8080
     depends_on:
@@ -46,6 +49,7 @@ services:
     image: delivery-service-image
     environment:
       - spring.profiles.active=local
+      - DISCOVERY_SERVER_URI=http://discovery-server:8761/eureka/
     ports:
       - 8084:8080
     depends_on:

@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo "Building docker image for config-server"
+docker build -t config-server-image "./config-server"
+
 echo "Building docker image for discovery-server"
 docker build -t discovery-server-image "./discovery-server"
 

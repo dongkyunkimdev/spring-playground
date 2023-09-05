@@ -16,11 +16,21 @@ services:
       - ./mysql/conf:/etc/mysql/conf.d
       - ./mysql/init:/docker-entrypoint-initdb.d
 
+  config-server:
+    image: config-server-image
+    restart: always
+    ports:
+      - 8888:8888
+    depends_on:
+      - playground-mysql
+
   discovery-server:
     image: discovery-server-image
     restart: always
     ports:
       - 8761:8761
+    depends_on:
+      - config-server
 
   gateway-server:
     image: gateway-server-image

@@ -9,6 +9,13 @@ spring:
   application:
     name: gateway-server
   cloud:
+    config:
+      fail-fast: true
+      retry:
+        initial-interval: 1000
+        max-attempts: 20
+        max-interval: 2000
+        multiplier: 1.1
     gateway:
       discovery:
         locator:

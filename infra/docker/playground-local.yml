@@ -19,6 +19,8 @@ services:
   config-server:
     image: config-server-image
     restart: always
+    environment:
+      - spring.profiles.active=local
     ports:
       - 8888:8888
     depends_on:
@@ -28,6 +30,7 @@ services:
     image: discovery-server-image
     restart: always
     environment:
+      - spring.profiles.active=local
       - CONFIG_SERVER_URI="http://config-server:8888"
     ports:
       - 8761:8761
@@ -38,6 +41,7 @@ services:
     image: gateway-server-image
     restart: always
     environment:
+      - spring.profiles.active=local
       - CONFIG_SERVER_URI="http://config-server:8888"
       - DISCOVERY_SERVER_URI=http://discovery-server:8761/eureka/
     ports:

@@ -27,6 +27,8 @@ services:
   discovery-server:
     image: discovery-server-image
     restart: always
+    environment:
+      - CONFIG_SERVER_URI="http://q-pang-config-server:8888"
     ports:
       - 8761:8761
     depends_on:
@@ -36,6 +38,7 @@ services:
     image: gateway-server-image
     restart: always
     environment:
+      - CONFIG_SERVER_URI="http://q-pang-config-server:8888"
       - DISCOVERY_SERVER_URI=http://discovery-server:8761/eureka/
     ports:
       - 8080:8080
@@ -47,6 +50,7 @@ services:
     restart: always
     environment:
       - spring.profiles.active=local
+      - CONFIG_SERVER_URI="http://q-pang-config-server:8888"
       - DISCOVERY_SERVER_URI=http://discovery-server:8761/eureka/
       - PLAYGROUND_MYSQL_URI=playground-mysql:3306
     ports:
@@ -59,6 +63,7 @@ services:
     restart: always
     environment:
       - spring.profiles.active=local
+      - CONFIG_SERVER_URI="http://q-pang-config-server:8888"
       - DISCOVERY_SERVER_URI=http://discovery-server:8761/eureka/
       - PLAYGROUND_MYSQL_URI=playground-mysql:3306
     ports:
@@ -71,6 +76,7 @@ services:
     restart: always
     environment:
       - spring.profiles.active=local
+      - CONFIG_SERVER_URI="http://q-pang-config-server:8888"
       - DISCOVERY_SERVER_URI=http://discovery-server:8761/eureka/
       - PLAYGROUND_MYSQL_URI=playground-mysql:3306
     ports:
@@ -83,6 +89,7 @@ services:
     restart: always
     environment:
       - spring.profiles.active=local
+      - CONFIG_SERVER_URI="http://q-pang-config-server:8888"
       - DISCOVERY_SERVER_URI=http://discovery-server:8761/eureka/
       - PLAYGROUND_MYSQL_URI=playground-mysql:3306
     ports:

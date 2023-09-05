@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: jdbc:mysql://${PLAYGROUND_MYSQL_URI:127.0.0.1:3308}/db_order?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&useTimezone=true&serverTimezone=UTC&useLegacyDatetimeCode=false&cacheDefaultTimezone=false&allowMultiQueries=true
+    username: app_playground
+    password: password
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${DISCOVERY_SERVER_URI:http://localhost:8761/eureka/}

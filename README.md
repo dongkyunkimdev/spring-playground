@@ -4,8 +4,8 @@
 > [Kotlin으로 구현한 Q-Pang 프로젝트](https://github.com/q-pang/q-pang-api)를 Java로 마이그레이션하고, 살을 붙이며 Java/Spring Playground로 활용하기 위한 프로젝트입니다.
 
 ## 아키텍처
-![q-pang 아키텍처](https://user-images.githubusercontent.com/49021557/209222999-cc6ac453-1a96-4be1-940c-77b8ea4a83e2.png)
-- q-pang 서버는 총 4가지의 마이크로서비스로 이루어진다.
+![아키텍처](https://user-images.githubusercontent.com/49021557/209222999-cc6ac453-1a96-4be1-940c-77b8ea4a83e2.png)
+- spring-playground는 총 4가지의 마이크로서비스로 이루어진다.
 - 각 마이크로서비스로의 접근은 Gateway Server를 통해 이루어지며, 사용자 인증은 Gateway Server에서 수행한다.
 - Gateway Server에서 request header에 담긴 jwt를 사용하여 사용자를 검증하고, payload에 담긴 username을 꺼내어 request header에 담아 마이크로서비스를 호출한다.
 - Database Schema, Eureka Service Url, JWT Secret 등의 환경 정보는 Config Server에서 중앙 집중하여 관리한다.

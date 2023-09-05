@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class RegisterProductCategoryRequest {
 
     @NotBlank
-    @Schema(description = "이름", defaultValue = "clothing")
+    @Schema(description = "이름", example = "Clothing")
     private String name;
 
 }

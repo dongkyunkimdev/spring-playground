@@ -1,3 +1,7 @@
+playground:
+  title: User API
+  version: 1.0.0
+
 server:
   port: 8080
 
@@ -11,10 +15,6 @@ eureka:
       register-with-eureka: true
       fetch-registry: true
       defaultZone: ${DISCOVERY_SERVER_URI:http://localhost:8761/eureka/}
-
-playground:
-  title: User API
-  version: 1.0.0
 
 springdoc:
   api-docs:

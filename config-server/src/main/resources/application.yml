@@ -1,3 +1,7 @@
+playground:
+  title: Config Server
+  version: 1.0.0
+
 server:
   port: 8888
 

@@ -19,8 +19,6 @@ services:
   config-server:
     image: config-server-image
     restart: always
-    environment:
-      - spring.profiles.active=local
     ports:
       - 8888:8888
     depends_on:

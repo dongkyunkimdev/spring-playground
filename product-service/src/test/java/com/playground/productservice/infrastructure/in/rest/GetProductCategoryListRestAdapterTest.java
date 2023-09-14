@@ -3,7 +3,6 @@ package com.playground.productservice.infrastructure.in.rest;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.playground.core.exception.dto.SuccessResponse;
 import com.playground.core.paging.SliceResponse;
-import com.playground.productservice.domain.ProductCategory;
 import com.playground.productservice.infrastructure.in.rest.dto.GetProductCategoryResponse;
 import com.playground.productservice.support.ControllerTest;
 import org.junit.jupiter.api.Test;
@@ -45,11 +44,11 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
 
         SliceResponse<GetProductCategoryResponse> sliceResponse = objectMapper.convertValue(responseDto.getData(), new TypeReference<>() {
         });
-        assertThat(sliceResponse.getContent().size()).isEqualTo(10);
-        assertThat(sliceResponse.getPage()).isEqualTo(0);
+        assertThat(sliceResponse.getContent()).hasSize(10);
+        assertThat(sliceResponse.getPage()).isZero();
         assertThat(sliceResponse.getSize()).isEqualTo(10);
-        assertThat(sliceResponse.isHasPrevious()).isEqualTo(false);
-        assertThat(sliceResponse.isHasNext()).isEqualTo(true);
+        assertThat(sliceResponse.isHasPrevious()).isFalse();
+        assertThat(sliceResponse.isHasNext()).isTrue();
 
         List<GetProductCategoryResponse> productCategoryResponseList = sliceResponse.getContent();
         productCategoryResponseList.forEach(productCategory -> {
@@ -83,11 +82,11 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
 
         SliceResponse<GetProductCategoryResponse> sliceResponse = objectMapper.convertValue(responseDto.getData(), new TypeReference<>() {
         });
-        assertThat(sliceResponse.getContent().size()).isEqualTo(10);
-        assertThat(sliceResponse.getPage()).isEqualTo(0);
+        assertThat(sliceResponse.getContent()).hasSize(10);
+        assertThat(sliceResponse.getPage()).isZero();
         assertThat(sliceResponse.getSize()).isEqualTo(10);
-        assertThat(sliceResponse.isHasPrevious()).isEqualTo(false);
-        assertThat(sliceResponse.isHasNext()).isEqualTo(true);
+        assertThat(sliceResponse.isHasPrevious()).isFalse();
+        assertThat(sliceResponse.isHasNext()).isTrue();
 
         List<GetProductCategoryResponse> productCategoryResponseList = sliceResponse.getContent();
         productCategoryResponseList.forEach(productCategory -> {
@@ -120,11 +119,11 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
 
         SliceResponse<GetProductCategoryResponse> sliceResponse = objectMapper.convertValue(responseDto.getData(), new TypeReference<>() {
         });
-        assertThat(sliceResponse.getContent().size()).isEqualTo(10);
-        assertThat(sliceResponse.getPage()).isEqualTo(0);
+        assertThat(sliceResponse.getContent()).hasSize(10);
+        assertThat(sliceResponse.getPage()).isZero();
         assertThat(sliceResponse.getSize()).isEqualTo(10);
-        assertThat(sliceResponse.isHasPrevious()).isEqualTo(false);
-        assertThat(sliceResponse.isHasNext()).isEqualTo(true);
+        assertThat(sliceResponse.isHasPrevious()).isFalse();
+        assertThat(sliceResponse.isHasNext()).isTrue();
 
         List<GetProductCategoryResponse> productCategoryResponseList = sliceResponse.getContent();
         productCategoryResponseList.forEach(productCategory -> {
@@ -158,11 +157,11 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
 
         SliceResponse<GetProductCategoryResponse> sliceResponse = objectMapper.convertValue(responseDto.getData(), new TypeReference<>() {
         });
-        assertThat(sliceResponse.getContent().size()).isEqualTo(1);
-        assertThat(sliceResponse.getPage()).isEqualTo(0);
+        assertThat(sliceResponse.getContent()).hasSize(1);
+        assertThat(sliceResponse.getPage()).isZero();
         assertThat(sliceResponse.getSize()).isEqualTo(1);
-        assertThat(sliceResponse.isHasPrevious()).isEqualTo(false);
-        assertThat(sliceResponse.isHasNext()).isEqualTo(true);
+        assertThat(sliceResponse.isHasPrevious()).isFalse();
+        assertThat(sliceResponse.isHasNext()).isTrue();
 
         List<GetProductCategoryResponse> productCategoryResponseList = sliceResponse.getContent();
         productCategoryResponseList.forEach(productCategory -> {
@@ -200,11 +199,11 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
 
         SliceResponse<GetProductCategoryResponse> sliceResponse = objectMapper.convertValue(responseDto.getData(), new TypeReference<>() {
         });
-        assertThat(sliceResponse.getContent().size()).isGreaterThanOrEqualTo(1);
-        assertThat(sliceResponse.getPage()).isEqualTo(0);
-        assertThat(sliceResponse.getSize()).isGreaterThanOrEqualTo(1);
-        assertThat(sliceResponse.isHasPrevious()).isEqualTo(false);
-        assertThat(sliceResponse.isHasNext()).isEqualTo(true);
+        assertThat(sliceResponse.getContent()).isNotEmpty();
+        assertThat(sliceResponse.getPage()).isZero();
+        assertThat(sliceResponse.getSize()).isPositive();
+        assertThat(sliceResponse.isHasPrevious()).isFalse();
+        assertThat(sliceResponse.isHasNext()).isTrue();
 
         List<GetProductCategoryResponse> productCategoryResponseList = sliceResponse.getContent();
         productCategoryResponseList.forEach(productCategory -> {

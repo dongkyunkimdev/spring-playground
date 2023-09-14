@@ -28,7 +28,7 @@ public class GetProductCategoryListRestAdapter {
     private final GetProductCategoryMapper mapper;
 
     @Operation(summary = "상품 카테고리 리스트 조회.")
-    @Tag(name = "2-1. [상품 카테고리 리스트 조회]")
+    @Tag(name = "1-1. [상품 카테고리 리스트 조회]")
     @GetMapping("/v1/product/category")
     @ResponseStatus(HttpStatus.OK)
     public SliceResponse<GetProductCategoryResponse> getProductCategory(

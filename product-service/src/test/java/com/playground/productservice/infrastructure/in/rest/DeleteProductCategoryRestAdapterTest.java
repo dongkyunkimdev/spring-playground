@@ -62,10 +62,12 @@ class DeleteProductCategoryRestAdapterTest extends ControllerTest {
         ErrorResponse responseDto = objectMapper.readValue(responseMessage, new TypeReference<>() {
         });
 
+        ProductErrorCode errorCode = ProductErrorCode.PRODUCT_CATEGORY_NOT_FOUND;
+
         assertThat(responseDto.isSuccess()).isFalse();
-        assertThat(responseDto.getStatus()).isEqualTo(404);
-        assertThat(responseDto.getCode()).isEqualTo(ProductErrorCode.PRODUCT_CATEGORY_NOT_FOUND.getCode());
-        assertThat(responseDto.getReason()).isEqualTo(ProductErrorCode.PRODUCT_CATEGORY_NOT_FOUND.getReason());
+        assertThat(responseDto.getStatus()).isEqualTo(errorCode.getStatus());
+        assertThat(responseDto.getCode()).isEqualTo(errorCode.getCode());
+        assertThat(responseDto.getReason()).isEqualTo(errorCode.getReason());
     }
 
     @Test
@@ -87,10 +89,12 @@ class DeleteProductCategoryRestAdapterTest extends ControllerTest {
         ErrorResponse responseDto = objectMapper.readValue(responseMessage, new TypeReference<>() {
         });
 
+        ProductErrorCode errorCode = ProductErrorCode.PRODUCT_CATEGORY_REFERENCED;
+
         assertThat(responseDto.isSuccess()).isFalse();
-        assertThat(responseDto.getStatus()).isEqualTo(409);
-        assertThat(responseDto.getCode()).isEqualTo(ProductErrorCode.PRODUCT_CATEGORY_REFERENCED.getCode());
-        assertThat(responseDto.getReason()).isEqualTo(ProductErrorCode.PRODUCT_CATEGORY_REFERENCED.getReason());
+        assertThat(responseDto.getStatus()).isEqualTo(errorCode.getStatus());
+        assertThat(responseDto.getCode()).isEqualTo(errorCode.getCode());
+        assertThat(responseDto.getReason()).isEqualTo(errorCode.getReason());
     }
 
 }

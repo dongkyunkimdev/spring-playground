@@ -54,16 +54,16 @@ class RegisterProductRestAdapterTest extends ControllerTest {
         assertThat(responseDto.isSuccess()).isTrue();
         assertThat(responseDto.getStatus()).isEqualTo(201);
 
-        RegisterProductResponse response = objectMapper.convertValue(responseDto.getData(), new TypeReference<>() {
+        RegisterProductResponse productResponse = objectMapper.convertValue(responseDto.getData(), new TypeReference<>() {
         });
-        assertThat(response.getProductId()).isNotNull();
-        assertThat(response.getName()).isEqualTo(requestDto.getName());
-        assertThat(response.getStock()).isEqualTo(requestDto.getStock());
-        assertThat(response.getPrice()).isEqualTo(requestDto.getPrice());
+        assertThat(productResponse.getProductId()).isNotNull();
+        assertThat(productResponse.getName()).isEqualTo(requestDto.getName());
+        assertThat(productResponse.getStock()).isEqualTo(requestDto.getStock());
+        assertThat(productResponse.getPrice()).isEqualTo(requestDto.getPrice());
 
-        CommonProductCategoryResponse productCategoryResponse = response.getProductCategory();
+        CommonProductCategoryResponse productCategoryResponse = productResponse.getProductCategory();
         assertThat(productCategoryResponse.getProductCategoryId()).isEqualTo(requestDto.getProductCategoryId());
-        assertThat(response.getProductCategory().getName()).isEqualTo("Clothing");
+        assertThat(productResponse.getProductCategory().getName()).isEqualTo("Clothing");
     }
 
     @Test
@@ -76,10 +76,8 @@ class RegisterProductRestAdapterTest extends ControllerTest {
                 .productCategoryId(1234L)
                 .build();
 
-        final String url = "/v1/product";
-
         // when
-        MockHttpServletRequestBuilder requestBuilder = post(url)
+        MockHttpServletRequestBuilder requestBuilder = post("/v1/product")
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(requestDto));

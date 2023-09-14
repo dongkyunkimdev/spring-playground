@@ -3,9 +3,9 @@ package com.playground.productservice.infrastructure.in.rest;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.playground.core.exception.dto.ErrorResponse;
 import com.playground.core.exception.dto.SuccessResponse;
-import com.playground.productservice.domain.ProductCategory;
 import com.playground.productservice.domain.exception.ProductErrorCode;
 import com.playground.productservice.infrastructure.in.rest.dto.RegisterProductCategoryRequest;
+import com.playground.productservice.infrastructure.in.rest.dto.RegisterProductCategoryResponse;
 import com.playground.productservice.support.ControllerTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
@@ -27,9 +27,8 @@ class RegisterProductCategoryRestAdapterTest extends ControllerTest {
     @Test
     void 상품_카테고리_등록_성공() throws Exception {
         // given
-        final String name = "Test Toys";
-        RegisterProductCategoryRequest requestDto = RegisterProductCategoryRequest.builder()
-                .name(name)
+        final RegisterProductCategoryRequest requestDto = RegisterProductCategoryRequest.builder()
+                .name("Test Toys")
                 .build();
 
         // when
@@ -50,24 +49,21 @@ class RegisterProductCategoryRestAdapterTest extends ControllerTest {
         assertThat(responseDto.isSuccess()).isTrue();
         assertThat(responseDto.getStatus()).isEqualTo(201);
 
-        ProductCategory productCategory = objectMapper.convertValue(responseDto.getData(), new TypeReference<>() {
+        RegisterProductCategoryResponse productCategoryResponse = objectMapper.convertValue(responseDto.getData(), new TypeReference<>() {
         });
-        assertThat(productCategory.getProductCategoryId()).isNotNull();
-        assertThat(productCategory.getName()).isEqualTo(name);
+        assertThat(productCategoryResponse.getProductCategoryId()).isNotNull();
+        assertThat(productCategoryResponse.getName()).isEqualTo(requestDto.getName());
     }
 
     @Test
     void 상품_카테고리_등록_실패_중복된_이름() throws Exception {
         // given
-        final String name = "Clothing";
-        RegisterProductCategoryRequest requestDto = RegisterProductCategoryRequest.builder()
-                .name(name)
+        final RegisterProductCategoryRequest requestDto = RegisterProductCategoryRequest.builder()
+                .name("Clothing")
                 .build();
 
-        final String url = "/v1/product/category";
-
         // when
-        MockHttpServletRequestBuilder requestBuilder = post(url)
+        MockHttpServletRequestBuilder requestBuilder = post("/v1/product/category")
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(requestDto));
@@ -81,10 +77,12 @@ class RegisterProductCategoryRestAdapterTest extends ControllerTest {
         ErrorResponse responseDto = objectMapper.readValue(responseMessage, new TypeReference<>() {
         });
 
+        ProductErrorCode errorCode = ProductErrorCode.PRODUCT_CATEGORY_NAME_DUPLICATED;
+
         assertThat(responseDto.isSuccess()).isFalse();
-        assertThat(responseDto.getStatus()).isEqualTo(409);
-        assertThat(responseDto.getCode()).isEqualTo(ProductErrorCode.PRODUCT_CATEGORY_NAME_DUPLICATED.getCode());
-        assertThat(responseDto.getReason()).isEqualTo(ProductErrorCode.PRODUCT_CATEGORY_NAME_DUPLICATED.getReason());
+        assertThat(responseDto.getStatus()).isEqualTo(errorCode.getStatus());
+        assertThat(responseDto.getCode()).isEqualTo(errorCode.getCode());
+        assertThat(responseDto.getReason()).isEqualTo(errorCode.getReason());
     }
 
 }

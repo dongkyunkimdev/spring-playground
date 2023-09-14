@@ -25,7 +25,7 @@ public class RegisterProductCategoryRestAdapter {
     private final RegisterProductCategoryMapper mapper;
 
     @Operation(summary = "상품 카테고리 등록.")
-    @Tag(name = "2-1. [상품 카테고리 등록]")
+    @Tag(name = "2-3. [상품 카테고리 등록]")
     @ApiErrorExceptionsExample(RegisterProductCategoryExceptionDocs.class)
     @PostMapping("/v1/product/category")
     @ResponseStatus(HttpStatus.CREATED)

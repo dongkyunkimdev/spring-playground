@@ -21,7 +21,7 @@ public class DeleteProductCategoryRestAdapter {
     private final DeleteProductCategoryUseCase deleteProductCategoryUseCase;
 
     @Operation(summary = "상품 카테고리 삭제.")
-    @Tag(name = "2-2. [상품 카테고리 삭제]")
+    @Tag(name = "2-4. [상품 카테고리 삭제]")
     @ApiErrorExceptionsExample(DeleteProductCategoryExceptionDocs.class)
     @DeleteMapping("/v1/product/category/{productCategoryId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

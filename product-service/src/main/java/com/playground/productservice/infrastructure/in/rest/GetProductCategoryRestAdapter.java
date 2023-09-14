@@ -25,7 +25,7 @@ public class GetProductCategoryRestAdapter {
     private final GetProductCategoryMapper mapper;
 
     @Operation(summary = "상품 카테고리 조회.")
-    @Tag(name = "2-3. [상품 카테고리 조회]")
+    @Tag(name = "2-2. [상품 카테고리 조회]")
     @ApiErrorExceptionsExample(GetProductCategoryExceptionDocs.class)
     @GetMapping("/v1/product/category/{productCategoryId}")
     @ResponseStatus(HttpStatus.OK)

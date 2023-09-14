@@ -33,11 +33,11 @@ class DeleteProductCategoryRestAdapterTest extends ControllerTest {
         ProductCategory savedProductCategory = productCategoryRepository.save(ProductCategory.builder().name("test category for delete").build());
 
         // when
-        MockHttpServletRequestBuilder request = delete("/v1/product/category/{productCategoryId}", savedProductCategory.getProductCategoryId())
+        MockHttpServletRequestBuilder requestBuilder = delete("/v1/product/category/{productCategoryId}", savedProductCategory.getProductCategoryId())
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON);
 
-        ResultActions result = mvc.perform(request);
+        ResultActions result = mvc.perform(requestBuilder);
 
         // then
         result.andExpect(status().isNoContent());
@@ -49,11 +49,11 @@ class DeleteProductCategoryRestAdapterTest extends ControllerTest {
         final Long productCategoryId = 98123L;
 
         // when
-        MockHttpServletRequestBuilder request = delete("/v1/product/category/{productCategoryId}", productCategoryId)
+        MockHttpServletRequestBuilder requestBuilder = delete("/v1/product/category/{productCategoryId}", productCategoryId)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON);
 
-        ResultActions result = mvc.perform(request);
+        ResultActions result = mvc.perform(requestBuilder);
 
         // then
         result.andExpect(status().isNotFound());
@@ -74,11 +74,11 @@ class DeleteProductCategoryRestAdapterTest extends ControllerTest {
         final Long productCategoryId = 1L;
 
         // when
-        MockHttpServletRequestBuilder request = delete("/v1/product/category/{productCategoryId}", productCategoryId)
+        MockHttpServletRequestBuilder requestBuilder = delete("/v1/product/category/{productCategoryId}", productCategoryId)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON);
 
-        ResultActions result = mvc.perform(request);
+        ResultActions result = mvc.perform(requestBuilder);
 
         // then
         result.andExpect(status().isConflict());

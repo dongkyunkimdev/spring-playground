@@ -29,11 +29,11 @@ class GetProductCategoryRestAdapterTest extends ControllerTest {
         final Long productCategoryId = 1L;
 
         // when
-        MockHttpServletRequestBuilder request = get("/v1/product/category/{productCategoryId}", productCategoryId)
+        MockHttpServletRequestBuilder requestBuilder = get("/v1/product/category/{productCategoryId}", productCategoryId)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON);
 
-        ResultActions result = mvc.perform(request);
+        ResultActions result = mvc.perform(requestBuilder);
 
         // then
         result.andExpect(status().isOk());
@@ -57,11 +57,11 @@ class GetProductCategoryRestAdapterTest extends ControllerTest {
         final Long productCategoryId = 98123L;
 
         // when
-        MockHttpServletRequestBuilder request = get("/v1/product/category/{productCategoryId}", productCategoryId)
+        MockHttpServletRequestBuilder requestBuilder = get("/v1/product/category/{productCategoryId}", productCategoryId)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON);
 
-        ResultActions result = mvc.perform(request);
+        ResultActions result = mvc.perform(requestBuilder);
 
         // then
         result.andExpect(status().isNotFound());

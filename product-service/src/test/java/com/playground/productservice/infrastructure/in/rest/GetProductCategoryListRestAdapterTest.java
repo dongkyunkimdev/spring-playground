@@ -26,11 +26,11 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
     @Test
     void 상품_카테고리_리스트_조회_성공() throws Exception {
         // when
-        MockHttpServletRequestBuilder request = get("/v1/product/category")
+        MockHttpServletRequestBuilder requestBuilder = get("/v1/product/category")
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON);
 
-        ResultActions result = mvc.perform(request);
+        ResultActions result = mvc.perform(requestBuilder);
 
         // then
         result.andExpect(status().isOk());
@@ -63,12 +63,12 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
         final Long fromProductCategoryId = 1L;
 
         // when
-        MockHttpServletRequestBuilder request = get("/v1/product/category")
+        MockHttpServletRequestBuilder requestBuilder = get("/v1/product/category")
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .param("fromProductCategoryId", String.valueOf(fromProductCategoryId));
 
-        ResultActions result = mvc.perform(request);
+        ResultActions result = mvc.perform(requestBuilder);
 
         // then
         result.andExpect(status().isOk());
@@ -100,12 +100,12 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
         final Long toProductCategoryId = 11L;
 
         // when
-        MockHttpServletRequestBuilder request = get("/v1/product/category")
+        MockHttpServletRequestBuilder requestBuilder = get("/v1/product/category")
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .param("toProductCategoryId", String.valueOf(toProductCategoryId));
 
-        ResultActions result = mvc.perform(request);
+        ResultActions result = mvc.perform(requestBuilder);
 
         // then
         result.andExpect(status().isOk());
@@ -137,13 +137,13 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
         final String productCategoryName = "co";
 
         // when
-        MockHttpServletRequestBuilder request = get("/v1/product/category")
+        MockHttpServletRequestBuilder requestBuilder = get("/v1/product/category")
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .param("productCategoryName", productCategoryName)
                 .param("size", String.valueOf(1));
 
-        ResultActions result = mvc.perform(request);
+        ResultActions result = mvc.perform(requestBuilder);
 
         // then
         result.andExpect(status().isOk());
@@ -177,7 +177,7 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
         final String productCategoryName = "es";
 
         // when
-        MockHttpServletRequestBuilder request = get("/v1/product/category")
+        MockHttpServletRequestBuilder requestBuilder = get("/v1/product/category")
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .param("fromProductCategoryId", String.valueOf(fromProductCategoryId))
@@ -185,7 +185,7 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
                 .param("productCategoryName", productCategoryName)
                 .param("size", String.valueOf(1));
 
-        ResultActions result = mvc.perform(request);
+        ResultActions result = mvc.perform(requestBuilder);
 
         // then
         result.andExpect(status().isOk());

@@ -37,12 +37,12 @@ class RegisterProductRestAdapterTest extends ControllerTest {
                 .build();
 
         // when
-        MockHttpServletRequestBuilder request = post("/v1/product")
+        MockHttpServletRequestBuilder requestBuilder = post("/v1/product")
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(requestDto));
 
-        ResultActions result = mvc.perform(request);
+        ResultActions result = mvc.perform(requestBuilder);
 
         // then
         result.andExpect(status().isCreated());
@@ -79,12 +79,12 @@ class RegisterProductRestAdapterTest extends ControllerTest {
         final String url = "/v1/product";
 
         // when
-        MockHttpServletRequestBuilder request = post(url)
+        MockHttpServletRequestBuilder requestBuilder = post(url)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(requestDto));
 
-        ResultActions result = mvc.perform(request);
+        ResultActions result = mvc.perform(requestBuilder);
 
         // then
         result.andExpect(status().isNotFound());

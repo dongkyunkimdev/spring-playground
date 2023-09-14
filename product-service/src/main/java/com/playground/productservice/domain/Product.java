@@ -3,6 +3,7 @@ package com.playground.productservice.domain;
 import com.playground.core.entity.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -31,5 +32,13 @@ public class Product extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "product_category_id")
     private ProductCategory productCategory;
+
+    @Builder
+    public Product(String name, Long stock, BigDecimal price, ProductCategory productCategory) {
+        this.name = name;
+        this.stock = stock;
+        this.price = price;
+        this.productCategory = productCategory;
+    }
 
 }

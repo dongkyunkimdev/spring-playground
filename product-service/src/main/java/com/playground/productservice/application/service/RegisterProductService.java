@@ -28,19 +28,11 @@ public class RegisterProductService implements RegisterProductUseCase {
         ProductCategory savedProductCategory = productPersistencePort.findProductCategoryById(command.getProductCategoryId())
                 .orElseThrow(ProductCategoryNotFoundException::new);
 
-        Product newProduct = generateProduct(command, savedProductCategory);
+        Product newProduct = mapper.commandToEntity(command, savedProductCategory);
 
         Product savedProduct = productPersistencePort.saveProduct(newProduct);
 
         return mapper.entityToInfo(savedProduct);
-    }
-
-    private static Product generateProduct(RegisterProductCommand command, ProductCategory savedProductCategory) {
-        return Product.builder()
-                .name(command.getName())
-                .stock(command.getStock())
-                .price(command.getPrice())
-                .productCategory(savedProductCategory).build();
     }
 
 }

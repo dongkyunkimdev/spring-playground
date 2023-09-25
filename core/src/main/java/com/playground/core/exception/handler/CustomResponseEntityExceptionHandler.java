@@ -101,7 +101,7 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
     }
 
     @ExceptionHandler(BusinessDynamicException.class)
-    public ResponseEntity<ErrorResponse> BusinessDynamicExceptionHandler(BusinessDynamicException e, HttpServletRequest request) {
+    public ResponseEntity<ErrorResponse> businessDynamicExceptionHandler(BusinessDynamicException e, HttpServletRequest request) {
         ErrorResponse errorResponse = new ErrorResponse(e.getStatus(), e.getCode(), e.getReason(), request.getRequestURL().toString());
 
         return ResponseEntity.status(HttpStatus.valueOf(e.getStatus())).body(errorResponse);

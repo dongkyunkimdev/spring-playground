@@ -1,5 +1,6 @@
 package com.playground.productservice.infrastructure.dao;
 
+import com.playground.core.paging.QueryDslUtil;
 import com.playground.core.paging.SliceUtil;
 import com.playground.productservice.domain.ProductCategory;
 import com.playground.productservice.domain.QProductCategory;
@@ -25,6 +26,7 @@ public class ProductCategoryRepositorySupport {
                         productCategoryIdInRange(fromProductCategoryId, toProductCategoryId),
                         nameContains(productCategoryName)
                 )
+                .orderBy(QueryDslUtil.createOrderSpecifiers(ProductCategory.class, pageable))
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize() + 1)
                 .fetch();

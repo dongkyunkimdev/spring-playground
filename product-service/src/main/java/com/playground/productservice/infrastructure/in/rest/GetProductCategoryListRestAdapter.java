@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,7 +34,7 @@ public class GetProductCategoryListRestAdapter {
     @ResponseStatus(HttpStatus.OK)
     public SliceResponse<GetProductCategoryResponse> getProductCategory(
             @ParameterObject GetProductCategoryListRequest request,
-            @ParameterObject @PageableDefault Pageable pageable
+            @ParameterObject @PageableDefault(size = 10, sort = "productCategoryId", direction = Sort.Direction.DESC) Pageable pageable
     ) {
         Slice<GetProductCategoryInfo> getProductCategoryInfoSlice = getProductCategoryListUseCase.execute(new GetProductCategoryListCommand(request.getFromProductCategoryId(), request.getToProductCategoryId(), request.getProductCategoryName()), pageable);
 

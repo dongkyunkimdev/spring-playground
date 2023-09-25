@@ -212,4 +212,36 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
         });
     }
 
+    @Test
+    void 상품_카테고리_리스트_조회_성공_name_asc_정렬() throws Exception {
+        // when
+        MockHttpServletRequestBuilder requestBuilder = get("/v1/product/category")
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .param("sort", "name,ASC");
+
+        ResultActions result = mvc.perform(requestBuilder);
+
+        // then
+        result.andExpect(status().isOk());
+
+        String responseMessage = result.andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
+        SuccessResponse responseDto = objectMapper.readValue(responseMessage, new TypeReference<>() {
+        });
+
+        assertThat(responseDto.isSuccess()).isTrue();
+        assertThat(responseDto.getStatus()).isEqualTo(200);
+
+        SliceResponse<GetProductCategoryResponse> sliceResponse = objectMapper.convertValue(responseDto.getData(), new TypeReference<>() {
+        });
+        assertThat(sliceResponse.getContent()).isNotEmpty();
+        assertThat(sliceResponse.getPage()).isZero();
+        assertThat(sliceResponse.getSize()).isPositive();
+        assertThat(sliceResponse.isHasPrevious()).isFalse();
+        assertThat(sliceResponse.isHasNext()).isTrue();
+
+        List<GetProductCategoryResponse> productCategoryResponseList = sliceResponse.getContent();
+        assertThat(productCategoryResponseList.get(0).getName()).startsWith("A");
+    }
+
 }

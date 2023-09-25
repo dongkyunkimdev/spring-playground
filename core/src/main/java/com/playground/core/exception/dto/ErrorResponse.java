@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class ErrorResponse {
 
-    private boolean success = false;
+    private final boolean success = false;
     private int status;
     private String code;
     private String reason;

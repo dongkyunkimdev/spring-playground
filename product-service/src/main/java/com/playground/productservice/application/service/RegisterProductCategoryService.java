@@ -21,7 +21,7 @@ public class RegisterProductCategoryService implements RegisterProductCategoryUs
 
     private final RegisterProductCategoryMapper mapper;
 
-    @Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRED)
+    @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
     @Override
     public RegisterProductCategoryInfo execute(RegisterProductCategoryCommand command) {
         if (productPersistencePort.isExistsProductCategoryByName(command.getName())) {

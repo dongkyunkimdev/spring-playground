@@ -19,7 +19,7 @@ public class DeleteProductCategoryService implements DeleteProductCategoryUseCas
 
     private final ProductPersistencePort productPersistencePort;
 
-    @Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRED)
+    @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
     @Override
     public void execute(DeleteProductCategoryCommand command) {
         ProductCategory savedProductCategory = productPersistencePort.findProductCategoryById(command.getProductCategoryId())

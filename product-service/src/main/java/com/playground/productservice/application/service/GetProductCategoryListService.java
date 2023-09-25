@@ -22,7 +22,7 @@ public class GetProductCategoryListService implements GetProductCategoryListUseC
 
     private final GetProductCategoryMapper mapper;
 
-    @Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRED, readOnly = true)
+    @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, readOnly = true)
     @Override
     public Slice<GetProductCategoryInfo> execute(GetProductCategoryListCommand command, Pageable pageable) {
         Slice<ProductCategory> productCategorySlice = productPersistencePort.findProductCategoryListByIdRangeAndName(command.getFromProductCategoryId(), command.getToProductCategoryId(), command.getProductCategoryName(), pageable);

@@ -52,8 +52,8 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
 
         List<GetProductCategoryResponse> productCategoryResponseList = sliceResponse.getContent();
         productCategoryResponseList.forEach(productCategory -> {
-            assertThat(productCategory.getProductCategoryId()).isNotNull();
-            assertThat(productCategory.getName()).isNotNull();
+            assertThat(productCategory.productCategoryId()).isNotNull();
+            assertThat(productCategory.name()).isNotNull();
         });
     }
 
@@ -90,7 +90,7 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
 
         List<GetProductCategoryResponse> productCategoryResponseList = sliceResponse.getContent();
         productCategoryResponseList.forEach(productCategory -> {
-            assertThat(productCategory.getProductCategoryId()).isGreaterThanOrEqualTo(fromProductCategoryId);
+            assertThat(productCategory.productCategoryId()).isGreaterThanOrEqualTo(fromProductCategoryId);
         });
     }
 
@@ -127,7 +127,7 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
 
         List<GetProductCategoryResponse> productCategoryResponseList = sliceResponse.getContent();
         productCategoryResponseList.forEach(productCategory -> {
-            assertThat(productCategory.getProductCategoryId()).isLessThanOrEqualTo(toProductCategoryId);
+            assertThat(productCategory.productCategoryId()).isLessThanOrEqualTo(toProductCategoryId);
         });
     }
 
@@ -165,7 +165,7 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
 
         List<GetProductCategoryResponse> productCategoryResponseList = sliceResponse.getContent();
         productCategoryResponseList.forEach(productCategory -> {
-            assertThat(productCategory.getName()).containsIgnoringCase(productCategoryName);
+            assertThat(productCategory.name()).containsIgnoringCase(productCategoryName);
         });
     }
 
@@ -207,8 +207,8 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
 
         List<GetProductCategoryResponse> productCategoryResponseList = sliceResponse.getContent();
         productCategoryResponseList.forEach(productCategory -> {
-            assertThat(productCategory.getProductCategoryId()).isBetween(fromProductCategoryId, toProductCategoryId);
-            assertThat(productCategory.getName()).containsIgnoringCase(productCategoryName);
+            assertThat(productCategory.productCategoryId()).isBetween(fromProductCategoryId, toProductCategoryId);
+            assertThat(productCategory.name()).containsIgnoringCase(productCategoryName);
         });
     }
 
@@ -241,7 +241,7 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
         assertThat(sliceResponse.isHasNext()).isTrue();
 
         List<GetProductCategoryResponse> productCategoryResponseList = sliceResponse.getContent();
-        assertThat(productCategoryResponseList.get(0).getName()).startsWith("A");
+        assertThat(productCategoryResponseList.get(0).name()).startsWith("A");
     }
 
 }

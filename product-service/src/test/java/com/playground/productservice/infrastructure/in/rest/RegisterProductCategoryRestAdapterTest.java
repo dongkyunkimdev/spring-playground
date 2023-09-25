@@ -27,9 +27,7 @@ class RegisterProductCategoryRestAdapterTest extends ControllerTest {
     @Test
     void 상품_카테고리_등록_성공() throws Exception {
         // given
-        final RegisterProductCategoryRequest requestDto = RegisterProductCategoryRequest.builder()
-                .name("Test Toys")
-                .build();
+        final RegisterProductCategoryRequest requestDto = new RegisterProductCategoryRequest("Test Toys");
 
         // when
         MockHttpServletRequestBuilder requestBuilder = post("/v1/product/category")
@@ -51,16 +49,14 @@ class RegisterProductCategoryRestAdapterTest extends ControllerTest {
 
         RegisterProductCategoryResponse productCategoryResponse = objectMapper.convertValue(responseDto.getData(), new TypeReference<>() {
         });
-        assertThat(productCategoryResponse.getProductCategoryId()).isNotNull();
-        assertThat(productCategoryResponse.getName()).isEqualTo(requestDto.getName());
+        assertThat(productCategoryResponse.productCategoryId()).isNotNull();
+        assertThat(productCategoryResponse.name()).isEqualTo(requestDto.name());
     }
 
     @Test
     void 상품_카테고리_등록_실패_중복된_이름() throws Exception {
         // given
-        final RegisterProductCategoryRequest requestDto = RegisterProductCategoryRequest.builder()
-                .name("Clothing")
-                .build();
+        final RegisterProductCategoryRequest requestDto = new RegisterProductCategoryRequest("Clothing");
 
         // when
         MockHttpServletRequestBuilder requestBuilder = post("/v1/product/category")

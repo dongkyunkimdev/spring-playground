@@ -25,7 +25,7 @@ public class GetProductCategoryListService implements GetProductCategoryListUseC
     @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, readOnly = true)
     @Override
     public Slice<GetProductCategoryInfo> execute(GetProductCategoryListCommand command, Pageable pageable) {
-        Slice<ProductCategory> productCategorySlice = productPersistencePort.findProductCategoryListByIdRangeAndName(command.getFromProductCategoryId(), command.getToProductCategoryId(), command.getProductCategoryName(), pageable);
+        Slice<ProductCategory> productCategorySlice = productPersistencePort.findProductCategoryListByIdRangeAndName(command.fromProductCategoryId(), command.toProductCategoryId(), command.productCategoryName(), pageable);
 
         return productCategorySlice.map(mapper::entityToInfo);
     }

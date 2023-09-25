@@ -47,8 +47,8 @@ class GetProductCategoryRestAdapterTest extends ControllerTest {
 
         GetProductCategoryResponse productCategoryResponse = objectMapper.convertValue(responseDto.getData(), new TypeReference<>() {
         });
-        assertThat(productCategoryResponse.getProductCategoryId()).isEqualTo(productCategoryId);
-        assertThat(productCategoryResponse.getName()).isEqualTo("Clothing");
+        assertThat(productCategoryResponse.productCategoryId()).isEqualTo(productCategoryId);
+        assertThat(productCategoryResponse.name()).isEqualTo("Clothing");
     }
 
     @Test

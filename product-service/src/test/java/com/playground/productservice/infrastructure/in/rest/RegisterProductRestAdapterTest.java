@@ -56,14 +56,14 @@ class RegisterProductRestAdapterTest extends ControllerTest {
 
         RegisterProductResponse productResponse = objectMapper.convertValue(responseDto.getData(), new TypeReference<>() {
         });
-        assertThat(productResponse.getProductId()).isNotNull();
-        assertThat(productResponse.getName()).isEqualTo(requestDto.getName());
-        assertThat(productResponse.getStock()).isEqualTo(requestDto.getStock());
-        assertThat(productResponse.getPrice()).isEqualTo(requestDto.getPrice());
+        assertThat(productResponse.productId()).isNotNull();
+        assertThat(productResponse.name()).isEqualTo(requestDto.name());
+        assertThat(productResponse.stock()).isEqualTo(requestDto.stock());
+        assertThat(productResponse.price()).isEqualTo(requestDto.price());
 
-        CommonProductCategoryResponse productCategoryResponse = productResponse.getProductCategory();
-        assertThat(productCategoryResponse.getProductCategoryId()).isEqualTo(requestDto.getProductCategoryId());
-        assertThat(productResponse.getProductCategory().getName()).isEqualTo("Clothing");
+        CommonProductCategoryResponse productCategoryResponse = productResponse.productCategory();
+        assertThat(productCategoryResponse.productCategoryId()).isEqualTo(requestDto.productCategoryId());
+        assertThat(productResponse.productCategory().name()).isEqualTo("Clothing");
     }
 
     @Test

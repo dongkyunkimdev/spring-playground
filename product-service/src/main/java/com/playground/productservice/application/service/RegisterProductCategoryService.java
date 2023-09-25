@@ -24,7 +24,7 @@ public class RegisterProductCategoryService implements RegisterProductCategoryUs
     @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
     @Override
     public RegisterProductCategoryInfo execute(RegisterProductCategoryCommand command) {
-        if (productPersistencePort.isExistsProductCategoryByName(command.getName())) {
+        if (productPersistencePort.isExistsProductCategoryByName(command.name())) {
             throw new DuplicateProductCategoryNameException();
         }
 

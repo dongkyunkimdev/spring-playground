@@ -11,6 +11,8 @@ public interface ProductPersistencePort {
 
     boolean isExistsProductCategoryByName(String name);
 
+    Optional<Product> findProductById(Long productId);
+
     Optional<ProductCategory> findProductCategoryById(Long productCategoryId);
 
     Slice<ProductCategory> findProductCategoryListByIdRangeAndName(Long fromProductCategoryId, Long toProductCategoryId, String productCategoryName, Pageable pageable);

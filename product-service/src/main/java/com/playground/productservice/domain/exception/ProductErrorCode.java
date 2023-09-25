@@ -16,7 +16,8 @@ public enum ProductErrorCode implements BaseErrorCode {
 
     PRODUCT_CATEGORY_NOT_FOUND(HttpStatus.NOT_FOUND.value(), "PRODUCT_001", "존재하지 않는 상품 카테고리입니다."),
     PRODUCT_CATEGORY_NAME_DUPLICATED(HttpStatus.CONFLICT.value(), "PRODUCT_002", "중복된 상품 카테고리 이름입니다."),
-    PRODUCT_CATEGORY_REFERENCED(HttpStatus.CONFLICT.value(), "PRODUCT_003", "상품 카테고리 정보가 참조되고 있습니다.");
+    PRODUCT_CATEGORY_REFERENCED(HttpStatus.CONFLICT.value(), "PRODUCT_003", "상품 카테고리 정보가 참조되고 있습니다."),
+    PRODUCT_NOT_FOUND(HttpStatus.NOT_FOUND.value(), "PRODUCT_004", "존재하지 않는 상품입니다.");
 
     private final int status;
     private final String code;

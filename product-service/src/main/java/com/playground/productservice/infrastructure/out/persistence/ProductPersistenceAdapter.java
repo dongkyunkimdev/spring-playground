@@ -29,6 +29,11 @@ public class ProductPersistenceAdapter implements ProductPersistencePort {
     }
 
     @Override
+    public Optional<Product> findProductById(Long productId) {
+        return productRepository.findById(productId);
+    }
+
+    @Override
     public Optional<ProductCategory> findProductCategoryById(Long productCategoryId) {
         return productCategoryRepository.findById(productCategoryId);
     }

@@ -21,8 +21,6 @@ public interface RegisterProductMapper {
     @Mapping(source = "savedProductCategory", target = "productCategory")
     Product commandToEntity(RegisterProductCommand command, ProductCategory savedProductCategory);
 
-    @Mapping(source = "productCategory.productCategoryId", target = "productCategory.productCategoryId")
-    @Mapping(source = "productCategory.name", target = "productCategory.name")
     RegisterProductInfo entityToInfo(Product product);
 
     RegisterProductResponse infoToResponse(RegisterProductInfo info);

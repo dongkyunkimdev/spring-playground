@@ -9,17 +9,19 @@ import java.util.Optional;
 
 public interface ProductPersistencePort {
 
-    boolean isExistsProductCategoryByName(String name);
+    Slice<ProductCategory> findProductCategoryListByIdRangeAndName(Long fromProductCategoryId, Long toProductCategoryId, String productCategoryName, Pageable pageable);
 
     Optional<Product> findProductById(Long productId);
 
     Optional<ProductCategory> findProductCategoryById(Long productCategoryId);
 
-    Slice<ProductCategory> findProductCategoryListByIdRangeAndName(Long fromProductCategoryId, Long toProductCategoryId, String productCategoryName, Pageable pageable);
+    boolean isExistsProductCategoryByName(String name);
 
     Product saveProduct(Product product);
 
     ProductCategory saveProductCategory(ProductCategory productCategory);
+
+    void deleteProduct(Product savedProduct);
 
     void deleteProductCategory(ProductCategory savedProductCategory);
 

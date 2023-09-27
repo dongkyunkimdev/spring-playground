@@ -24,8 +24,8 @@ public class ProductPersistenceAdapter implements ProductPersistencePort {
     private final ProductCategoryRepositorySupport productCategoryRepositorySupport;
 
     @Override
-    public boolean isExistsProductCategoryByName(String name) {
-        return productCategoryRepository.existsByName(name);
+    public Slice<ProductCategory> findProductCategoryListByIdRangeAndName(Long fromProductCategoryId, Long toProductCategoryId, String productCategoryName, Pageable pageable) {
+        return productCategoryRepositorySupport.findAllByIdRangeAndName(fromProductCategoryId, toProductCategoryId, productCategoryName, pageable);
     }
 
     @Override
@@ -39,8 +39,8 @@ public class ProductPersistenceAdapter implements ProductPersistencePort {
     }
 
     @Override
-    public Slice<ProductCategory> findProductCategoryListByIdRangeAndName(Long fromProductCategoryId, Long toProductCategoryId, String productCategoryName, Pageable pageable) {
-        return productCategoryRepositorySupport.findAllByIdRangeAndName(fromProductCategoryId, toProductCategoryId, productCategoryName, pageable);
+    public boolean isExistsProductCategoryByName(String name) {
+        return productCategoryRepository.existsByName(name);
     }
 
     @Override
@@ -51,6 +51,11 @@ public class ProductPersistenceAdapter implements ProductPersistencePort {
     @Override
     public ProductCategory saveProductCategory(ProductCategory productCategory) {
         return productCategoryRepository.save(productCategory);
+    }
+
+    @Override
+    public void deleteProduct(Product product) {
+        productRepository.delete(product);
     }
 
     @Override

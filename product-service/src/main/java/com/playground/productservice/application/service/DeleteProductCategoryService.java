@@ -28,7 +28,7 @@ public class DeleteProductCategoryService implements DeleteProductCategoryUseCas
         try {
             productPersistencePort.deleteProductCategory(savedProductCategory);
         } catch (DataIntegrityViolationException e) {
-            if (e.getMessage().contains("CONSTRAINT `product_product_category_product_category_id`")) {
+            if (e.getMessage().contains("CONSTRAINT `fk_product_product_category_product_category_id`")) {
                 throw new ProductCategoryReferencedException();
             } else {
                 throw new IllegalStateException(e);

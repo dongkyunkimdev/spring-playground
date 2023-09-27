@@ -47,7 +47,7 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
     protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body, HttpHeaders headers, HttpStatusCode statusCode, WebRequest request) {
         ServletWebRequest servletWebRequest = (ServletWebRequest) request;
         String url = UriComponentsBuilder.fromHttpRequest(
-                new ServletServerHttpRequest(servletWebRequest.getRequest())).build().toUriString();
+            new ServletServerHttpRequest(servletWebRequest.getRequest())).build().toUriString();
         ErrorResponse errorResponse = new ErrorResponse(statusCode.value(), HttpStatus.valueOf(statusCode.value()).name(), ex.getMessage(), url);
 
         return super.handleExceptionInternal(ex, errorResponse, headers, statusCode, request);
@@ -59,9 +59,9 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
         List<FieldError> errors = ex.getBindingResult().getFieldErrors();
         ServletWebRequest servletWebRequest = (ServletWebRequest) request;
         String url = UriComponentsBuilder.fromHttpRequest(
-                new ServletServerHttpRequest(servletWebRequest.getRequest())).build().toUriString();
+            new ServletServerHttpRequest(servletWebRequest.getRequest())).build().toUriString();
         Map<String, Object> fieldAndErrorMessages = errors.stream()
-                .collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
+            .collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
         String errorsToJsonString = new ObjectMapper().writeValueAsString(fieldAndErrorMessages);
         ErrorResponse errorResponse = new ErrorResponse(statusCode.value(), HttpStatus.valueOf(statusCode.value()).name(), errorsToJsonString, url);
 
@@ -72,32 +72,32 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
     public ResponseEntity<ErrorResponse> ConstraintViolationExceptionHandler(ConstraintViolationException e, HttpServletRequest request) {
         Map<String, Object> bindingErrors = new HashMap<>();
         e.getConstraintViolations()
-                .forEach(
-                        constraintViolation -> {
-                            List<String> propertyPath =
-                                    List.of(
-                                            constraintViolation
-                                                    .getPropertyPath()
-                                                    .toString()
-                                                    .split("\\."));
-                            String path =
-                                    propertyPath.stream()
-                                            .skip(propertyPath.size() - 1L)
-                                            .findFirst()
-                                            .orElse(null);
-                            bindingErrors.put(path, constraintViolation.getMessage());
-                        });
+            .forEach(
+                constraintViolation -> {
+                    List<String> propertyPath =
+                        List.of(
+                            constraintViolation
+                                .getPropertyPath()
+                                .toString()
+                                .split("\\."));
+                    String path =
+                        propertyPath.stream()
+                            .skip(propertyPath.size() - 1L)
+                            .findFirst()
+                            .orElse(null);
+                    bindingErrors.put(path, constraintViolation.getMessage());
+                });
 
         ErrorReason errorReason =
-                ErrorReason.builder()
-                        .code("BAD_REQUEST")
-                        .status(400)
-                        .reason(bindingErrors.toString())
-                        .build();
+            ErrorReason.builder()
+                .code("BAD_REQUEST")
+                .status(400)
+                .reason(bindingErrors.toString())
+                .build();
         ErrorResponse errorResponse = new ErrorResponse(errorReason, request.getRequestURL().toString());
 
         return ResponseEntity.status(HttpStatus.valueOf(errorReason.getStatus()))
-                .body(errorResponse);
+            .body(errorResponse);
     }
 
     @ExceptionHandler(BusinessDynamicException.class)
@@ -114,13 +114,13 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
         String url = UriComponentsBuilder.fromHttpRequest(new ServletServerHttpRequest(request)).build().toUriString();
         GlobalErrorCode internalServerError = GlobalErrorCode.INTERNAL_SERVER_ERROR;
         ErrorResponse errorResponse = new ErrorResponse(
-                internalServerError.getStatus(),
-                internalServerError.getCode(),
-                internalServerError.getReason(),
-                url);
+            internalServerError.getStatus(),
+            internalServerError.getCode(),
+            internalServerError.getReason(),
+            url);
 
         return ResponseEntity.status(HttpStatus.valueOf(internalServerError.getStatus()))
-                .body(errorResponse);
+            .body(errorResponse);
     }
 
 }

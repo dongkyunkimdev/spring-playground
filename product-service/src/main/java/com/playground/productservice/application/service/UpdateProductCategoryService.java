@@ -27,10 +27,10 @@ public class UpdateProductCategoryService implements UpdateProductCategoryUseCas
     @Override
     public UpdateProductCategoryInfo execute(UpdateProductCategoryCommand command) {
         ProductCategory savedProductCategory = productPersistencePort.findProductCategoryById(command.productCategoryId())
-                .orElseThrow(ProductCategoryNotFoundException::new);
+            .orElseThrow(ProductCategoryNotFoundException::new);
 
         if (!StringUtils.containsIgnoreCase(savedProductCategory.getName(), command.name()) &&
-                productPersistencePort.isExistsProductCategoryByName(command.name())) {
+            productPersistencePort.isExistsProductCategoryByName(command.name())) {
             throw new DuplicateProductCategoryNameException();
         }
 

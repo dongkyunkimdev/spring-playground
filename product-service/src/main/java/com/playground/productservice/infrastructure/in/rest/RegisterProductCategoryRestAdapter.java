@@ -30,7 +30,7 @@ public class RegisterProductCategoryRestAdapter {
     @PostMapping("/v1/product/category")
     @ResponseStatus(HttpStatus.CREATED)
     public RegisterProductCategoryResponse registerProductCategory(
-            @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "상품 카테고리 등록 정보.") @RequestBody(required = true) @Valid final RegisterProductCategoryRequest request
+        @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "상품 카테고리 등록 정보.") @RequestBody(required = true) @Valid final RegisterProductCategoryRequest request
     ) {
         return mapper.infoToResponse(registerProductCategoryUseCase.execute(mapper.requestToCommand(request)));
     }

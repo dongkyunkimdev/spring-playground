@@ -26,7 +26,7 @@ public class DeleteProductCategoryRestAdapter {
     @DeleteMapping("/v1/product/category/{productCategoryId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteProductCategory(
-            @Parameter(description = "상품 카테고리 ID.", example = "1") @PathVariable("productCategoryId") final Long productCategoryId
+        @Parameter(description = "상품 카테고리 ID.", example = "1") @PathVariable("productCategoryId") final Long productCategoryId
     ) {
         deleteProductCategoryUseCase.execute(new DeleteProductCategoryCommand(productCategoryId));
     }

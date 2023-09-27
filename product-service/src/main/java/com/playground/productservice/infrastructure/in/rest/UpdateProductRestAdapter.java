@@ -32,8 +32,8 @@ public class UpdateProductRestAdapter {
     @PatchMapping("/v1/product/{productId}")
     @ResponseStatus(HttpStatus.OK)
     public UpdateProductResponse updateProduct(
-            @Parameter(description = "상품 ID.", example = "1") @PathVariable("productId") final Long productId,
-            @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "상품 수정 정보.") @RequestBody(required = true) @Valid final UpdateProductRequest request
+        @Parameter(description = "상품 ID.", example = "1") @PathVariable("productId") final Long productId,
+        @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "상품 수정 정보.") @RequestBody(required = true) @Valid final UpdateProductRequest request
     ) {
         return mapper.infoToResponse(updateProductUseCase.execute(mapper.requestToEntity(productId, request)));
     }

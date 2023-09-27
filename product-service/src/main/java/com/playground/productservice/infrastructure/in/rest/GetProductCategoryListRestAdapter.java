@@ -33,8 +33,8 @@ public class GetProductCategoryListRestAdapter {
     @GetMapping("/v1/product/category")
     @ResponseStatus(HttpStatus.OK)
     public SliceResponse<GetProductCategoryResponse> getProductCategory(
-            @ParameterObject GetProductCategoryListRequest request,
-            @ParameterObject @PageableDefault(size = 10, sort = "productCategoryId", direction = Sort.Direction.DESC) Pageable pageable
+        @ParameterObject GetProductCategoryListRequest request,
+        @ParameterObject @PageableDefault(size = 10, sort = "productCategoryId", direction = Sort.Direction.DESC) Pageable pageable
     ) {
         Slice<GetProductCategoryInfo> getProductCategoryInfoSlice = getProductCategoryListUseCase.execute(new GetProductCategoryListCommand(request.fromProductCategoryId(), request.toProductCategoryId(), request.productCategoryName()), pageable);
 

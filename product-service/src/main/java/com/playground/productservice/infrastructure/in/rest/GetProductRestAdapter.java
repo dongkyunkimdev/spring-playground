@@ -30,7 +30,7 @@ public class GetProductRestAdapter {
     @GetMapping("/v1/product/{productId}")
     @ResponseStatus(HttpStatus.OK)
     public GetProductResponse getProduct(
-            @Parameter(description = "상품 ID.", example = "1") @PathVariable("productId") final Long productId
+        @Parameter(description = "상품 ID.", example = "1") @PathVariable("productId") final Long productId
     ) {
         return mapper.infoToResponse(getProductUseCase.execute(new GetProductCommand(productId)));
     }

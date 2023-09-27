@@ -25,7 +25,7 @@ public class GetProductCategoryService implements GetProductCategoryUseCase {
     @Override
     public GetProductCategoryInfo execute(GetProductCategoryCommand command) {
         ProductCategory savedProductCategory = productPersistencePort.findProductCategoryById(command.productCategoryId())
-                .orElseThrow(ProductCategoryNotFoundException::new);
+            .orElseThrow(ProductCategoryNotFoundException::new);
 
         return mapper.entityToInfo(savedProductCategory);
     }

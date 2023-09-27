@@ -27,13 +27,15 @@ public abstract class ControllerTest {
     protected SuccessResponse getSuccessResponse(ResultActions result) throws UnsupportedEncodingException, JsonProcessingException {
         String responseMessage = result.andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
 
-        return objectMapper.readValue(responseMessage, new TypeReference<>() {});
+        return objectMapper.readValue(responseMessage, new TypeReference<>() {
+        });
     }
 
     protected ErrorResponse getErrorResponse(ResultActions result) throws UnsupportedEncodingException, JsonProcessingException {
         String responseMessage = result.andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
 
-        return objectMapper.readValue(responseMessage, new TypeReference<>() {});
+        return objectMapper.readValue(responseMessage, new TypeReference<>() {
+        });
     }
 
 }

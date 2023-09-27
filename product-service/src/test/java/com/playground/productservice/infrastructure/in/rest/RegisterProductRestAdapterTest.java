@@ -32,15 +32,15 @@ class RegisterProductRestAdapterTest extends ControllerTest {
     void 상품_등록_성공() throws Exception {
         // given
         final RegisterProductRequest requestDto = RegisterProductRequest.builder()
-                .name("Black T-Shirts")
-                .stock(100L)
-                .price(BigDecimal.valueOf(1000))
-                .productCategoryId(1L)
-                .build();
+            .name("Black T-Shirts")
+            .stock(100L)
+            .price(BigDecimal.valueOf(1000))
+            .productCategoryId(1L)
+            .build();
 
         // when
         MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.POST, "/v1/product")
-                .content(objectMapper.writeValueAsString(requestDto));
+            .content(objectMapper.writeValueAsString(requestDto));
 
         ResultActions result = mvc.perform(requestBuilder);
 
@@ -66,15 +66,15 @@ class RegisterProductRestAdapterTest extends ControllerTest {
     void 상품_등록_실패_카테고리가_존재하지_않음() throws Exception {
         // given
         final RegisterProductRequest requestDto = RegisterProductRequest.builder()
-                .name("Black T-Shirts")
-                .stock(100L)
-                .price(BigDecimal.valueOf(1000))
-                .productCategoryId(1234L)
-                .build();
+            .name("Black T-Shirts")
+            .stock(100L)
+            .price(BigDecimal.valueOf(1000))
+            .productCategoryId(1234L)
+            .build();
 
         // when
         MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.POST, "/v1/product")
-                .content(objectMapper.writeValueAsString(requestDto));
+            .content(objectMapper.writeValueAsString(requestDto));
 
         ResultActions result = mvc.perform(requestBuilder);
 

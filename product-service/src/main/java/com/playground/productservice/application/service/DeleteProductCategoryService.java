@@ -23,7 +23,7 @@ public class DeleteProductCategoryService implements DeleteProductCategoryUseCas
     @Override
     public void execute(DeleteProductCategoryCommand command) {
         ProductCategory savedProductCategory = productPersistencePort.findProductCategoryById(command.productCategoryId())
-                .orElseThrow(ProductCategoryNotFoundException::new);
+            .orElseThrow(ProductCategoryNotFoundException::new);
 
         try {
             productPersistencePort.deleteProductCategory(savedProductCategory);

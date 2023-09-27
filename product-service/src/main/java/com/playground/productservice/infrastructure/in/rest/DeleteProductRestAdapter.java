@@ -27,7 +27,7 @@ public class DeleteProductRestAdapter {
     @DeleteMapping("/v1/product/{productId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteProduct(
-            @Parameter(description = "상품 ID.", example = "1") @PathVariable("productId") final Long productId
+        @Parameter(description = "상품 ID.", example = "1") @PathVariable("productId") final Long productId
     ) {
         deleteProductUseCase.execute(new DeleteProductCommand(productId));
     }

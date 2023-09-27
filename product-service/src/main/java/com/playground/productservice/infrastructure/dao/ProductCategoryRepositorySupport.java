@@ -22,14 +22,14 @@ public class ProductCategoryRepositorySupport {
 
     public Slice<ProductCategory> findAllByIdRangeAndName(Long fromProductCategoryId, Long toProductCategoryId, String productCategoryName, Pageable pageable) {
         List<ProductCategory> content = queryFactory.selectFrom(QProductCategory.productCategory)
-                .where(
-                        productCategoryIdInRange(fromProductCategoryId, toProductCategoryId),
-                        nameContains(productCategoryName)
-                )
-                .orderBy(QueryDslUtil.createOrderSpecifiers(ProductCategory.class, pageable))
-                .offset(pageable.getOffset())
-                .limit(pageable.getPageSize() + 1)
-                .fetch();
+            .where(
+                productCategoryIdInRange(fromProductCategoryId, toProductCategoryId),
+                nameContains(productCategoryName)
+            )
+            .orderBy(QueryDslUtil.createOrderSpecifiers(ProductCategory.class, pageable))
+            .offset(pageable.getOffset())
+            .limit(pageable.getPageSize() + 1)
+            .fetch();
 
         return SliceUtil.createSlice(content, pageable);
     }

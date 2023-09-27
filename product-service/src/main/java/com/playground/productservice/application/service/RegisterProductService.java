@@ -26,7 +26,7 @@ public class RegisterProductService implements RegisterProductUseCase {
     @Override
     public RegisterProductInfo execute(RegisterProductCommand command) {
         ProductCategory savedProductCategory = productPersistencePort.findProductCategoryById(command.productCategoryId())
-                .orElseThrow(ProductCategoryNotFoundException::new);
+            .orElseThrow(ProductCategoryNotFoundException::new);
 
         Product newProduct = mapper.commandToEntity(command, savedProductCategory);
 

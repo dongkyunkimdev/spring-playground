@@ -25,7 +25,7 @@ public class GetProductService implements GetProductUseCase {
     @Override
     public GetProductInfo execute(GetProductCommand command) {
         Product savedProduct = productPersistencePort.findProductById(command.productId())
-                .orElseThrow(ProductNotFoundException::new);
+            .orElseThrow(ProductNotFoundException::new);
 
         return mapper.entityToInfo(savedProduct);
     }

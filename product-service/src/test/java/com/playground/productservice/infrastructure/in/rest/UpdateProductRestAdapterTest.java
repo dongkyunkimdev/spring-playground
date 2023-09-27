@@ -33,15 +33,15 @@ class UpdateProductRestAdapterTest extends ControllerTest {
         // given
         final Long productId = 2L;
         final UpdateProductRequest requestDto = UpdateProductRequest.builder()
-                .name("Black T-Shirts")
-                .stock(100L)
-                .price(BigDecimal.valueOf(1000))
-                .productCategoryId(1L)
-                .build();
+            .name("Black T-Shirts")
+            .stock(100L)
+            .price(BigDecimal.valueOf(1000))
+            .productCategoryId(1L)
+            .build();
 
         // when
         MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.PATCH, "/v1/product/{productId}", productId)
-                .content(objectMapper.writeValueAsString(requestDto));
+            .content(objectMapper.writeValueAsString(requestDto));
 
         ResultActions result = mvc.perform(requestBuilder);
 
@@ -68,15 +68,15 @@ class UpdateProductRestAdapterTest extends ControllerTest {
         // given
         final Long productId = 12837192L;
         final UpdateProductRequest requestDto = UpdateProductRequest.builder()
-                .name("Black T-Shirts")
-                .stock(100L)
-                .price(BigDecimal.valueOf(1000))
-                .productCategoryId(1L)
-                .build();
+            .name("Black T-Shirts")
+            .stock(100L)
+            .price(BigDecimal.valueOf(1000))
+            .productCategoryId(1L)
+            .build();
 
         // when
         MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.PATCH, "/v1/product/{productId}", productId)
-                .content(objectMapper.writeValueAsString(requestDto));
+            .content(objectMapper.writeValueAsString(requestDto));
 
         ResultActions result = mvc.perform(requestBuilder);
 
@@ -92,15 +92,15 @@ class UpdateProductRestAdapterTest extends ControllerTest {
         // given
         final Long productId = 2L;
         final UpdateProductRequest requestDto = UpdateProductRequest.builder()
-                .name("Black T-Shirts")
-                .stock(100L)
-                .price(BigDecimal.valueOf(1000))
-                .productCategoryId(1827391L)
-                .build();
+            .name("Black T-Shirts")
+            .stock(100L)
+            .price(BigDecimal.valueOf(1000))
+            .productCategoryId(1827391L)
+            .build();
 
         // when
         MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.PATCH, "/v1/product/{productId}", productId)
-                .content(objectMapper.writeValueAsString(requestDto));
+            .content(objectMapper.writeValueAsString(requestDto));
 
         ResultActions result = mvc.perform(requestBuilder);
 

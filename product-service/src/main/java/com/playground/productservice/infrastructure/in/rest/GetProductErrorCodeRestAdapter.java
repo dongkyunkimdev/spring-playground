@@ -19,6 +19,7 @@ public class GetProductErrorCodeRestAdapter {
     @ApiErrorCodeExample(ProductErrorCode.class)
     @GetMapping("/v1/product/error-code")
     @ResponseStatus(HttpStatus.OK)
-    public void getProductErrorCode() {}
+    public void getProductErrorCode() {
+    }
 
 }

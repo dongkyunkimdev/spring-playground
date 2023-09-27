@@ -27,10 +27,10 @@ public class UpdateProductService implements UpdateProductUseCase {
     @Override
     public UpdateProductInfo execute(UpdateProductCommand command) {
         Product savedProduct = productPersistencePort.findProductById(command.productId())
-                .orElseThrow(ProductNotFoundException::new);
+            .orElseThrow(ProductNotFoundException::new);
 
         ProductCategory savedProductCategory = productPersistencePort.findProductCategoryById(command.productCategoryId())
-                .orElseThrow(ProductCategoryNotFoundException::new);
+            .orElseThrow(ProductCategoryNotFoundException::new);
 
         savedProduct.update(command, savedProductCategory);
 

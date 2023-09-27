@@ -31,7 +31,7 @@ public class QueryDslUtil {
 
     private static <T> Boolean hasField(Class<? extends T> type, String name) {
         return Arrays.stream(type.getDeclaredFields())
-                .anyMatch(field -> field.getName().equals(name));
+            .anyMatch(field -> field.getName().equals(name));
     }
 
 }

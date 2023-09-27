@@ -50,7 +50,7 @@ public class SwaggerConfig {
     @Bean
     public OpenAPI openAPI() {
         return new OpenAPI()
-                .info(info());
+            .info(info());
     }
 
     private Info info() {
@@ -59,9 +59,9 @@ public class SwaggerConfig {
         license.setName("Github");
 
         return new Info()
-                .title(this.title)
-                .version(this.version)
-                .license(license);
+            .title(this.title)
+            .version(this.version)
+            .license(license);
     }
 
     @Bean
@@ -108,27 +108,27 @@ public class SwaggerConfig {
         Object bean = applicationContext.getBean(type);
         Field[] declaredFields = bean.getClass().getDeclaredFields();
         Map<Integer, List<ExampleHolder>> statusWithExampleHolders =
-                Arrays.stream(declaredFields)
-                        .filter(field -> field.getAnnotation(ExplainError.class) != null)
-                        .filter(field -> field.getType() == BusinessException.class)
-                        .map(
-                                field -> {
-                                    try {
-                                        BusinessException exception = (BusinessException) field.get(bean);
-                                        ExplainError annotation = field.getAnnotation(ExplainError.class);
-                                        String value = annotation.value();
-                                        ErrorReason errorReason = exception.getErrorReason();
+            Arrays.stream(declaredFields)
+                .filter(field -> field.getAnnotation(ExplainError.class) != null)
+                .filter(field -> field.getType() == BusinessException.class)
+                .map(
+                    field -> {
+                        try {
+                            BusinessException exception = (BusinessException) field.get(bean);
+                            ExplainError annotation = field.getAnnotation(ExplainError.class);
+                            String value = annotation.value();
+                            ErrorReason errorReason = exception.getErrorReason();
 
-                                        return ExampleHolder.builder()
-                                                .example(getSwaggerExample(value, errorReason))
-                                                .code(errorReason.getStatus())
-                                                .name(field.getName())
-                                                .build();
-                                    } catch (IllegalAccessException e) {
-                                        throw new RuntimeException(e);
-                                    }
-                                })
-                        .collect(groupingBy(ExampleHolder::getCode));
+                            return ExampleHolder.builder()
+                                .example(getSwaggerExample(value, errorReason))
+                                .code(errorReason.getStatus())
+                                .name(field.getName())
+                                .build();
+                        } catch (IllegalAccessException e) {
+                            throw new RuntimeException(e);
+                        }
+                    })
+                .collect(groupingBy(ExampleHolder::getCode));
 
         addExamplesToResponses(responses, statusWithExampleHolders);
     }
@@ -145,20 +145,20 @@ public class SwaggerConfig {
 
     private void addExamplesToResponses(ApiResponses responses, Map<Integer, List<ExampleHolder>> statusWithExampleHolders) {
         statusWithExampleHolders.forEach(
-                (status, v) -> {
-                    Content content = new Content();
-                    MediaType mediaType = new MediaType();
-                    ApiResponse apiResponse = new ApiResponse();
+            (status, v) -> {
+                Content content = new Content();
+                MediaType mediaType = new MediaType();
+                ApiResponse apiResponse = new ApiResponse();
 
-                    v.forEach(
-                            exampleHolder -> {
-                                mediaType.addExamples(
-                                        exampleHolder.getName(), exampleHolder.getExample());
-                            });
-                    content.addMediaType("application/json", mediaType);
-                    apiResponse.setContent(content);
-                    responses.addApiResponse(status.toString(), apiResponse);
-                });
+                v.forEach(
+                    exampleHolder -> {
+                        mediaType.addExamples(
+                            exampleHolder.getName(), exampleHolder.getExample());
+                    });
+                content.addMediaType("application/json", mediaType);
+                apiResponse.setContent(content);
+                responses.addApiResponse(status.toString(), apiResponse);
+            });
     }
 
     private void generateErrorCodeResponseExample(Operation operation, Class<? extends BaseErrorCode> type) {
@@ -166,24 +166,24 @@ public class SwaggerConfig {
         BaseErrorCode[] errorCodes = type.getEnumConstants();
 
         Map<Integer, List<ExampleHolder>> statusWithExampleHolders =
-                Arrays.stream(errorCodes)
-                        .map(
-                                baseErrorCode -> {
-                                    try {
-                                        ErrorReason errorReason = baseErrorCode.getErrorReason();
-                                        return ExampleHolder.builder()
-                                                .example(
-                                                        getSwaggerExample(
-                                                                baseErrorCode.getExplainError(),
-                                                                errorReason))
-                                                .code(errorReason.getStatus())
-                                                .name(errorReason.getCode())
-                                                .build();
-                                    } catch (NoSuchFieldException e) {
-                                        throw new RuntimeException(e);
-                                    }
-                                })
-                        .collect(groupingBy(ExampleHolder::getCode));
+            Arrays.stream(errorCodes)
+                .map(
+                    baseErrorCode -> {
+                        try {
+                            ErrorReason errorReason = baseErrorCode.getErrorReason();
+                            return ExampleHolder.builder()
+                                .example(
+                                    getSwaggerExample(
+                                        baseErrorCode.getExplainError(),
+                                        errorReason))
+                                .code(errorReason.getStatus())
+                                .name(errorReason.getCode())
+                                .build();
+                        } catch (NoSuchFieldException e) {
+                            throw new RuntimeException(e);
+                        }
+                    })
+                .collect(groupingBy(ExampleHolder::getCode));
 
         addExamplesToResponses(responses, statusWithExampleHolders);
     }

@@ -59,7 +59,7 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
 
         // when
         MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.GET, "/v1/product/category")
-                .param("fromProductCategoryId", String.valueOf(fromProductCategoryId));
+            .param("fromProductCategoryId", String.valueOf(fromProductCategoryId));
 
         ResultActions result = mvc.perform(requestBuilder);
 
@@ -90,7 +90,7 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
 
         // when
         MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.GET, "/v1/product/category")
-                .param("toProductCategoryId", String.valueOf(toProductCategoryId));
+            .param("toProductCategoryId", String.valueOf(toProductCategoryId));
 
         ResultActions result = mvc.perform(requestBuilder);
 
@@ -121,8 +121,8 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
 
         // when
         MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.GET, "/v1/product/category")
-                .param("productCategoryName", productCategoryName)
-                .param("size", String.valueOf(1));
+            .param("productCategoryName", productCategoryName)
+            .param("size", String.valueOf(1));
 
         ResultActions result = mvc.perform(requestBuilder);
 
@@ -155,10 +155,10 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
 
         // when
         MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.GET, "/v1/product/category")
-                .param("fromProductCategoryId", String.valueOf(fromProductCategoryId))
-                .param("toProductCategoryId", String.valueOf(toProductCategoryId))
-                .param("productCategoryName", productCategoryName)
-                .param("size", String.valueOf(1));
+            .param("fromProductCategoryId", String.valueOf(fromProductCategoryId))
+            .param("toProductCategoryId", String.valueOf(toProductCategoryId))
+            .param("productCategoryName", productCategoryName)
+            .param("size", String.valueOf(1));
 
         ResultActions result = mvc.perform(requestBuilder);
 
@@ -187,7 +187,7 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
     void 상품_카테고리_리스트_조회_성공_name_asc_정렬() throws Exception {
         // when
         MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.GET, "/v1/product/category")
-                .param("sort", "name,ASC");
+            .param("sort", "name,ASC");
 
         ResultActions result = mvc.perform(requestBuilder);
 

@@ -26,11 +26,11 @@ public class SliceResponse<T> {
 
     public static <T> SliceResponse<T> of(Slice<T> slice) {
         return new SliceResponse<>(
-                slice.getContent(),
-                slice.getNumber(),
-                slice.getNumberOfElements(),
-                slice.hasPrevious(),
-                slice.hasNext());
+            slice.getContent(),
+            slice.getNumber(),
+            slice.getNumberOfElements(),
+            slice.hasPrevious(),
+            slice.hasNext());
     }
 
 }

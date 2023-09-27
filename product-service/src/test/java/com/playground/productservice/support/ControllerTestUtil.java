@@ -23,8 +23,8 @@ public class ControllerTestUtil {
 
         if (requestBuilder != null) {
             requestBuilder
-                    .accept(MediaType.APPLICATION_JSON)
-                    .contentType(MediaType.APPLICATION_JSON);
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON);
         }
 
         return requestBuilder;

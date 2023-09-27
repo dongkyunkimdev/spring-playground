@@ -25,7 +25,7 @@ public class DeleteProductService implements DeleteProductUseCase {
     @Override
     public void execute(DeleteProductCommand command) {
         Product savedProduct = productPersistencePort.findProductById(command.productId())
-                .orElseThrow(ProductNotFoundException::new);
+            .orElseThrow(ProductNotFoundException::new);
 
         if (isProductReferenced(command.productId())) {
             throw new ProductReferencedException();

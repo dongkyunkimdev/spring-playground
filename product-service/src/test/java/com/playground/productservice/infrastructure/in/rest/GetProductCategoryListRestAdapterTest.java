@@ -7,6 +7,7 @@ import com.playground.productservice.infrastructure.in.rest.dto.GetProductCatego
 import com.playground.productservice.support.ControllerTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
@@ -34,7 +35,7 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
 
         SuccessResponse responseDto = getSuccessResponse(result);
         assertThat(responseDto.isSuccess()).isTrue();
-        assertThat(responseDto.getStatus()).isEqualTo(200);
+        assertThat(responseDto.getStatus()).isEqualTo(HttpStatus.OK.value());
 
         SliceResponse<GetProductCategoryResponse> sliceResponse = objectMapper.convertValue(responseDto.getData(), new TypeReference<>() {
         });
@@ -67,7 +68,7 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
 
         SuccessResponse responseDto = getSuccessResponse(result);
         assertThat(responseDto.isSuccess()).isTrue();
-        assertThat(responseDto.getStatus()).isEqualTo(200);
+        assertThat(responseDto.getStatus()).isEqualTo(HttpStatus.OK.value());
 
         SliceResponse<GetProductCategoryResponse> sliceResponse = objectMapper.convertValue(responseDto.getData(), new TypeReference<>() {
         });
@@ -99,7 +100,7 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
 
         SuccessResponse responseDto = getSuccessResponse(result);
         assertThat(responseDto.isSuccess()).isTrue();
-        assertThat(responseDto.getStatus()).isEqualTo(200);
+        assertThat(responseDto.getStatus()).isEqualTo(HttpStatus.OK.value());
 
         SliceResponse<GetProductCategoryResponse> sliceResponse = objectMapper.convertValue(responseDto.getData(), new TypeReference<>() {
         });
@@ -132,7 +133,7 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
 
         SuccessResponse responseDto = getSuccessResponse(result);
         assertThat(responseDto.isSuccess()).isTrue();
-        assertThat(responseDto.getStatus()).isEqualTo(200);
+        assertThat(responseDto.getStatus()).isEqualTo(HttpStatus.OK.value());
 
         SliceResponse<GetProductCategoryResponse> sliceResponse = objectMapper.convertValue(responseDto.getData(), new TypeReference<>() {
         });
@@ -169,7 +170,7 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
 
         SuccessResponse responseDto = getSuccessResponse(result);
         assertThat(responseDto.isSuccess()).isTrue();
-        assertThat(responseDto.getStatus()).isEqualTo(200);
+        assertThat(responseDto.getStatus()).isEqualTo(HttpStatus.OK.value());
 
         SliceResponse<GetProductCategoryResponse> sliceResponse = objectMapper.convertValue(responseDto.getData(), new TypeReference<>() {
         });
@@ -199,7 +200,7 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
 
         SuccessResponse responseDto = getSuccessResponse(result);
         assertThat(responseDto.isSuccess()).isTrue();
-        assertThat(responseDto.getStatus()).isEqualTo(200);
+        assertThat(responseDto.getStatus()).isEqualTo(HttpStatus.OK.value());
 
         SliceResponse<GetProductCategoryResponse> sliceResponse = objectMapper.convertValue(responseDto.getData(), new TypeReference<>() {
         });

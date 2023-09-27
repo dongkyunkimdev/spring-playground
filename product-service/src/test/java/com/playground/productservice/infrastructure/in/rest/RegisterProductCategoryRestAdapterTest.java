@@ -15,6 +15,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.transaction.annotation.Transactional;
 
+import static com.playground.productservice.support.AssertUtil.assertErrorResponse;
 import static com.playground.productservice.support.ControllerTestUtil.createRequestBuilder;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -62,12 +63,7 @@ class RegisterProductCategoryRestAdapterTest extends ControllerTest {
         result.andExpect(status().isConflict());
 
         ErrorResponse responseDto = getErrorResponse(result);
-        ProductErrorCode errorCode = ProductErrorCode.PRODUCT_CATEGORY_NAME_DUPLICATED;
-
-        assertThat(responseDto.isSuccess()).isFalse();
-        assertThat(responseDto.getStatus()).isEqualTo(errorCode.getStatus());
-        assertThat(responseDto.getCode()).isEqualTo(errorCode.getCode());
-        assertThat(responseDto.getReason()).isEqualTo(errorCode.getReason());
+        assertErrorResponse(responseDto, ProductErrorCode.PRODUCT_CATEGORY_NAME_DUPLICATED);
     }
 
 }

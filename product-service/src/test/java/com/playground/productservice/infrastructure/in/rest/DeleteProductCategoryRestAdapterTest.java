@@ -13,8 +13,8 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.transaction.annotation.Transactional;
 
+import static com.playground.productservice.support.AssertUtil.assertErrorResponse;
 import static com.playground.productservice.support.ControllerTestUtil.createRequestBuilder;
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @Transactional
@@ -52,12 +52,7 @@ class DeleteProductCategoryRestAdapterTest extends ControllerTest {
         result.andExpect(status().isNotFound());
 
         ErrorResponse responseDto = getErrorResponse(result);
-        ProductErrorCode errorCode = ProductErrorCode.PRODUCT_CATEGORY_NOT_FOUND;
-
-        assertThat(responseDto.isSuccess()).isFalse();
-        assertThat(responseDto.getStatus()).isEqualTo(errorCode.getStatus());
-        assertThat(responseDto.getCode()).isEqualTo(errorCode.getCode());
-        assertThat(responseDto.getReason()).isEqualTo(errorCode.getReason());
+        assertErrorResponse(responseDto, ProductErrorCode.PRODUCT_CATEGORY_NOT_FOUND);
     }
 
     @Test
@@ -74,12 +69,7 @@ class DeleteProductCategoryRestAdapterTest extends ControllerTest {
         result.andExpect(status().isConflict());
 
         ErrorResponse responseDto = getErrorResponse(result);
-        ProductErrorCode errorCode = ProductErrorCode.PRODUCT_CATEGORY_REFERENCED;
-
-        assertThat(responseDto.isSuccess()).isFalse();
-        assertThat(responseDto.getStatus()).isEqualTo(errorCode.getStatus());
-        assertThat(responseDto.getCode()).isEqualTo(errorCode.getCode());
-        assertThat(responseDto.getReason()).isEqualTo(errorCode.getReason());
+        assertErrorResponse(responseDto, ProductErrorCode.PRODUCT_CATEGORY_REFERENCED);
     }
 
 }

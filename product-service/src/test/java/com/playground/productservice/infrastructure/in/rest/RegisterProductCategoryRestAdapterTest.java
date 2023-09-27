@@ -48,7 +48,7 @@ class RegisterProductCategoryRestAdapterTest extends ControllerTest {
     }
 
     @Test
-    void 상품_카테고리_등록_실패_중복된_이름() throws Exception {
+    void 상품_카테고리_등록_실패_이름이_중복됨() throws Exception {
         // given
         final RegisterProductCategoryRequest requestDto = new RegisterProductCategoryRequest("Clothing");
 

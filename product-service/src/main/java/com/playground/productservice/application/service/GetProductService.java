@@ -21,7 +21,7 @@ public class GetProductService implements GetProductUseCase {
 
     private final GetProductMapper mapper;
 
-    @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, readOnly = true)
+    @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.SUPPORTS, readOnly = true)
     @Override
     public GetProductInfo execute(GetProductCommand command) {
         Product savedProduct = productPersistencePort.findProductById(command.productId())

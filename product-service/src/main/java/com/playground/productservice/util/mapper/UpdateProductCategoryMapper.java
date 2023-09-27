@@ -2,6 +2,7 @@ package com.playground.productservice.util.mapper;
 
 import com.playground.productservice.application.port.in.usecase.dto.UpdateProductCategoryInfo;
 import com.playground.productservice.domain.ProductCategory;
+import com.playground.productservice.infrastructure.in.rest.dto.UpdateProductCategoryResponse;
 import com.playground.productservice.util.mapper.config.UnmappedIgnoreConfig;
 import org.mapstruct.Mapper;
 
@@ -9,5 +10,7 @@ import org.mapstruct.Mapper;
 public interface UpdateProductCategoryMapper {
 
     UpdateProductCategoryInfo entityToInfo(ProductCategory productCategory);
+
+    UpdateProductCategoryResponse infoToResponse(UpdateProductCategoryInfo info);
 
 }

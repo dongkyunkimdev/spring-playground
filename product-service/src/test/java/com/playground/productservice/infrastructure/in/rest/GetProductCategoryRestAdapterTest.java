@@ -15,6 +15,7 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.transaction.annotation.Transactional;
 
 import static com.playground.productservice.support.AssertUtil.assertErrorResponse;
+import static com.playground.productservice.support.AssertUtil.assertSuccessResponse;
 import static com.playground.productservice.support.ControllerTestUtil.createRequestBuilder;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -37,8 +38,7 @@ class GetProductCategoryRestAdapterTest extends ControllerTest {
         result.andExpect(status().isOk());
 
         SuccessResponse responseDto = getSuccessResponse(result);
-        assertThat(responseDto.isSuccess()).isTrue();
-        assertThat(responseDto.getStatus()).isEqualTo(HttpStatus.OK.value());
+        assertSuccessResponse(responseDto, HttpStatus.OK);
 
         GetProductCategoryResponse productCategoryResponse = objectMapper.convertValue(responseDto.getData(), new TypeReference<>() {
         });

@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 
 import static com.playground.productservice.support.AssertUtil.assertErrorResponse;
+import static com.playground.productservice.support.AssertUtil.assertSuccessResponse;
 import static com.playground.productservice.support.ControllerTestUtil.createRequestBuilder;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -47,8 +48,7 @@ class RegisterProductRestAdapterTest extends ControllerTest {
         result.andExpect(status().isCreated());
 
         SuccessResponse responseDto = getSuccessResponse(result);
-        assertThat(responseDto.isSuccess()).isTrue();
-        assertThat(responseDto.getStatus()).isEqualTo(HttpStatus.CREATED.value());
+        assertSuccessResponse(responseDto, HttpStatus.CREATED);
 
         RegisterProductResponse productResponse = objectMapper.convertValue(responseDto.getData(), new TypeReference<>() {
         });

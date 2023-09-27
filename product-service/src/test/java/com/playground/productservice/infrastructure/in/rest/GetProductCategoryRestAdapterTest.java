@@ -36,10 +36,7 @@ class GetProductCategoryRestAdapterTest extends ControllerTest {
         // then
         result.andExpect(status().isOk());
 
-        String responseMessage = result.andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
-        SuccessResponse responseDto = objectMapper.readValue(responseMessage, new TypeReference<>() {
-        });
-
+        SuccessResponse responseDto = getSuccessResponse(result);
         assertThat(responseDto.isSuccess()).isTrue();
         assertThat(responseDto.getStatus()).isEqualTo(200);
 
@@ -62,10 +59,7 @@ class GetProductCategoryRestAdapterTest extends ControllerTest {
         // then
         result.andExpect(status().isNotFound());
 
-        String responseMessage = result.andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
-        ErrorResponse responseDto = objectMapper.readValue(responseMessage, new TypeReference<>() {
-        });
-
+        ErrorResponse responseDto = getErrorResponse(result);
         ProductErrorCode errorCode = ProductErrorCode.PRODUCT_CATEGORY_NOT_FOUND;
 
         assertThat(responseDto.isSuccess()).isFalse();

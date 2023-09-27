@@ -1,6 +1,5 @@
 package com.playground.productservice.infrastructure.in.rest;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.playground.core.exception.dto.ErrorResponse;
 import com.playground.productservice.domain.ProductCategory;
 import com.playground.productservice.domain.exception.ProductErrorCode;
@@ -13,8 +12,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.nio.charset.StandardCharsets;
 
 import static com.playground.productservice.support.ControllerTestUtil.createRequestBuilder;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -54,10 +51,7 @@ class DeleteProductCategoryRestAdapterTest extends ControllerTest {
         // then
         result.andExpect(status().isNotFound());
 
-        String responseMessage = result.andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
-        ErrorResponse responseDto = objectMapper.readValue(responseMessage, new TypeReference<>() {
-        });
-
+        ErrorResponse responseDto = getErrorResponse(result);
         ProductErrorCode errorCode = ProductErrorCode.PRODUCT_CATEGORY_NOT_FOUND;
 
         assertThat(responseDto.isSuccess()).isFalse();
@@ -79,10 +73,7 @@ class DeleteProductCategoryRestAdapterTest extends ControllerTest {
         // then
         result.andExpect(status().isConflict());
 
-        String responseMessage = result.andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
-        ErrorResponse responseDto = objectMapper.readValue(responseMessage, new TypeReference<>() {
-        });
-
+        ErrorResponse responseDto = getErrorResponse(result);
         ProductErrorCode errorCode = ProductErrorCode.PRODUCT_CATEGORY_REFERENCED;
 
         assertThat(responseDto.isSuccess()).isFalse();

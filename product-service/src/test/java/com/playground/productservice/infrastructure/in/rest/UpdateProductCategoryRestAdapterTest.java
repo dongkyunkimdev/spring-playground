@@ -15,8 +15,6 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.nio.charset.StandardCharsets;
-
 import static com.playground.productservice.support.ControllerTestUtil.createRequestBuilder;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -40,10 +38,7 @@ class UpdateProductCategoryRestAdapterTest extends ControllerTest {
         // then
         result.andExpect(status().isOk());
 
-        String responseMessage = result.andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
-        SuccessResponse responseDto = objectMapper.readValue(responseMessage, new TypeReference<>() {
-        });
-
+        SuccessResponse responseDto = getSuccessResponse(result);
         assertThat(responseDto.isSuccess()).isTrue();
         assertThat(responseDto.getStatus()).isEqualTo(HttpStatus.OK.value());
 
@@ -68,10 +63,7 @@ class UpdateProductCategoryRestAdapterTest extends ControllerTest {
         // then
         result.andExpect(status().isNotFound());
 
-        String responseMessage = result.andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
-        ErrorResponse responseDto = objectMapper.readValue(responseMessage, new TypeReference<>() {
-        });
-
+        ErrorResponse responseDto = getErrorResponse(result);
         ProductErrorCode errorCode = ProductErrorCode.PRODUCT_CATEGORY_NOT_FOUND;
 
         assertThat(responseDto.isSuccess()).isFalse();
@@ -95,10 +87,7 @@ class UpdateProductCategoryRestAdapterTest extends ControllerTest {
         // then
         result.andExpect(status().isConflict());
 
-        String responseMessage = result.andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
-        ErrorResponse responseDto = objectMapper.readValue(responseMessage, new TypeReference<>() {
-        });
-
+        ErrorResponse responseDto = getErrorResponse(result);
         ProductErrorCode errorCode = ProductErrorCode.PRODUCT_CATEGORY_NAME_DUPLICATED;
 
         assertThat(responseDto.isSuccess()).isFalse();

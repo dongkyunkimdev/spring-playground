@@ -12,7 +12,6 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import static com.playground.productservice.support.ControllerTestUtil.createRequestBuilder;
@@ -33,10 +32,7 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
         // then
         result.andExpect(status().isOk());
 
-        String responseMessage = result.andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
-        SuccessResponse responseDto = objectMapper.readValue(responseMessage, new TypeReference<>() {
-        });
-
+        SuccessResponse responseDto = getSuccessResponse(result);
         assertThat(responseDto.isSuccess()).isTrue();
         assertThat(responseDto.getStatus()).isEqualTo(200);
 
@@ -69,10 +65,7 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
         // then
         result.andExpect(status().isOk());
 
-        String responseMessage = result.andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
-        SuccessResponse responseDto = objectMapper.readValue(responseMessage, new TypeReference<>() {
-        });
-
+        SuccessResponse responseDto = getSuccessResponse(result);
         assertThat(responseDto.isSuccess()).isTrue();
         assertThat(responseDto.getStatus()).isEqualTo(200);
 
@@ -104,10 +97,7 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
         // then
         result.andExpect(status().isOk());
 
-        String responseMessage = result.andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
-        SuccessResponse responseDto = objectMapper.readValue(responseMessage, new TypeReference<>() {
-        });
-
+        SuccessResponse responseDto = getSuccessResponse(result);
         assertThat(responseDto.isSuccess()).isTrue();
         assertThat(responseDto.getStatus()).isEqualTo(200);
 
@@ -140,10 +130,7 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
         // then
         result.andExpect(status().isOk());
 
-        String responseMessage = result.andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
-        SuccessResponse responseDto = objectMapper.readValue(responseMessage, new TypeReference<>() {
-        });
-
+        SuccessResponse responseDto = getSuccessResponse(result);
         assertThat(responseDto.isSuccess()).isTrue();
         assertThat(responseDto.getStatus()).isEqualTo(200);
 
@@ -180,10 +167,7 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
         // then
         result.andExpect(status().isOk());
 
-        String responseMessage = result.andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
-        SuccessResponse responseDto = objectMapper.readValue(responseMessage, new TypeReference<>() {
-        });
-
+        SuccessResponse responseDto = getSuccessResponse(result);
         assertThat(responseDto.isSuccess()).isTrue();
         assertThat(responseDto.getStatus()).isEqualTo(200);
 
@@ -213,10 +197,7 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
         // then
         result.andExpect(status().isOk());
 
-        String responseMessage = result.andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
-        SuccessResponse responseDto = objectMapper.readValue(responseMessage, new TypeReference<>() {
-        });
-
+        SuccessResponse responseDto = getSuccessResponse(result);
         assertThat(responseDto.isSuccess()).isTrue();
         assertThat(responseDto.getStatus()).isEqualTo(200);
 

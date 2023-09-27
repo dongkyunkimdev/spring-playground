@@ -13,7 +13,6 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.nio.charset.StandardCharsets;
 
 import static com.playground.productservice.support.ControllerTestUtil.createRequestBuilder;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -36,10 +35,7 @@ class GetProductRestAdapterTest extends ControllerTest {
         // then
         result.andExpect(status().isOk());
 
-        String responseMessage = result.andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
-        SuccessResponse responseDto = objectMapper.readValue(responseMessage, new TypeReference<>() {
-        });
-
+        SuccessResponse responseDto = getSuccessResponse(result);
         assertThat(responseDto.isSuccess()).isTrue();
         assertThat(responseDto.getStatus()).isEqualTo(200);
 

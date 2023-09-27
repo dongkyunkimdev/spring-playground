@@ -1,6 +1,7 @@
 package com.playground.productservice.domain;
 
 import com.playground.core.entity.BaseTimeEntity;
+import com.playground.productservice.application.port.in.usecase.dto.UpdateProductCommand;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -38,6 +39,13 @@ public class Product extends BaseTimeEntity {
         this.name = name;
         this.stock = stock;
         this.price = price;
+        this.productCategory = productCategory;
+    }
+
+    public void update(UpdateProductCommand command, ProductCategory productCategory) {
+        this.name = command.name();
+        this.stock = command.stock();
+        this.price = command.price();
         this.productCategory = productCategory;
     }
 

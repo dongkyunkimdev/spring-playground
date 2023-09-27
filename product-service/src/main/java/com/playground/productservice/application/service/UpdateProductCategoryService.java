@@ -6,9 +6,11 @@ import com.playground.productservice.application.port.in.usecase.dto.UpdateProdu
 import com.playground.productservice.application.port.in.usecase.dto.UpdateProductCategoryInfo;
 import com.playground.productservice.application.port.out.persistence.ProductPersistencePort;
 import com.playground.productservice.domain.ProductCategory;
+import com.playground.productservice.domain.exception.DuplicateProductCategoryNameException;
 import com.playground.productservice.domain.exception.ProductCategoryNotFoundException;
 import com.playground.productservice.util.mapper.UpdateProductCategoryMapper;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,6 +28,11 @@ public class UpdateProductCategoryService implements UpdateProductCategoryUseCas
     public UpdateProductCategoryInfo execute(UpdateProductCategoryCommand command) {
         ProductCategory savedProductCategory = productPersistencePort.findProductCategoryById(command.productCategoryId())
                 .orElseThrow(ProductCategoryNotFoundException::new);
+
+        if (!StringUtils.containsIgnoreCase(savedProductCategory.getName(), command.name()) &&
+                productPersistencePort.isExistsProductCategoryByName(command.name())) {
+            throw new DuplicateProductCategoryNameException();
+        }
 
         savedProductCategory.update(command);
 

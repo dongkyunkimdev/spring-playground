@@ -1,6 +1,7 @@
 package com.playground.productservice.domain;
 
 import com.playground.core.entity.BaseTimeEntity;
+import com.playground.productservice.application.port.in.usecase.dto.UpdateProductCategoryCommand;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -24,6 +25,10 @@ public class ProductCategory extends BaseTimeEntity {
     @Builder
     public ProductCategory(String name) {
         this.name = name;
+    }
+
+    public void update(UpdateProductCategoryCommand command) {
+        this.name = command.name();
     }
 
 }

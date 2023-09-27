@@ -40,7 +40,8 @@ CREATE TABLE `product_category`
     `product_category_id` BIGINT PRIMARY KEY AUTO_INCREMENT,
     `name`                VARCHAR(255) NOT NULL,
     `created_at`          datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    `updated_at`          datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    `updated_at`          datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    UNIQUE KEY `uix_name` (`name`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4;
 

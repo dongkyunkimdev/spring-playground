@@ -8,8 +8,8 @@ import com.playground.productservice.infrastructure.in.rest.dto.UpdateProductCat
 import com.playground.productservice.infrastructure.in.rest.dto.UpdateProductCategoryResponse;
 import com.playground.productservice.support.ControllerTest;
 import org.junit.jupiter.api.Test;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
@@ -17,8 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.nio.charset.StandardCharsets;
 
+import static com.playground.productservice.support.ControllerTestUtil.createRequestBuilder;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @Transactional
@@ -32,9 +32,7 @@ class UpdateProductCategoryRestAdapterTest extends ControllerTest {
         final UpdateProductCategoryRequest requestDto = new UpdateProductCategoryRequest("Test Toys");
 
         // when
-        MockHttpServletRequestBuilder requestBuilder = patch("/v1/product/category/{productCategoryId}", productCategoryId)
-                .accept(MediaType.APPLICATION_JSON)
-                .contentType(MediaType.APPLICATION_JSON)
+        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.PATCH, "/v1/product/category/{productCategoryId}", productCategoryId)
                 .content(objectMapper.writeValueAsString(requestDto));
 
         ResultActions result = mvc.perform(requestBuilder);
@@ -62,9 +60,7 @@ class UpdateProductCategoryRestAdapterTest extends ControllerTest {
         final UpdateProductCategoryRequest requestDto = new UpdateProductCategoryRequest("Test Toys");
 
         // when
-        MockHttpServletRequestBuilder requestBuilder = patch("/v1/product/category/{productCategoryId}", productCategoryId)
-                .accept(MediaType.APPLICATION_JSON)
-                .contentType(MediaType.APPLICATION_JSON)
+        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.PATCH, "/v1/product/category/{productCategoryId}", productCategoryId)
                 .content(objectMapper.writeValueAsString(requestDto));
 
         ResultActions result = mvc.perform(requestBuilder);
@@ -91,9 +87,7 @@ class UpdateProductCategoryRestAdapterTest extends ControllerTest {
         final UpdateProductCategoryRequest requestDto = new UpdateProductCategoryRequest("Electronics");
 
         // when
-        MockHttpServletRequestBuilder requestBuilder = patch("/v1/product/category/{productCategoryId}", productCategoryId)
-                .accept(MediaType.APPLICATION_JSON)
-                .contentType(MediaType.APPLICATION_JSON)
+        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.PATCH, "/v1/product/category/{productCategoryId}", productCategoryId)
                 .content(objectMapper.writeValueAsString(requestDto));
 
         ResultActions result = mvc.perform(requestBuilder);

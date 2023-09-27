@@ -9,7 +9,7 @@ import com.playground.productservice.infrastructure.in.rest.dto.RegisterProductR
 import com.playground.productservice.infrastructure.in.rest.dto.RegisterProductResponse;
 import com.playground.productservice.support.ControllerTest;
 import org.junit.jupiter.api.Test;
-import org.springframework.http.MediaType;
+import org.springframework.http.HttpMethod;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
@@ -18,8 +18,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 
+import static com.playground.productservice.support.ControllerTestUtil.createRequestBuilder;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @Transactional
@@ -37,9 +37,7 @@ class RegisterProductRestAdapterTest extends ControllerTest {
                 .build();
 
         // when
-        MockHttpServletRequestBuilder requestBuilder = post("/v1/product")
-                .accept(MediaType.APPLICATION_JSON)
-                .contentType(MediaType.APPLICATION_JSON)
+        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.POST, "/v1/product")
                 .content(objectMapper.writeValueAsString(requestDto));
 
         ResultActions result = mvc.perform(requestBuilder);
@@ -77,9 +75,7 @@ class RegisterProductRestAdapterTest extends ControllerTest {
                 .build();
 
         // when
-        MockHttpServletRequestBuilder requestBuilder = post("/v1/product")
-                .accept(MediaType.APPLICATION_JSON)
-                .contentType(MediaType.APPLICATION_JSON)
+        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.POST, "/v1/product")
                 .content(objectMapper.writeValueAsString(requestDto));
 
         ResultActions result = mvc.perform(requestBuilder);

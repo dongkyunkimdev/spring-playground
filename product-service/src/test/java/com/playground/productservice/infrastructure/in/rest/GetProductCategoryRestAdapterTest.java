@@ -7,7 +7,7 @@ import com.playground.productservice.domain.exception.ProductErrorCode;
 import com.playground.productservice.infrastructure.in.rest.dto.GetProductCategoryResponse;
 import com.playground.productservice.support.ControllerTest;
 import org.junit.jupiter.api.Test;
-import org.springframework.http.MediaType;
+import org.springframework.http.HttpMethod;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
@@ -15,8 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.nio.charset.StandardCharsets;
 
+import static com.playground.productservice.support.ControllerTestUtil.createRequestBuilder;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @Transactional
@@ -29,9 +29,7 @@ class GetProductCategoryRestAdapterTest extends ControllerTest {
         final Long productCategoryId = 1L;
 
         // when
-        MockHttpServletRequestBuilder requestBuilder = get("/v1/product/category/{productCategoryId}", productCategoryId)
-                .accept(MediaType.APPLICATION_JSON)
-                .contentType(MediaType.APPLICATION_JSON);
+        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.GET, "/v1/product/category/{productCategoryId}", productCategoryId);
 
         ResultActions result = mvc.perform(requestBuilder);
 
@@ -57,9 +55,7 @@ class GetProductCategoryRestAdapterTest extends ControllerTest {
         final Long productCategoryId = 98123L;
 
         // when
-        MockHttpServletRequestBuilder requestBuilder = get("/v1/product/category/{productCategoryId}", productCategoryId)
-                .accept(MediaType.APPLICATION_JSON)
-                .contentType(MediaType.APPLICATION_JSON);
+        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.GET, "/v1/product/category/{productCategoryId}", productCategoryId);
 
         ResultActions result = mvc.perform(requestBuilder);
 

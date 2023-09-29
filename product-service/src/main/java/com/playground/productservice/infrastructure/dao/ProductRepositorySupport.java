@@ -66,11 +66,11 @@ public class ProductRepositorySupport {
         }
 
         if (minPrice == null) {
-            return QProduct.product.productId.loe(maxPrice);
+            return QProduct.product.price.loe(maxPrice);
         }
 
         if (maxPrice == null) {
-            return QProduct.product.productId.goe(minPrice);
+            return QProduct.product.price.goe(minPrice);
         }
 
         return QProduct.product.price.between(minPrice, maxPrice);

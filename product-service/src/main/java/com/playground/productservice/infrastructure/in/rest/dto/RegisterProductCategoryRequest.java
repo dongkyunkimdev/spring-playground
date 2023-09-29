@@ -4,7 +4,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 
 public record RegisterProductCategoryRequest(
-    @NotBlank @Schema(description = "이름", example = "Clothing") String name
+    @NotBlank(message = "name은 비어있을 수 없습니다.")
+    @Schema(description = "이름", example = "Clothing") String name
 ) {
 
 }

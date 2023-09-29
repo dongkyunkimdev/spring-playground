@@ -145,7 +145,7 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
     }
 
     @Test
-    void 상품_카테고리_리스트_조회_성공_name_필터링() throws Exception {
+    void 상품_카테고리_리스트_조회_성공_productCategoryName_필터링() throws Exception {
         // given
         final String productCategoryName = "co";
 

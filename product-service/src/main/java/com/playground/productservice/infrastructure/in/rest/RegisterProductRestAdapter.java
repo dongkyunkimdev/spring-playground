@@ -27,7 +27,7 @@ public class RegisterProductRestAdapter {
     @Operation(summary = "상품 등록.")
     @Tag(name = "2-3. [상품 등록]")
     @ApiErrorExceptionsExample(RegisterProductExceptionDocs.class)
-    @PostMapping("/v1/product")
+    @PostMapping("/v1/products")
     @ResponseStatus(HttpStatus.CREATED)
     public RegisterProductResponse registerProduct(
         @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "상품 등록 정보.") @RequestBody(required = true) @Valid final RegisterProductRequest request

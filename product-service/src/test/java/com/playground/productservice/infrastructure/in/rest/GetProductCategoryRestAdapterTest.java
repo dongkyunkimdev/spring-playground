@@ -30,7 +30,7 @@ class GetProductCategoryRestAdapterTest extends ControllerTest {
         final Long productCategoryId = 1L;
 
         // when
-        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.GET, "/v1/product/category/{productCategoryId}", productCategoryId);
+        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.GET, "/v1/products/categories/{productCategoryId}", productCategoryId);
 
         ResultActions result = mvc.perform(requestBuilder);
 
@@ -52,7 +52,7 @@ class GetProductCategoryRestAdapterTest extends ControllerTest {
         final Long productCategoryId = 98123L;
 
         // when
-        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.GET, "/v1/product/category/{productCategoryId}", productCategoryId);
+        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.GET, "/v1/products/categories/{productCategoryId}", productCategoryId);
 
         ResultActions result = mvc.perform(requestBuilder);
 

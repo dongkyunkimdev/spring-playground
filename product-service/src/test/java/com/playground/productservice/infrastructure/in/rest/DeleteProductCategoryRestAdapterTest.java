@@ -30,7 +30,7 @@ class DeleteProductCategoryRestAdapterTest extends ControllerTest {
         ProductCategory savedProductCategory = productCategoryRepository.save(ProductCategory.builder().name("test category for delete").build());
 
         // when
-        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.DELETE, "/v1/product/category/{productCategoryId}", savedProductCategory.getProductCategoryId());
+        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.DELETE, "/v1/products/categories/{productCategoryId}", savedProductCategory.getProductCategoryId());
 
         ResultActions result = mvc.perform(requestBuilder);
 
@@ -44,7 +44,7 @@ class DeleteProductCategoryRestAdapterTest extends ControllerTest {
         final Long productCategoryId = 98123L;
 
         // when
-        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.DELETE, "/v1/product/category/{productCategoryId}", productCategoryId);
+        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.DELETE, "/v1/products/categories/{productCategoryId}", productCategoryId);
 
         ResultActions result = mvc.perform(requestBuilder);
 
@@ -61,7 +61,7 @@ class DeleteProductCategoryRestAdapterTest extends ControllerTest {
         final Long productCategoryId = 1L;
 
         // when
-        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.DELETE, "/v1/product/category/{productCategoryId}", productCategoryId);
+        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.DELETE, "/v1/products/categories/{productCategoryId}", productCategoryId);
 
         ResultActions result = mvc.perform(requestBuilder);
 

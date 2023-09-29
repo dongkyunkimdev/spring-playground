@@ -33,7 +33,7 @@ class GetProductRestAdapterTest extends ControllerTest {
         final Long productId = 1L;
 
         // when
-        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.GET, "/v1/product/{productId}", productId);
+        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.GET, "/v1/products/{productId}", productId);
 
         ResultActions result = mvc.perform(requestBuilder);
 
@@ -61,7 +61,7 @@ class GetProductRestAdapterTest extends ControllerTest {
         final Long productId = 1892731L;
 
         // when
-        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.GET, "/v1/product/{productId}", productId);
+        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.GET, "/v1/products/{productId}", productId);
 
         ResultActions result = mvc.perform(requestBuilder);
 

@@ -24,22 +24,22 @@ spring:
         - id: user-service
           uri: lb://user-service
           predicates:
-            - Path=/v*/user/**
+            - Path=/v*/users/**
 
         - id: product-service
           uri: lb://product-service
           predicates:
-            - Path=/v*/product/**
+            - Path=/v*/products/**
 
         - id: order-service
           uri: lb://order-service
           predicates:
-            - Path=/v*/order/**
+            - Path=/v*/orders/**
 
         - id: delivery-service
           uri: lb://delivery-service
           predicates:
-            - Path=/v*/delivery/**
+            - Path=/v*/deliveries/**
 
 eureka:
   client:

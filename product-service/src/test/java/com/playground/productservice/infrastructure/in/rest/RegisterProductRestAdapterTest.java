@@ -39,7 +39,7 @@ class RegisterProductRestAdapterTest extends ControllerTest {
             .build();
 
         // when
-        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.POST, "/v1/product")
+        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.POST, "/v1/products")
             .content(objectMapper.writeValueAsString(requestDto));
 
         ResultActions result = mvc.perform(requestBuilder);
@@ -73,7 +73,7 @@ class RegisterProductRestAdapterTest extends ControllerTest {
             .build();
 
         // when
-        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.POST, "/v1/product")
+        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.POST, "/v1/products")
             .content(objectMapper.writeValueAsString(requestDto));
 
         ResultActions result = mvc.perform(requestBuilder);

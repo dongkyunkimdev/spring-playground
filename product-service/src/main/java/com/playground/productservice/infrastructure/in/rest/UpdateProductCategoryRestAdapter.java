@@ -30,7 +30,7 @@ public class UpdateProductCategoryRestAdapter {
     @Operation(summary = "상품 카테고리 수정.")
     @Tag(name = "1-4. [상품 카테고리 수정]")
     @ApiErrorExceptionsExample(UpdateProductCategoryExceptionDocs.class)
-    @PatchMapping("/v1/product/category/{productCategoryId}")
+    @PatchMapping("/v1/products/categories/{productCategoryId}")
     @ResponseStatus(HttpStatus.OK)
     public UpdateProductCategoryResponse updateProductCategory(
         @Parameter(description = "상품 카테고리 ID.", example = "1") @PathVariable("productCategoryId") final Long productCategoryId,

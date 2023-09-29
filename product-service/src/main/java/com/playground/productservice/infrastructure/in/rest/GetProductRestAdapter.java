@@ -27,7 +27,7 @@ public class GetProductRestAdapter {
     @Operation(summary = "상품 조회.")
     @Tag(name = "2-2. [상품 조회]")
     @ApiErrorExceptionsExample(GetProductExceptionDocs.class)
-    @GetMapping("/v1/product/{productId}")
+    @GetMapping("/v1/products/{productId}")
     @ResponseStatus(HttpStatus.OK)
     public GetProductResponse getProduct(
         @Parameter(description = "상품 ID.", example = "1") @PathVariable("productId") final Long productId

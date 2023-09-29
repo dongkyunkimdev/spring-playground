@@ -21,7 +21,7 @@ class DeleteProductRestAdapterTest extends ControllerTest {
         final Long productId = 1L;
 
         // when
-        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.DELETE, "/v1/product/{productId}", productId);
+        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.DELETE, "/v1/products/{productId}", productId);
 
         ResultActions result = mvc.perform(requestBuilder);
 

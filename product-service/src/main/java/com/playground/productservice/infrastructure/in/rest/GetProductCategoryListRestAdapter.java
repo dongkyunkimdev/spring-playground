@@ -8,7 +8,6 @@ import com.playground.productservice.application.port.in.usecase.dto.GetProductC
 import com.playground.productservice.infrastructure.in.rest.dto.GetProductCategoryListRequest;
 import com.playground.productservice.infrastructure.in.rest.dto.GetProductCategoryListResponse;
 import com.playground.productservice.util.mapper.GetProductCategoryListMapper;
-import com.playground.productservice.util.mapper.GetProductCategoryMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -31,15 +30,15 @@ public class GetProductCategoryListRestAdapter {
 
     @Operation(summary = "상품 카테고리 리스트 조회.")
     @Tag(name = "1-1. [상품 카테고리 리스트 조회]")
-    @GetMapping("/v1/product/category")
+    @GetMapping("/v1/products/categories")
     @ResponseStatus(HttpStatus.OK)
-    public SliceResponse<GetProductCategoryListResponse> getProductCategory(
+    public SliceResponse<GetProductCategoryListResponse> getProductCategoryList(
         @ParameterObject GetProductCategoryListRequest request,
         @ParameterObject @PageableDefault(size = 10, sort = "productCategoryId", direction = Sort.Direction.DESC) Pageable pageable
     ) {
-        Slice<GetProductCategoryListInfo> getProductCategoryInfoSlice = getProductCategoryListUseCase.execute(new GetProductCategoryListCommand(request.fromProductCategoryId(), request.toProductCategoryId(), request.productCategoryName()), pageable);
+        Slice<GetProductCategoryListInfo> getProductCategoryListInfoSlice = getProductCategoryListUseCase.execute(new GetProductCategoryListCommand(request.fromProductCategoryId(), request.toProductCategoryId(), request.productCategoryName()), pageable);
 
-        return SliceResponse.of(getProductCategoryInfoSlice.map(mapper::infoToResponse));
+        return SliceResponse.of(getProductCategoryListInfoSlice.map(mapper::infoToResponse));
     }
 
 }

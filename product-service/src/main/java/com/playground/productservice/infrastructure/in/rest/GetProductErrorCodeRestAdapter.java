@@ -17,7 +17,7 @@ public class GetProductErrorCodeRestAdapter {
     @Operation(summary = "상품 서비스 전체 에러코드 조회.")
     @Tag(name = "99. [상품 서비스 전체 에러코드 조회]")
     @ApiErrorCodeExample(ProductErrorCode.class)
-    @GetMapping("/v1/product/error-code")
+    @GetMapping("/v1/products/error-code")
     @ResponseStatus(HttpStatus.OK)
     public void getProductErrorCode() {
     }

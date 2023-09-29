@@ -24,7 +24,7 @@ public class DeleteProductRestAdapter {
     @Operation(summary = "상품 삭제.")
     @Tag(name = "2-5. [상품 삭제]")
     @ApiErrorExceptionsExample(DeleteProductExceptionDocs.class)
-    @DeleteMapping("/v1/product/{productId}")
+    @DeleteMapping("/v1/products/{productId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteProduct(
         @Parameter(description = "상품 ID.", example = "1") @PathVariable("productId") final Long productId

@@ -31,7 +31,7 @@ class RegisterProductCategoryRestAdapterTest extends ControllerTest {
         final RegisterProductCategoryRequest requestDto = new RegisterProductCategoryRequest("Test Toys");
 
         // when
-        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.POST, "/v1/product/category")
+        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.POST, "/v1/products/categories")
             .content(objectMapper.writeValueAsString(requestDto));
 
         ResultActions result = mvc.perform(requestBuilder);
@@ -54,7 +54,7 @@ class RegisterProductCategoryRestAdapterTest extends ControllerTest {
         final RegisterProductCategoryRequest requestDto = new RegisterProductCategoryRequest("Clothing");
 
         // when
-        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.POST, "/v1/product/category")
+        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.POST, "/v1/products/categories")
             .content(objectMapper.writeValueAsString(requestDto));
 
         ResultActions result = mvc.perform(requestBuilder);

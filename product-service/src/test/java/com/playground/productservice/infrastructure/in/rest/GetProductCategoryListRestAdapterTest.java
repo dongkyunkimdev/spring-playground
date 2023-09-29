@@ -27,7 +27,7 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
     @Test
     void 상품_카테고리_리스트_조회_성공() throws Exception {
         // when
-        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.GET, "/v1/product/category");
+        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.GET, "/v1/products/categories");
 
         ResultActions result = mvc.perform(requestBuilder);
 
@@ -58,7 +58,7 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
         final Long fromProductCategoryId = 1L;
 
         // when
-        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.GET, "/v1/product/category")
+        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.GET, "/v1/products/categories")
             .param("fromProductCategoryId", String.valueOf(fromProductCategoryId));
 
         ResultActions result = mvc.perform(requestBuilder);
@@ -89,7 +89,7 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
         final Long toProductCategoryId = 11L;
 
         // when
-        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.GET, "/v1/product/category")
+        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.GET, "/v1/products/categories")
             .param("toProductCategoryId", String.valueOf(toProductCategoryId));
 
         ResultActions result = mvc.perform(requestBuilder);
@@ -120,7 +120,7 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
         final String productCategoryName = "co";
 
         // when
-        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.GET, "/v1/product/category")
+        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.GET, "/v1/products/categories")
             .param("productCategoryName", productCategoryName)
             .param("size", String.valueOf(1));
 
@@ -154,7 +154,7 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
         final String productCategoryName = "es";
 
         // when
-        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.GET, "/v1/product/category")
+        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.GET, "/v1/products/categories")
             .param("fromProductCategoryId", String.valueOf(fromProductCategoryId))
             .param("toProductCategoryId", String.valueOf(toProductCategoryId))
             .param("productCategoryName", productCategoryName)
@@ -186,7 +186,7 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
     @Test
     void 상품_카테고리_리스트_조회_성공_name_asc_정렬() throws Exception {
         // when
-        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.GET, "/v1/product/category")
+        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.GET, "/v1/products/categories")
             .param("sort", "name,ASC");
 
         ResultActions result = mvc.perform(requestBuilder);

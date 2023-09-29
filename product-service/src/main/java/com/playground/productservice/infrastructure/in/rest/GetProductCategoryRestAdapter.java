@@ -27,7 +27,7 @@ public class GetProductCategoryRestAdapter {
     @Operation(summary = "상품 카테고리 조회.")
     @Tag(name = "1-2. [상품 카테고리 조회]")
     @ApiErrorExceptionsExample(GetProductCategoryExceptionDocs.class)
-    @GetMapping("/v1/product/category/{productCategoryId}")
+    @GetMapping("/v1/products/categories/{productCategoryId}")
     @ResponseStatus(HttpStatus.OK)
     public GetProductCategoryResponse getProductCategory(
         @Parameter(description = "상품 카테고리 ID.", example = "1") @PathVariable("productCategoryId") final Long productCategoryId

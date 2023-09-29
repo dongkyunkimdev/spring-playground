@@ -23,7 +23,7 @@ public class DeleteProductCategoryRestAdapter {
     @Operation(summary = "상품 카테고리 삭제.")
     @Tag(name = "1-5. [상품 카테고리 삭제]")
     @ApiErrorExceptionsExample(DeleteProductCategoryExceptionDocs.class)
-    @DeleteMapping("/v1/product/category/{productCategoryId}")
+    @DeleteMapping("/v1/products/categories/{productCategoryId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteProductCategory(
         @Parameter(description = "상품 카테고리 ID.", example = "1") @PathVariable("productCategoryId") final Long productCategoryId

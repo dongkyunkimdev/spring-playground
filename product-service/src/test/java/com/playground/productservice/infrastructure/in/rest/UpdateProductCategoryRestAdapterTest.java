@@ -32,7 +32,7 @@ class UpdateProductCategoryRestAdapterTest extends ControllerTest {
         final UpdateProductCategoryRequest requestDto = new UpdateProductCategoryRequest("Test Toys");
 
         // when
-        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.PATCH, "/v1/product/category/{productCategoryId}", productCategoryId)
+        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.PATCH, "/v1/products/categories/{productCategoryId}", productCategoryId)
             .content(objectMapper.writeValueAsString(requestDto));
 
         ResultActions result = mvc.perform(requestBuilder);
@@ -56,7 +56,7 @@ class UpdateProductCategoryRestAdapterTest extends ControllerTest {
         final UpdateProductCategoryRequest requestDto = new UpdateProductCategoryRequest("Test Toys");
 
         // when
-        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.PATCH, "/v1/product/category/{productCategoryId}", productCategoryId)
+        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.PATCH, "/v1/products/categories/{productCategoryId}", productCategoryId)
             .content(objectMapper.writeValueAsString(requestDto));
 
         ResultActions result = mvc.perform(requestBuilder);
@@ -75,7 +75,7 @@ class UpdateProductCategoryRestAdapterTest extends ControllerTest {
         final UpdateProductCategoryRequest requestDto = new UpdateProductCategoryRequest("Electronics");
 
         // when
-        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.PATCH, "/v1/product/category/{productCategoryId}", productCategoryId)
+        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.PATCH, "/v1/products/categories/{productCategoryId}", productCategoryId)
             .content(objectMapper.writeValueAsString(requestDto));
 
         ResultActions result = mvc.perform(requestBuilder);

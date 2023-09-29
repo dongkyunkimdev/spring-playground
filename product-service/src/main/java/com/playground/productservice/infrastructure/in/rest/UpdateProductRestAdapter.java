@@ -29,7 +29,7 @@ public class UpdateProductRestAdapter {
     @Operation(summary = "상품 수정.")
     @Tag(name = "2-4. [상품 수정]")
     @ApiErrorExceptionsExample(UpdateProductExceptionDocs.class)
-    @PatchMapping("/v1/product/{productId}")
+    @PatchMapping("/v1/products/{productId}")
     @ResponseStatus(HttpStatus.OK)
     public UpdateProductResponse updateProduct(
         @Parameter(description = "상품 ID.", example = "1") @PathVariable("productId") final Long productId,

@@ -7,6 +7,8 @@ import com.playground.productservice.domain.ProductCategory;
 import com.playground.productservice.infrastructure.dao.ProductCategoryRepository;
 import com.playground.productservice.infrastructure.dao.ProductCategoryRepositorySupport;
 import com.playground.productservice.infrastructure.dao.ProductRepository;
+import com.playground.productservice.infrastructure.dao.ProductRepositorySupport;
+import com.playground.productservice.infrastructure.dao.dto.GetProductListSearchCondition;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
@@ -21,7 +23,14 @@ public class ProductPersistenceAdapter implements ProductPersistencePort {
 
     private final ProductCategoryRepository productCategoryRepository;
 
+    private final ProductRepositorySupport productRepositorySupport;
+
     private final ProductCategoryRepositorySupport productCategoryRepositorySupport;
+
+    @Override
+    public Slice<Product> searchProductListBySearchCondition(GetProductListSearchCondition searchCondition, Pageable pageable) {
+        return productRepositorySupport.findProductListBySearchCondition(searchCondition, pageable);
+    }
 
     @Override
     public Slice<ProductCategory> findProductCategoryListByIdRangeAndName(Long fromProductCategoryId, Long toProductCategoryId, String productCategoryName, Pageable pageable) {

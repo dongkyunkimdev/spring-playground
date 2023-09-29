@@ -53,9 +53,9 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
     }
 
     @Test
-    void 상품_카테고리_리스트_조회_성공_fromId_필터링() throws Exception {
+    void 상품_카테고리_리스트_조회_성공_fromProductCategoryId_필터링() throws Exception {
         // given
-        final Long fromProductCategoryId = 1L;
+        final Long fromProductCategoryId = 5L;
 
         // when
         MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.GET, "/v1/products/categories")
@@ -78,13 +78,11 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
         assertThat(sliceResponse.isHasNext()).isTrue();
 
         List<GetProductCategoryListResponse> productCategoryResponseList = sliceResponse.getContent();
-        productCategoryResponseList.forEach(productCategory -> {
-            assertThat(productCategory.productCategoryId()).isGreaterThanOrEqualTo(fromProductCategoryId);
-        });
+        productCategoryResponseList.forEach(productCategory -> assertThat(productCategory.productCategoryId()).isGreaterThanOrEqualTo(fromProductCategoryId));
     }
 
     @Test
-    void 상품_카테고리_리스트_조회_성공_toId_필터링() throws Exception {
+    void 상품_카테고리_리스트_조회_성공_toProductCategoryId_필터링() throws Exception {
         // given
         final Long toProductCategoryId = 11L;
 
@@ -109,7 +107,39 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
         assertThat(sliceResponse.isHasNext()).isTrue();
 
         List<GetProductCategoryListResponse> productCategoryResponseList = sliceResponse.getContent();
+        productCategoryResponseList.forEach(productCategory -> assertThat(productCategory.productCategoryId()).isLessThanOrEqualTo(toProductCategoryId));
+    }
+
+    @Test
+    void 상품_카테고리_리스트_조회_성공_productCategoryIdInRange_필터링() throws Exception {
+        // given
+        final Long fromProductCategoryId = 5L;
+        final Long toProductCategoryId = 11L;
+
+        // when
+        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.GET, "/v1/products/categories")
+            .param("fromProductCategoryId", String.valueOf(fromProductCategoryId))
+            .param("toProductCategoryId", String.valueOf(toProductCategoryId));
+
+        ResultActions result = mvc.perform(requestBuilder);
+
+        // then
+        result.andExpect(status().isOk());
+
+        SuccessResponse responseDto = getSuccessResponse(result);
+        assertSuccessResponse(responseDto, HttpStatus.OK);
+
+        SliceResponse<GetProductCategoryListResponse> sliceResponse = objectMapper.convertValue(responseDto.getData(), new TypeReference<>() {
+        });
+        assertThat(sliceResponse.getContent()).hasSize(7);
+        assertThat(sliceResponse.getPage()).isZero();
+        assertThat(sliceResponse.getSize()).isEqualTo(7);
+        assertThat(sliceResponse.isHasPrevious()).isFalse();
+        assertThat(sliceResponse.isHasNext()).isFalse();
+
+        List<GetProductCategoryListResponse> productCategoryResponseList = sliceResponse.getContent();
         productCategoryResponseList.forEach(productCategory -> {
+            assertThat(productCategory.productCategoryId()).isGreaterThanOrEqualTo(fromProductCategoryId);
             assertThat(productCategory.productCategoryId()).isLessThanOrEqualTo(toProductCategoryId);
         });
     }

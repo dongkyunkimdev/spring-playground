@@ -3,10 +3,11 @@ package com.playground.productservice.infrastructure.in.rest;
 import com.playground.core.annotation.RestAdapter;
 import com.playground.core.paging.SliceResponse;
 import com.playground.productservice.application.port.in.usecase.GetProductCategoryListUseCase;
-import com.playground.productservice.application.port.in.usecase.dto.GetProductCategoryInfo;
 import com.playground.productservice.application.port.in.usecase.dto.GetProductCategoryListCommand;
+import com.playground.productservice.application.port.in.usecase.dto.GetProductCategoryListInfo;
 import com.playground.productservice.infrastructure.in.rest.dto.GetProductCategoryListRequest;
-import com.playground.productservice.infrastructure.in.rest.dto.GetProductCategoryResponse;
+import com.playground.productservice.infrastructure.in.rest.dto.GetProductCategoryListResponse;
+import com.playground.productservice.util.mapper.GetProductCategoryListMapper;
 import com.playground.productservice.util.mapper.GetProductCategoryMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -26,17 +27,17 @@ public class GetProductCategoryListRestAdapter {
 
     private final GetProductCategoryListUseCase getProductCategoryListUseCase;
 
-    private final GetProductCategoryMapper mapper;
+    private final GetProductCategoryListMapper mapper;
 
     @Operation(summary = "상품 카테고리 리스트 조회.")
     @Tag(name = "1-1. [상품 카테고리 리스트 조회]")
     @GetMapping("/v1/product/category")
     @ResponseStatus(HttpStatus.OK)
-    public SliceResponse<GetProductCategoryResponse> getProductCategory(
+    public SliceResponse<GetProductCategoryListResponse> getProductCategory(
         @ParameterObject GetProductCategoryListRequest request,
         @ParameterObject @PageableDefault(size = 10, sort = "productCategoryId", direction = Sort.Direction.DESC) Pageable pageable
     ) {
-        Slice<GetProductCategoryInfo> getProductCategoryInfoSlice = getProductCategoryListUseCase.execute(new GetProductCategoryListCommand(request.fromProductCategoryId(), request.toProductCategoryId(), request.productCategoryName()), pageable);
+        Slice<GetProductCategoryListInfo> getProductCategoryInfoSlice = getProductCategoryListUseCase.execute(new GetProductCategoryListCommand(request.fromProductCategoryId(), request.toProductCategoryId(), request.productCategoryName()), pageable);
 
         return SliceResponse.of(getProductCategoryInfoSlice.map(mapper::infoToResponse));
     }

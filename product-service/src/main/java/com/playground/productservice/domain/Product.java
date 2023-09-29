@@ -30,7 +30,7 @@ public class Product extends BaseTimeEntity {
     @Column(name = "price")
     private BigDecimal price;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "product_category_id")
     private ProductCategory productCategory;
 

@@ -138,10 +138,7 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
         assertThat(sliceResponse.isHasNext()).isFalse();
 
         List<GetProductCategoryListResponse> productCategoryResponseList = sliceResponse.getContent();
-        productCategoryResponseList.forEach(productCategory -> {
-            assertThat(productCategory.productCategoryId()).isGreaterThanOrEqualTo(fromProductCategoryId);
-            assertThat(productCategory.productCategoryId()).isLessThanOrEqualTo(toProductCategoryId);
-        });
+        productCategoryResponseList.forEach(productCategory -> assertThat(productCategory.productCategoryId()).isBetween(fromProductCategoryId, toProductCategoryId));
     }
 
     @Test
@@ -171,9 +168,7 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
         assertThat(sliceResponse.isHasNext()).isTrue();
 
         List<GetProductCategoryListResponse> productCategoryResponseList = sliceResponse.getContent();
-        productCategoryResponseList.forEach(productCategory -> {
-            assertThat(productCategory.name()).containsIgnoringCase(productCategoryName);
-        });
+        productCategoryResponseList.forEach(productCategory -> assertThat(productCategory.name()).containsIgnoringCase(productCategoryName));
     }
 
     @Test

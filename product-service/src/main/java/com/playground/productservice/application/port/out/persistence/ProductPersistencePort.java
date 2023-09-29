@@ -2,6 +2,7 @@ package com.playground.productservice.application.port.out.persistence;
 
 import com.playground.productservice.domain.Product;
 import com.playground.productservice.domain.ProductCategory;
+import com.playground.productservice.infrastructure.dao.dto.GetProductCategoryListSearchCondition;
 import com.playground.productservice.infrastructure.dao.dto.GetProductListSearchCondition;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
@@ -12,11 +13,11 @@ public interface ProductPersistencePort {
 
     Slice<Product> searchProductListBySearchCondition(GetProductListSearchCondition getProductListSearchCondition, Pageable pageable);
 
-    Slice<ProductCategory> findProductCategoryListByIdRangeAndName(Long fromProductCategoryId, Long toProductCategoryId, String productCategoryName, Pageable pageable);
+    Slice<ProductCategory> searchProductCategoryListBySearchCondition(GetProductCategoryListSearchCondition searchCondition, Pageable pageable);
 
-    Optional<Product> findProductById(Long productId);
+    Optional<Product> searchProductById(Long productId);
 
-    Optional<ProductCategory> findProductCategoryById(Long productCategoryId);
+    Optional<ProductCategory> searchProductCategoryById(Long productCategoryId);
 
     boolean isExistsProductCategoryByName(String name);
 

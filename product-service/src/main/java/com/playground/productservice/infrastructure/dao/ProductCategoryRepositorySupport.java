@@ -4,6 +4,7 @@ import com.playground.core.paging.QueryDslUtil;
 import com.playground.core.paging.SliceUtil;
 import com.playground.productservice.domain.ProductCategory;
 import com.playground.productservice.domain.QProductCategory;
+import com.playground.productservice.infrastructure.dao.dto.GetProductCategoryListSearchCondition;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -20,11 +21,11 @@ public class ProductCategoryRepositorySupport {
 
     private final JPAQueryFactory queryFactory;
 
-    public Slice<ProductCategory> findAllByIdRangeAndName(Long fromProductCategoryId, Long toProductCategoryId, String productCategoryName, Pageable pageable) {
+    public Slice<ProductCategory> findListBySearchCondition(GetProductCategoryListSearchCondition searchCondition, Pageable pageable) {
         List<ProductCategory> content = queryFactory.selectFrom(QProductCategory.productCategory)
             .where(
-                productCategoryIdInRange(fromProductCategoryId, toProductCategoryId),
-                nameContains(productCategoryName)
+                productCategoryIdInRange(searchCondition.fromProductCategoryId(), searchCondition.toProductCategoryId()),
+                productCategoryNameContains(searchCondition.productCategoryName())
             )
             .orderBy(QueryDslUtil.createOrderSpecifiers(ProductCategory.class, pageable))
             .offset(pageable.getOffset())
@@ -34,24 +35,24 @@ public class ProductCategoryRepositorySupport {
         return SliceUtil.createSlice(content, pageable);
     }
 
-    private BooleanExpression productCategoryIdInRange(Long from, Long to) {
-        if (from == null && to == null) {
+    private BooleanExpression productCategoryIdInRange(Long fromProductCategoryId, Long toProductCategoryId) {
+        if (fromProductCategoryId == null && toProductCategoryId == null) {
             return null;
         }
 
-        if (from == null) {
-            return QProductCategory.productCategory.productCategoryId.loe(to);
+        if (fromProductCategoryId == null) {
+            return QProductCategory.productCategory.productCategoryId.loe(toProductCategoryId);
         }
 
-        if (to == null) {
-            return QProductCategory.productCategory.productCategoryId.goe(from);
+        if (toProductCategoryId == null) {
+            return QProductCategory.productCategory.productCategoryId.goe(fromProductCategoryId);
         }
 
-        return QProductCategory.productCategory.productCategoryId.between(from, to);
+        return QProductCategory.productCategory.productCategoryId.between(fromProductCategoryId, toProductCategoryId);
     }
 
-    private BooleanExpression nameContains(String name) {
-        return StringUtils.isBlank(name) ? null : QProductCategory.productCategory.name.containsIgnoreCase(name);
+    private BooleanExpression productCategoryNameContains(String productCategoryName) {
+        return StringUtils.isBlank(productCategoryName) ? null : QProductCategory.productCategory.name.containsIgnoreCase(productCategoryName);
     }
 
 }

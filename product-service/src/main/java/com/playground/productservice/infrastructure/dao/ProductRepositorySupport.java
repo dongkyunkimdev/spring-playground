@@ -23,7 +23,7 @@ public class ProductRepositorySupport {
 
     private final JPAQueryFactory queryFactory;
 
-    public Slice<Product> findProductListBySearchCondition(GetProductListSearchCondition searchCondition, Pageable pageable) {
+    public Slice<Product> findListBySearchCondition(GetProductListSearchCondition searchCondition, Pageable pageable) {
         List<Product> content = queryFactory.selectFrom(QProduct.product)
             .where(
                 productIdInRange(searchCondition.fromProductId(), searchCondition.toProductId()),

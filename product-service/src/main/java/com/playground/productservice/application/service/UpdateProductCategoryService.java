@@ -26,7 +26,7 @@ public class UpdateProductCategoryService implements UpdateProductCategoryUseCas
     @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
     @Override
     public UpdateProductCategoryInfo execute(UpdateProductCategoryCommand command) {
-        ProductCategory savedProductCategory = productPersistencePort.findProductCategoryById(command.productCategoryId())
+        ProductCategory savedProductCategory = productPersistencePort.searchProductCategoryById(command.productCategoryId())
             .orElseThrow(ProductCategoryNotFoundException::new);
 
         if (!StringUtils.containsIgnoreCase(savedProductCategory.getName(), command.name()) &&

@@ -24,7 +24,7 @@ public class GetProductService implements GetProductUseCase {
     @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.SUPPORTS, readOnly = true)
     @Override
     public GetProductInfo execute(GetProductCommand command) {
-        Product savedProduct = productPersistencePort.findProductById(command.productId())
+        Product savedProduct = productPersistencePort.searchProductById(command.productId())
             .orElseThrow(ProductNotFoundException::new);
 
         return mapper.entityToInfo(savedProduct);

@@ -22,7 +22,7 @@ public class DeleteProductCategoryService implements DeleteProductCategoryUseCas
     @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
     @Override
     public void execute(DeleteProductCategoryCommand command) {
-        ProductCategory savedProductCategory = productPersistencePort.findProductCategoryById(command.productCategoryId())
+        ProductCategory savedProductCategory = productPersistencePort.searchProductCategoryById(command.productCategoryId())
             .orElseThrow(ProductCategoryNotFoundException::new);
 
         try {

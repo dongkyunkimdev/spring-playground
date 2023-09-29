@@ -8,6 +8,7 @@ import com.playground.productservice.infrastructure.dao.ProductCategoryRepositor
 import com.playground.productservice.infrastructure.dao.ProductCategoryRepositorySupport;
 import com.playground.productservice.infrastructure.dao.ProductRepository;
 import com.playground.productservice.infrastructure.dao.ProductRepositorySupport;
+import com.playground.productservice.infrastructure.dao.dto.GetProductCategoryListSearchCondition;
 import com.playground.productservice.infrastructure.dao.dto.GetProductListSearchCondition;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -29,21 +30,21 @@ public class ProductPersistenceAdapter implements ProductPersistencePort {
 
     @Override
     public Slice<Product> searchProductListBySearchCondition(GetProductListSearchCondition searchCondition, Pageable pageable) {
-        return productRepositorySupport.findProductListBySearchCondition(searchCondition, pageable);
+        return productRepositorySupport.findListBySearchCondition(searchCondition, pageable);
     }
 
     @Override
-    public Slice<ProductCategory> findProductCategoryListByIdRangeAndName(Long fromProductCategoryId, Long toProductCategoryId, String productCategoryName, Pageable pageable) {
-        return productCategoryRepositorySupport.findAllByIdRangeAndName(fromProductCategoryId, toProductCategoryId, productCategoryName, pageable);
+    public Slice<ProductCategory> searchProductCategoryListBySearchCondition(GetProductCategoryListSearchCondition searchCondition, Pageable pageable) {
+        return productCategoryRepositorySupport.findListBySearchCondition(searchCondition, pageable);
     }
 
     @Override
-    public Optional<Product> findProductById(Long productId) {
+    public Optional<Product> searchProductById(Long productId) {
         return productRepository.findById(productId);
     }
 
     @Override
-    public Optional<ProductCategory> findProductCategoryById(Long productCategoryId) {
+    public Optional<ProductCategory> searchProductCategoryById(Long productCategoryId) {
         return productCategoryRepository.findById(productCategoryId);
     }
 

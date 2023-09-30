@@ -1,6 +1,6 @@
 package com.playground.productservice.infrastructure.in.rest;
 
-import com.playground.core.annotation.ApiErrorExceptionsExample;
+import com.playground.core.annotation.ApiExceptionExample;
 import com.playground.core.annotation.RestAdapter;
 import com.playground.productservice.application.port.in.usecase.RegisterProductUseCase;
 import com.playground.productservice.infrastructure.in.rest.docs.RegisterProductExceptionDocs;
@@ -26,7 +26,7 @@ public class RegisterProductRestAdapter {
 
     @Operation(summary = "상품 등록.")
     @Tag(name = "2-3. [상품 등록]")
-    @ApiErrorExceptionsExample(RegisterProductExceptionDocs.class)
+    @ApiExceptionExample(RegisterProductExceptionDocs.class)
     @PostMapping("/v1/products")
     @ResponseStatus(HttpStatus.CREATED)
     public RegisterProductResponse registerProduct(

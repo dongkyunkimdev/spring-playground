@@ -1,6 +1,6 @@
 package com.playground.productservice.infrastructure.in.rest;
 
-import com.playground.core.annotation.ApiErrorExceptionsExample;
+import com.playground.core.annotation.ApiExceptionExample;
 import com.playground.core.annotation.RestAdapter;
 import com.playground.productservice.application.port.in.usecase.DeleteProductUseCase;
 import com.playground.productservice.application.port.in.usecase.dto.DeleteProductCommand;
@@ -22,7 +22,7 @@ public class DeleteProductRestAdapter {
 
     @Operation(summary = "상품 삭제.")
     @Tag(name = "2-5. [상품 삭제]")
-    @ApiErrorExceptionsExample(DeleteProductExceptionDocs.class)
+    @ApiExceptionExample(DeleteProductExceptionDocs.class)
     @DeleteMapping("/v1/products/{productId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteProduct(

@@ -1,7 +1,7 @@
 package com.playground.core.config;
 
 import com.playground.core.annotation.ApiErrorCodeExample;
-import com.playground.core.annotation.ApiErrorExceptionsExample;
+import com.playground.core.annotation.ApiExceptionExample;
 import com.playground.core.annotation.ExplainError;
 import com.playground.core.exception.BusinessException;
 import com.playground.core.exception.dto.ErrorReason;
@@ -67,7 +67,7 @@ public class SwaggerConfig {
     @Bean
     public OperationCustomizer customize() {
         return (Operation operation, HandlerMethod handlerMethod) -> {
-            ApiErrorExceptionsExample apiErrorExceptionsExample = handlerMethod.getMethodAnnotation(ApiErrorExceptionsExample.class);
+            ApiExceptionExample apiExceptionExample = handlerMethod.getMethodAnnotation(ApiExceptionExample.class);
             ApiErrorCodeExample apiErrorCodeExample = handlerMethod.getMethodAnnotation(ApiErrorCodeExample.class);
 
             List<String> tags = getTags(handlerMethod);
@@ -76,8 +76,8 @@ public class SwaggerConfig {
                 operation.setTags(List.of(tags.get(0)));
             }
 
-            if (apiErrorExceptionsExample != null) {
-                generateExceptionResponseExample(operation, apiErrorExceptionsExample.value());
+            if (apiExceptionExample != null) {
+                generateExceptionResponseExample(operation, apiExceptionExample.value());
             }
 
             if (apiErrorCodeExample != null) {

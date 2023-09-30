@@ -1,6 +1,6 @@
 package com.playground.userservice.infrastructure.in.rest;
 
-import com.playground.core.annotation.ApiErrorExceptionsExample;
+import com.playground.core.annotation.ApiExceptionExample;
 import com.playground.core.annotation.RestAdapter;
 import com.playground.userservice.application.port.in.usecase.SignUpUseCase;
 import com.playground.userservice.infrastructure.in.rest.docs.SignUpExceptionDocs;
@@ -26,7 +26,7 @@ public class SignUpRestAdapter {
 
     @Operation(summary = "회원가입.")
     @Tag(name = "1-1. [회원가입]")
-    @ApiErrorExceptionsExample(SignUpExceptionDocs.class)
+    @ApiExceptionExample(SignUpExceptionDocs.class)
     @PostMapping("/v1/users/signup")
     @ResponseStatus(HttpStatus.CREATED)
     public SignUpResponse signUp(

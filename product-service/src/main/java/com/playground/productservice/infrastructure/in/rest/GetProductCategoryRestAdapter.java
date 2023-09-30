@@ -1,6 +1,6 @@
 package com.playground.productservice.infrastructure.in.rest;
 
-import com.playground.core.annotation.ApiErrorExceptionsExample;
+import com.playground.core.annotation.ApiExceptionExample;
 import com.playground.core.annotation.RestAdapter;
 import com.playground.productservice.application.port.in.usecase.GetProductCategoryUseCase;
 import com.playground.productservice.application.port.in.usecase.dto.GetProductCategoryCommand;
@@ -26,7 +26,7 @@ public class GetProductCategoryRestAdapter {
 
     @Operation(summary = "상품 카테고리 조회.")
     @Tag(name = "1-2. [상품 카테고리 조회]")
-    @ApiErrorExceptionsExample(GetProductCategoryExceptionDocs.class)
+    @ApiExceptionExample(GetProductCategoryExceptionDocs.class)
     @GetMapping("/v1/products/categories/{productCategoryId}")
     @ResponseStatus(HttpStatus.OK)
     public GetProductCategoryResponse getProductCategory(

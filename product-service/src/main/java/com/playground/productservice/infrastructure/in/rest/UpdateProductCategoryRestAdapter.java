@@ -1,6 +1,6 @@
 package com.playground.productservice.infrastructure.in.rest;
 
-import com.playground.core.annotation.ApiErrorExceptionsExample;
+import com.playground.core.annotation.ApiExceptionExample;
 import com.playground.core.annotation.RestAdapter;
 import com.playground.productservice.application.port.in.usecase.UpdateProductCategoryUseCase;
 import com.playground.productservice.infrastructure.in.rest.docs.UpdateProductCategoryExceptionDocs;
@@ -28,7 +28,7 @@ public class UpdateProductCategoryRestAdapter {
 
     @Operation(summary = "상품 카테고리 수정.")
     @Tag(name = "1-4. [상품 카테고리 수정]")
-    @ApiErrorExceptionsExample(UpdateProductCategoryExceptionDocs.class)
+    @ApiExceptionExample(UpdateProductCategoryExceptionDocs.class)
     @PatchMapping("/v1/products/categories/{productCategoryId}")
     @ResponseStatus(HttpStatus.OK)
     public UpdateProductCategoryResponse updateProductCategory(

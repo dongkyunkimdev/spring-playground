@@ -1,6 +1,6 @@
 package com.playground.productservice.infrastructure.in.rest;
 
-import com.playground.core.annotation.ApiErrorExceptionsExample;
+import com.playground.core.annotation.ApiExceptionExample;
 import com.playground.core.annotation.RestAdapter;
 import com.playground.productservice.application.port.in.usecase.GetProductUseCase;
 import com.playground.productservice.application.port.in.usecase.dto.GetProductCommand;
@@ -26,7 +26,7 @@ public class GetProductRestAdapter {
 
     @Operation(summary = "상품 조회.")
     @Tag(name = "2-2. [상품 조회]")
-    @ApiErrorExceptionsExample(GetProductExceptionDocs.class)
+    @ApiExceptionExample(GetProductExceptionDocs.class)
     @GetMapping("/v1/products/{productId}")
     @ResponseStatus(HttpStatus.OK)
     public GetProductResponse getProduct(

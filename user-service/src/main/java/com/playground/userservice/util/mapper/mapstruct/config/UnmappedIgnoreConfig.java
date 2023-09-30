@@ -1,4 +1,4 @@
-package com.playground.userservice.util.mapper.config;
+package com.playground.userservice.util.mapper.mapstruct.config;
 
 import org.mapstruct.MapperConfig;
 import org.mapstruct.ReportingPolicy;

@@ -24,13 +24,21 @@ public class RegisterProductCategoryService implements RegisterProductCategoryUs
     @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
     @Override
     public RegisterProductCategoryInfo execute(RegisterProductCategoryCommand command) {
+        validateProductCategoryRegister(command);
+
+        ProductCategory savedProductCategory = saveProductCategory(command);
+
+        return mapper.entityToInfo(savedProductCategory);
+    }
+
+    private void validateProductCategoryRegister(RegisterProductCategoryCommand command) {
         if (productPersistencePort.isExistsProductCategoryByName(command.name())) {
             throw new DuplicateProductCategoryNameException();
         }
+    }
 
-        ProductCategory savedProductCategory = productPersistencePort.saveProductCategory(mapper.commandToEntity(command));
-
-        return mapper.entityToInfo(savedProductCategory);
+    private ProductCategory saveProductCategory(RegisterProductCategoryCommand command) {
+        return productPersistencePort.saveProductCategory(mapper.commandToEntity(command));
     }
 
 }

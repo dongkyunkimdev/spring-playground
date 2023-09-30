@@ -26,17 +26,25 @@ public class UpdateProductCategoryService implements UpdateProductCategoryUseCas
     @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
     @Override
     public UpdateProductCategoryInfo execute(UpdateProductCategoryCommand command) {
-        ProductCategory savedProductCategory = productPersistencePort.searchProductCategoryById(command.productCategoryId())
-            .orElseThrow(ProductCategoryNotFoundException::new);
+        ProductCategory savedProductCategory = getProductCategory(command.productCategoryId());
 
-        if (!StringUtils.containsIgnoreCase(savedProductCategory.getName(), command.name()) &&
-            productPersistencePort.isExistsProductCategoryByName(command.name())) {
-            throw new DuplicateProductCategoryNameException();
-        }
+        validateProductCategoryUpdate(command, savedProductCategory);
 
         savedProductCategory.update(command);
 
         return mapper.entityToInfo(savedProductCategory);
+    }
+
+    private ProductCategory getProductCategory(Long productCategoryId) {
+        return productPersistencePort.searchProductCategoryById(productCategoryId)
+            .orElseThrow(ProductCategoryNotFoundException::new);
+    }
+
+    private void validateProductCategoryUpdate(UpdateProductCategoryCommand command, ProductCategory savedProductCategory) {
+        if (!StringUtils.containsIgnoreCase(savedProductCategory.getName(), command.name()) &&
+            productPersistencePort.isExistsProductCategoryByName(command.name())) {
+            throw new DuplicateProductCategoryNameException();
+        }
     }
 
 }

@@ -24,19 +24,29 @@ public class DeleteProductService implements DeleteProductUseCase {
     @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
     @Override
     public void execute(DeleteProductCommand command) {
-        Product savedProduct = productPersistencePort.searchProductById(command.productId())
-            .orElseThrow(ProductNotFoundException::new);
+        Product savedProduct = getProduct(command.productId());
 
+        validateProductDelete(command);
+        deleteProduct(savedProduct);
+    }
+
+    private Product getProduct(Long productId) {
+        return productPersistencePort.searchProductById(productId)
+            .orElseThrow(ProductNotFoundException::new);
+    }
+
+    private void validateProductDelete(DeleteProductCommand command) {
         if (isProductReferenced(command.productId())) {
             throw new ProductReferencedException();
         }
-
-        productPersistencePort.deleteProduct(savedProduct);
-
     }
 
     private boolean isProductReferenced(Long productId) {
         return orderServiceExternalPort.isProductReferenced(productId);
+    }
+
+    private void deleteProduct(Product savedProduct) {
+        productPersistencePort.deleteProduct(savedProduct);
     }
 
 }

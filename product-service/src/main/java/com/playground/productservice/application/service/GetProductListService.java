@@ -25,9 +25,13 @@ public class GetProductListService implements GetProductListUseCase {
     @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.SUPPORTS, readOnly = true)
     @Override
     public Slice<GetProductListInfo> execute(GetProductListCommand command, Pageable pageable) {
-        Slice<Product> productSlice = productPersistencePort.searchProductListBySearchCondition(mapper.commandToSearchCondition(command), pageable);
+        Slice<Product> productSlice = getProductSlice(command, pageable);
 
         return productSlice.map(mapper::entityToInfo);
+    }
+
+    private Slice<Product> getProductSlice(GetProductListCommand command, Pageable pageable) {
+        return productPersistencePort.searchProductListBySearchCondition(mapper.commandToSearchCondition(command), pageable);
     }
 
 }

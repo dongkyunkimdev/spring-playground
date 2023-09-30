@@ -24,10 +24,14 @@ public class GetProductService implements GetProductUseCase {
     @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.SUPPORTS, readOnly = true)
     @Override
     public GetProductInfo execute(GetProductCommand command) {
-        Product savedProduct = productPersistencePort.searchProductById(command.productId())
-            .orElseThrow(ProductNotFoundException::new);
+        Product savedProduct = getProduct(command.productId());
 
         return mapper.entityToInfo(savedProduct);
+    }
+
+    private Product getProduct(Long productId) {
+        return productPersistencePort.searchProductById(productId)
+            .orElseThrow(ProductNotFoundException::new);
     }
 
 }

@@ -4,9 +4,9 @@ import com.playground.core.annotation.UseCase;
 import com.playground.userservice.application.port.in.usecase.SignupUseCase;
 import com.playground.userservice.application.port.in.usecase.dto.SignupCommand;
 import com.playground.userservice.application.port.in.usecase.dto.SignupInfo;
+import com.playground.userservice.application.port.out.persistence.UserPersistencePort;
 import com.playground.userservice.domain.User;
 import com.playground.userservice.domain.exception.DuplicateUsernameException;
-import com.playground.userservice.application.port.out.persistence.UserPersistencePort;
 import com.playground.userservice.util.mapper.SignupMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Isolation;
@@ -24,13 +24,21 @@ public class SignupService implements SignupUseCase {
     @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
     @Override
     public SignupInfo execute(SignupCommand command) {
+        validateSignup(command);
+
+        User savedUser = saveUser(command);
+
+        return mapper.entityToInfo(savedUser);
+    }
+
+    private void validateSignup(SignupCommand command) {
         if (userPersistencePort.isExistsUserByUsername(command.username())) {
             throw new DuplicateUsernameException();
         }
+    }
 
-        User savedUser = userPersistencePort.saveUser(mapper.commandToEntity(command));
-
-        return mapper.entityToInfo(savedUser);
+    private User saveUser(SignupCommand command) {
+        return userPersistencePort.saveUser(mapper.commandToEntity(command));
     }
 
 }

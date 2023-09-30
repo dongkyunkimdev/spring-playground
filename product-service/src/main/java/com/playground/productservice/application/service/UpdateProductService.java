@@ -26,15 +26,22 @@ public class UpdateProductService implements UpdateProductUseCase {
     @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
     @Override
     public UpdateProductInfo execute(UpdateProductCommand command) {
-        Product savedProduct = productPersistencePort.searchProductById(command.productId())
-            .orElseThrow(ProductNotFoundException::new);
-
-        ProductCategory savedProductCategory = productPersistencePort.searchProductCategoryById(command.productCategoryId())
-            .orElseThrow(ProductCategoryNotFoundException::new);
+        Product savedProduct = getProduct(command.productId());
+        ProductCategory savedProductCategory = getProductCategory(command.productCategoryId());
 
         savedProduct.update(command, savedProductCategory);
 
         return mapper.entityToInfo(savedProduct);
+    }
+
+    private Product getProduct(Long productId) {
+        return productPersistencePort.searchProductById(productId)
+            .orElseThrow(ProductNotFoundException::new);
+    }
+
+    private ProductCategory getProductCategory(Long productCategoryId) {
+        return productPersistencePort.searchProductCategoryById(productCategoryId)
+            .orElseThrow(ProductCategoryNotFoundException::new);
     }
 
 }

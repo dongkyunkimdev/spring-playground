@@ -55,8 +55,8 @@ services:
       - CONFIG_SERVER_URI=http://config-server:8888/
       - DISCOVERY_SERVER_URI=http://discovery-server:8761/eureka/
       - PLAYGROUND_MYSQL_URI=playground-mysql:3306
-      - ACCESS_TOKEN_VALIDITY=360000
-      - REFRESH_TOKEN_VALIDITY=4320000
+      - ACCESS_TOKEN_VALIDITY=3600
+      - REFRESH_TOKEN_VALIDITY=43200
       - JWT_SECRET=3d3ff27ea3a909c49cb1497af6675e85a4f9182848e41481e7f394f97c6e19f5
     ports:
       - 8081:8080

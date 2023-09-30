@@ -22,7 +22,7 @@ public class SignUpMapper {
         return mapStruct.requestToCommand(request);
     }
 
-    public User commandToEntity(SignUpCommand command) {
+    public User commandToEntityWithPasswordEncryption(SignUpCommand command) {
         return User.builder()
             .username(command.username())
             .password(passwordEncoder.encode(command.password()))

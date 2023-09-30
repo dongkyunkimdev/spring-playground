@@ -38,7 +38,7 @@ public class SignUpService implements SignUpUseCase {
     }
 
     private User saveUser(SignUpCommand command) {
-        return userPersistencePort.saveUser(mapper.commandToEntity(command));
+        return userPersistencePort.saveUser(mapper.commandToEntityWithPasswordEncryption(command));
     }
 
 }

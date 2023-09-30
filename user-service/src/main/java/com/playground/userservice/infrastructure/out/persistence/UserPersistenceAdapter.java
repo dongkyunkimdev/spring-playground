@@ -6,11 +6,18 @@ import com.playground.userservice.domain.User;
 import com.playground.userservice.infrastructure.dao.UserRepository;
 import lombok.RequiredArgsConstructor;
 
+import java.util.Optional;
+
 @PersistenceAdapter
 @RequiredArgsConstructor
 public class UserPersistenceAdapter implements UserPersistencePort {
 
     private final UserRepository userRepository;
+
+    @Override
+    public Optional<User> searchUserByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
 
     @Override
     public boolean isExistsUserByUsername(String username) {

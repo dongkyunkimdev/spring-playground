@@ -2,7 +2,11 @@ package com.playground.userservice.application.port.out.persistence;
 
 import com.playground.userservice.domain.User;
 
+import java.util.Optional;
+
 public interface UserPersistencePort {
+
+    Optional<User> searchUserByUsername(String username);
 
     boolean isExistsUserByUsername(String username);
 

@@ -17,3 +17,8 @@ spring:
         native:
           search-locations:
             - classpath:config/
+
+jwt:
+  access-token-validity: ${ACCESS_TOKEN_VALIDITY:3600}
+  refresh-token-validity: ${REFRESH_TOKEN_VALIDITY:43200}
+  secret: ${JWT_SECRET:9e8275a1552f04233a54c11a76a39095c502aa4f58cc20cf4b02b36e73b2c90e}

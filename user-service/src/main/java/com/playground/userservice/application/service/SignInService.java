@@ -31,13 +31,25 @@ public class SignInService implements SignInUseCase {
     @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.SUPPORTS, readOnly = true)
     @Override
     public SignInInfo execute(SignInCommand command) {
-        User savedUser = userPersistencePort.searchUserByUsername(command.username())
-            .orElseThrow(UserNotFoundException::new);
+        User savedUser = getUser(command);
 
+        validateSignIn(command, savedUser);
+
+        return generateTokens(savedUser);
+    }
+
+    private User getUser(SignInCommand command) {
+        return userPersistencePort.searchUserByUsername(command.username())
+            .orElseThrow(UserNotFoundException::new);
+    }
+
+    private void validateSignIn(SignInCommand command, User savedUser) {
         if (!passwordEncoder.matches(command.password(), savedUser.getPassword())) {
             throw new PasswordMismatchException();
         }
+    }
 
+    private SignInInfo generateTokens(User savedUser) {
         String newAccessToken = jwtProvider.generateAccessToken(savedUser.getUserId());
         String newRefreshToken = jwtProvider.generateRefreshToken(savedUser.getUserId());
 

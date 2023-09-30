@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-public record SignupRequest(
+public record SignUpRequest(
     @NotBlank(message = "username은 비어있을 수 없습니다.")
     @Email(message = "이메일 형식만 입력할 수 있습니다.")
 //    @Length()

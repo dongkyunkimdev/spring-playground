@@ -1,13 +1,13 @@
 package com.playground.userservice.application.service;
 
 import com.playground.core.annotation.UseCase;
-import com.playground.userservice.application.port.in.usecase.SignupUseCase;
-import com.playground.userservice.application.port.in.usecase.dto.SignupCommand;
-import com.playground.userservice.application.port.in.usecase.dto.SignupInfo;
+import com.playground.userservice.application.port.in.usecase.SignUpUseCase;
+import com.playground.userservice.application.port.in.usecase.dto.SignUpCommand;
+import com.playground.userservice.application.port.in.usecase.dto.SignUpInfo;
 import com.playground.userservice.application.port.out.persistence.UserPersistencePort;
 import com.playground.userservice.domain.User;
 import com.playground.userservice.domain.exception.DuplicateUsernameException;
-import com.playground.userservice.util.mapper.SignupMapper;
+import com.playground.userservice.util.mapper.SignUpMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -15,29 +15,29 @@ import org.springframework.transaction.annotation.Transactional;
 
 @UseCase
 @RequiredArgsConstructor
-public class SignupService implements SignupUseCase {
+public class SignUpService implements SignUpUseCase {
 
     private final UserPersistencePort userPersistencePort;
 
-    private final SignupMapper mapper;
+    private final SignUpMapper mapper;
 
     @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
     @Override
-    public SignupInfo execute(SignupCommand command) {
-        validateSignup(command);
+    public SignUpInfo execute(SignUpCommand command) {
+        validateSignUp(command);
 
         User savedUser = saveUser(command);
 
         return mapper.entityToInfo(savedUser);
     }
 
-    private void validateSignup(SignupCommand command) {
+    private void validateSignUp(SignUpCommand command) {
         if (userPersistencePort.isExistsUserByUsername(command.username())) {
             throw new DuplicateUsernameException();
         }
     }
 
-    private User saveUser(SignupCommand command) {
+    private User saveUser(SignUpCommand command) {
         return userPersistencePort.saveUser(mapper.commandToEntity(command));
     }
 

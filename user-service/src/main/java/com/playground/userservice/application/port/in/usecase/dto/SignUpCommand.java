@@ -1,6 +1,6 @@
 package com.playground.userservice.application.port.in.usecase.dto;
 
-public record SignupCommand(
+public record SignUpCommand(
     String username,
     String password,
     String nickname

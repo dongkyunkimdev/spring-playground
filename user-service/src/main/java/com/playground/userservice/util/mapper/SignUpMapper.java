@@ -1,28 +1,28 @@
 package com.playground.userservice.util.mapper;
 
 import com.playground.core.annotation.CustomMapper;
-import com.playground.userservice.application.port.in.usecase.dto.SignupCommand;
-import com.playground.userservice.application.port.in.usecase.dto.SignupInfo;
+import com.playground.userservice.application.port.in.usecase.dto.SignUpCommand;
+import com.playground.userservice.application.port.in.usecase.dto.SignUpInfo;
 import com.playground.userservice.domain.User;
-import com.playground.userservice.infrastructure.in.rest.dto.SignupRequest;
-import com.playground.userservice.infrastructure.in.rest.dto.SignupResponse;
-import com.playground.userservice.util.mapper.mapstruct.SignupMapStruct;
+import com.playground.userservice.infrastructure.in.rest.dto.SignUpRequest;
+import com.playground.userservice.infrastructure.in.rest.dto.SignUpResponse;
+import com.playground.userservice.util.mapper.mapstruct.SignUpMapStruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @CustomMapper
 @RequiredArgsConstructor
-public class SignupMapper {
+public class SignUpMapper {
 
-    private final SignupMapStruct mapStruct;
+    private final SignUpMapStruct mapStruct;
 
     private final PasswordEncoder passwordEncoder;
 
-    public SignupCommand requestToCommand(SignupRequest request) {
+    public SignUpCommand requestToCommand(SignUpRequest request) {
         return mapStruct.requestToCommand(request);
     }
 
-    public User commandToEntity(SignupCommand command) {
+    public User commandToEntity(SignUpCommand command) {
         return User.builder()
             .username(command.username())
             .password(passwordEncoder.encode(command.password()))
@@ -30,11 +30,11 @@ public class SignupMapper {
             .build();
     }
 
-    public SignupInfo entityToInfo(User user) {
+    public SignUpInfo entityToInfo(User user) {
         return mapStruct.entityToInfo(user);
     }
 
-    public SignupResponse infoToResponse(SignupInfo info) {
+    public SignUpResponse infoToResponse(SignUpInfo info) {
         return mapStruct.infoToResponse(info);
     }
 

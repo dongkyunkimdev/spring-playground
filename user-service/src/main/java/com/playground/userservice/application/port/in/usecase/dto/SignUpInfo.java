@@ -1,6 +1,6 @@
 package com.playground.userservice.application.port.in.usecase.dto;
 
-public record SignupInfo(
+public record SignUpInfo(
     Long userId,
     String username,
     String nickname

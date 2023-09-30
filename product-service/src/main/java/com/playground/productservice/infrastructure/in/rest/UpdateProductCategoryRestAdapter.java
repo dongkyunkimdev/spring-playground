@@ -3,7 +3,6 @@ package com.playground.productservice.infrastructure.in.rest;
 import com.playground.core.annotation.ApiErrorExceptionsExample;
 import com.playground.core.annotation.RestAdapter;
 import com.playground.productservice.application.port.in.usecase.UpdateProductCategoryUseCase;
-import com.playground.productservice.application.port.in.usecase.dto.UpdateProductCategoryCommand;
 import com.playground.productservice.infrastructure.in.rest.docs.UpdateProductCategoryExceptionDocs;
 import com.playground.productservice.infrastructure.in.rest.dto.UpdateProductCategoryRequest;
 import com.playground.productservice.infrastructure.in.rest.dto.UpdateProductCategoryResponse;
@@ -36,7 +35,7 @@ public class UpdateProductCategoryRestAdapter {
         @Parameter(description = "상품 카테고리 ID.", example = "1") @PathVariable("productCategoryId") final Long productCategoryId,
         @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "상품 카테고리 수정 정보.") @RequestBody(required = true) @Valid final UpdateProductCategoryRequest request
     ) {
-        return mapper.infoToResponse(updateProductCategoryUseCase.execute(new UpdateProductCategoryCommand(productCategoryId, request.name())));
+        return mapper.infoToResponse(updateProductCategoryUseCase.execute(mapper.requestToCommand(productCategoryId, request)));
     }
 
 }

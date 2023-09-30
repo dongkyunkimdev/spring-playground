@@ -1,16 +1,24 @@
 package com.playground.productservice.util.mapper;
 
+import com.playground.core.annotation.CustomMapper;
 import com.playground.productservice.application.port.in.usecase.dto.GetProductInfo;
 import com.playground.productservice.domain.Product;
 import com.playground.productservice.infrastructure.in.rest.dto.GetProductResponse;
-import com.playground.productservice.util.mapper.config.UnmappedIgnoreConfig;
-import org.mapstruct.Mapper;
+import com.playground.productservice.util.mapper.mapstruct.GetProductMapStruct;
+import lombok.RequiredArgsConstructor;
 
-@Mapper(componentModel = "spring", config = UnmappedIgnoreConfig.class)
-public interface GetProductMapper {
+@CustomMapper
+@RequiredArgsConstructor
+public class GetProductMapper {
 
-    GetProductInfo entityToInfo(Product product);
+    private final GetProductMapStruct mapStruct;
 
-    GetProductResponse infoToResponse(GetProductInfo info);
+    public GetProductInfo entityToInfo(Product product) {
+        return mapStruct.entityToInfo(product);
+    }
+
+    public GetProductResponse infoToResponse(GetProductInfo info) {
+        return mapStruct.infoToResponse(info);
+    }
 
 }

@@ -1,22 +1,34 @@
 package com.playground.productservice.util.mapper;
 
+import com.playground.core.annotation.CustomMapper;
 import com.playground.productservice.application.port.in.usecase.dto.RegisterProductCategoryCommand;
 import com.playground.productservice.application.port.in.usecase.dto.RegisterProductCategoryInfo;
 import com.playground.productservice.domain.ProductCategory;
 import com.playground.productservice.infrastructure.in.rest.dto.RegisterProductCategoryRequest;
 import com.playground.productservice.infrastructure.in.rest.dto.RegisterProductCategoryResponse;
-import com.playground.productservice.util.mapper.config.UnmappedIgnoreConfig;
-import org.mapstruct.Mapper;
+import com.playground.productservice.util.mapper.mapstruct.RegisterProductCategoryMapStruct;
+import lombok.RequiredArgsConstructor;
 
-@Mapper(componentModel = "spring", config = UnmappedIgnoreConfig.class)
-public interface RegisterProductCategoryMapper {
+@CustomMapper
+@RequiredArgsConstructor
+public class RegisterProductCategoryMapper {
 
-    RegisterProductCategoryCommand requestToCommand(RegisterProductCategoryRequest request);
+    private final RegisterProductCategoryMapStruct mapStruct;
 
-    ProductCategory commandToEntity(RegisterProductCategoryCommand command);
+    public RegisterProductCategoryCommand requestToCommand(RegisterProductCategoryRequest request) {
+        return mapStruct.requestToCommand(request);
+    }
 
-    RegisterProductCategoryInfo entityToInfo(ProductCategory productCategory);
+    public ProductCategory commandToEntity(RegisterProductCategoryCommand command) {
+        return mapStruct.commandToEntity(command);
+    }
 
-    RegisterProductCategoryResponse infoToResponse(RegisterProductCategoryInfo info);
+    public RegisterProductCategoryInfo entityToInfo(ProductCategory productCategory) {
+        return mapStruct.entityToInfo(productCategory);
+    }
+
+    public RegisterProductCategoryResponse infoToResponse(RegisterProductCategoryInfo info) {
+        return mapStruct.infoToResponse(info);
+    }
 
 }

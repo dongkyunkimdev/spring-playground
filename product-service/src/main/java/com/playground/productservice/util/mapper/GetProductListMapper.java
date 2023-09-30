@@ -1,23 +1,35 @@
 package com.playground.productservice.util.mapper;
 
+import com.playground.core.annotation.CustomMapper;
 import com.playground.productservice.application.port.in.usecase.dto.GetProductListCommand;
 import com.playground.productservice.application.port.in.usecase.dto.GetProductListInfo;
 import com.playground.productservice.domain.Product;
 import com.playground.productservice.infrastructure.dao.dto.GetProductListSearchCondition;
 import com.playground.productservice.infrastructure.in.rest.dto.GetProductListRequest;
 import com.playground.productservice.infrastructure.in.rest.dto.GetProductListResponse;
-import com.playground.productservice.util.mapper.config.UnmappedIgnoreConfig;
-import org.mapstruct.Mapper;
+import com.playground.productservice.util.mapper.mapstruct.GetProductListMapStruct;
+import lombok.RequiredArgsConstructor;
 
-@Mapper(componentModel = "spring", config = UnmappedIgnoreConfig.class)
-public interface GetProductListMapper {
+@CustomMapper
+@RequiredArgsConstructor
+public class GetProductListMapper {
 
-    GetProductListCommand requestToCommand(GetProductListRequest request);
+    private final GetProductListMapStruct mapStruct;
 
-    GetProductListInfo entityToInfo(Product product);
+    public GetProductListCommand requestToCommand(GetProductListRequest request) {
+        return mapStruct.requestToCommand(request);
+    }
 
-    GetProductListResponse infoToResponse(GetProductListInfo info);
+    public GetProductListInfo entityToInfo(Product product) {
+        return mapStruct.entityToInfo(product);
+    }
 
-    GetProductListSearchCondition commandToSearchCondition(GetProductListCommand command);
+    public GetProductListResponse infoToResponse(GetProductListInfo info) {
+        return mapStruct.infoToResponse(info);
+    }
+
+    public GetProductListSearchCondition commandToSearchCondition(GetProductListCommand command) {
+        return mapStruct.commandToSearchCondition(command);
+    }
 
 }

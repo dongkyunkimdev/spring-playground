@@ -4,7 +4,6 @@ import com.playground.core.annotation.ApiErrorExceptionsExample;
 import com.playground.core.annotation.RestAdapter;
 import com.playground.productservice.application.port.in.usecase.DeleteProductUseCase;
 import com.playground.productservice.application.port.in.usecase.dto.DeleteProductCommand;
-import com.playground.productservice.infrastructure.in.rest.docs.DeleteProductCategoryExceptionDocs;
 import com.playground.productservice.infrastructure.in.rest.docs.DeleteProductExceptionDocs;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

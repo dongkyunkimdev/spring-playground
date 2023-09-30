@@ -3,7 +3,6 @@ package com.playground.productservice.infrastructure.in.rest;
 import com.playground.core.annotation.RestAdapter;
 import com.playground.core.paging.SliceResponse;
 import com.playground.productservice.application.port.in.usecase.GetProductCategoryListUseCase;
-import com.playground.productservice.application.port.in.usecase.dto.GetProductCategoryListCommand;
 import com.playground.productservice.application.port.in.usecase.dto.GetProductCategoryListInfo;
 import com.playground.productservice.infrastructure.in.rest.dto.GetProductCategoryListRequest;
 import com.playground.productservice.infrastructure.in.rest.dto.GetProductCategoryListResponse;
@@ -36,7 +35,7 @@ public class GetProductCategoryListRestAdapter {
         @ParameterObject GetProductCategoryListRequest request,
         @ParameterObject @PageableDefault(size = 10, sort = "productCategoryId", direction = Sort.Direction.DESC) Pageable pageable
     ) {
-        Slice<GetProductCategoryListInfo> getProductCategoryListInfoSlice = getProductCategoryListUseCase.execute(new GetProductCategoryListCommand(request.fromProductCategoryId(), request.toProductCategoryId(), request.productCategoryName()), pageable);
+        Slice<GetProductCategoryListInfo> getProductCategoryListInfoSlice = getProductCategoryListUseCase.execute(mapper.requestToCommand(request), pageable);
 
         return SliceResponse.of(getProductCategoryListInfoSlice.map(mapper::infoToResponse));
     }

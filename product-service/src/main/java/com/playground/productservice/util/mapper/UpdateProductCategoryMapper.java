@@ -1,16 +1,30 @@
 package com.playground.productservice.util.mapper;
 
+import com.playground.core.annotation.CustomMapper;
+import com.playground.productservice.application.port.in.usecase.dto.UpdateProductCategoryCommand;
 import com.playground.productservice.application.port.in.usecase.dto.UpdateProductCategoryInfo;
 import com.playground.productservice.domain.ProductCategory;
+import com.playground.productservice.infrastructure.in.rest.dto.UpdateProductCategoryRequest;
 import com.playground.productservice.infrastructure.in.rest.dto.UpdateProductCategoryResponse;
-import com.playground.productservice.util.mapper.config.UnmappedIgnoreConfig;
-import org.mapstruct.Mapper;
+import com.playground.productservice.util.mapper.mapstruct.UpdateProductCategoryMapStruct;
+import lombok.RequiredArgsConstructor;
 
-@Mapper(componentModel = "spring", config = UnmappedIgnoreConfig.class)
-public interface UpdateProductCategoryMapper {
+@CustomMapper
+@RequiredArgsConstructor
+public class UpdateProductCategoryMapper {
 
-    UpdateProductCategoryInfo entityToInfo(ProductCategory productCategory);
+    private final UpdateProductCategoryMapStruct mapStruct;
 
-    UpdateProductCategoryResponse infoToResponse(UpdateProductCategoryInfo info);
+    public UpdateProductCategoryCommand requestToCommand(Long productCategoryId, UpdateProductCategoryRequest request) {
+        return mapStruct.requestToCommand(productCategoryId, request.name());
+    }
+
+    public UpdateProductCategoryInfo entityToInfo(ProductCategory productCategory) {
+        return mapStruct.entityToInfo(productCategory);
+    }
+
+    public UpdateProductCategoryResponse infoToResponse(UpdateProductCategoryInfo info) {
+        return mapStruct.infoToResponse(info);
+    }
 
 }

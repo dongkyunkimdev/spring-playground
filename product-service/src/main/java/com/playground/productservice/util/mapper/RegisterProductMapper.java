@@ -1,28 +1,40 @@
 package com.playground.productservice.util.mapper;
 
+import com.playground.core.annotation.CustomMapper;
 import com.playground.productservice.application.port.in.usecase.dto.RegisterProductCommand;
 import com.playground.productservice.application.port.in.usecase.dto.RegisterProductInfo;
 import com.playground.productservice.domain.Product;
 import com.playground.productservice.domain.ProductCategory;
 import com.playground.productservice.infrastructure.in.rest.dto.RegisterProductRequest;
 import com.playground.productservice.infrastructure.in.rest.dto.RegisterProductResponse;
-import com.playground.productservice.util.mapper.config.UnmappedIgnoreConfig;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+import com.playground.productservice.util.mapper.mapstruct.RegisterProductMapStruct;
+import lombok.RequiredArgsConstructor;
 
-@Mapper(componentModel = "spring", config = UnmappedIgnoreConfig.class)
-public interface RegisterProductMapper {
+@CustomMapper
+@RequiredArgsConstructor
+public class RegisterProductMapper {
 
-    RegisterProductCommand requestToCommand(RegisterProductRequest request);
+    private final RegisterProductMapStruct mapStruct;
 
-    @Mapping(source = "command.name", target = "name")
-    @Mapping(source = "command.stock", target = "stock")
-    @Mapping(source = "command.price", target = "price")
-    @Mapping(source = "savedProductCategory", target = "productCategory")
-    Product commandToEntity(RegisterProductCommand command, ProductCategory savedProductCategory);
+    public RegisterProductCommand requestToCommand(RegisterProductRequest request) {
+        return mapStruct.requestToCommand(request);
+    }
 
-    RegisterProductInfo entityToInfo(Product product);
+    public Product commandToEntity(RegisterProductCommand command, ProductCategory productCategory) {
+        return Product.builder()
+            .name(command.name())
+            .stock(command.stock())
+            .price(command.price())
+            .productCategory(productCategory)
+            .build();
+    }
 
-    RegisterProductResponse infoToResponse(RegisterProductInfo info);
+    public RegisterProductInfo entityToInfo(Product product) {
+        return mapStruct.entityToInfo(product);
+    }
+
+    public RegisterProductResponse infoToResponse(RegisterProductInfo info) {
+        return mapStruct.infoToResponse(info);
+    }
 
 }

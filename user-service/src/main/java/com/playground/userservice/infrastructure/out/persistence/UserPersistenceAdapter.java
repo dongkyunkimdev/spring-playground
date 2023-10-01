@@ -4,7 +4,11 @@ import com.playground.core.annotation.PersistenceAdapter;
 import com.playground.userservice.application.port.out.persistence.UserPersistencePort;
 import com.playground.userservice.domain.User;
 import com.playground.userservice.infrastructure.dao.UserRepository;
+import com.playground.userservice.infrastructure.dao.UserRepositorySupport;
+import com.playground.userservice.infrastructure.dao.dto.GetUserListSearchCondition;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 
 import java.util.Optional;
 
@@ -13,6 +17,13 @@ import java.util.Optional;
 public class UserPersistenceAdapter implements UserPersistencePort {
 
     private final UserRepository userRepository;
+
+    private final UserRepositorySupport userRepositorySupport;
+
+    @Override
+    public Slice<User> searchUserListBySearchCondition(GetUserListSearchCondition searchCondition, Pageable pageable) {
+        return userRepositorySupport.findListBySearchCondition(searchCondition, pageable);
+    }
 
     @Override
     public Optional<User> searchUserById(Long userId) {

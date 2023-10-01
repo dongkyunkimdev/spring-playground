@@ -1,4 +1,4 @@
-package com.playground.productservice.infrastructure.dao;
+package com.playground.productservice.infrastructure.dao.support;
 
 import com.playground.productservice.domain.QProduct;
 import com.playground.productservice.domain.QProductCategory;

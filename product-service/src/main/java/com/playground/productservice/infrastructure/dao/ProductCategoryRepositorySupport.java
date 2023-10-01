@@ -13,8 +13,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-import static com.playground.productservice.infrastructure.dao.ConditionBuilder.productCategoryIdInRange;
-import static com.playground.productservice.infrastructure.dao.ConditionBuilder.productCategoryNameContains;
+import static com.playground.productservice.infrastructure.dao.support.ConditionBuilder.productCategoryIdInRange;
+import static com.playground.productservice.infrastructure.dao.support.ConditionBuilder.productCategoryNameContains;
 
 @Repository
 @RequiredArgsConstructor

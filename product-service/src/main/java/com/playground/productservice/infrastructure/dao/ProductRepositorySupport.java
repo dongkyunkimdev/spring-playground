@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-import static com.playground.productservice.infrastructure.dao.ConditionBuilder.*;
+import static com.playground.productservice.infrastructure.dao.support.ConditionBuilder.*;
 
 @Repository
 @RequiredArgsConstructor

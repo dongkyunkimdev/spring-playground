@@ -15,6 +15,11 @@ public class UserPersistenceAdapter implements UserPersistencePort {
     private final UserRepository userRepository;
 
     @Override
+    public Optional<User> searchUserById(Long userId) {
+        return userRepository.findById(userId);
+    }
+
+    @Override
     public Optional<User> searchUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }

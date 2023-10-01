@@ -6,6 +6,8 @@ import java.util.Optional;
 
 public interface UserPersistencePort {
 
+    Optional<User> searchUserById(Long userId);
+
     Optional<User> searchUserByUsername(String username);
 
     boolean isExistsUserByUsername(String username);

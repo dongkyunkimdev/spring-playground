@@ -1,12 +1,15 @@
 package com.playground.userservice.domain;
 
 import com.playground.core.entity.BaseTimeEntity;
+import com.playground.userservice.domain.enums.UserRole;
+import com.playground.userservice.domain.enums.UserStatus;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -28,6 +31,17 @@ public class User extends BaseTimeEntity {
 
     @Column(name = "nickname")
     private String nickname;
+
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    private UserStatus status = UserStatus.ACTIVE;
+
+    @Column(name = "role")
+    @Enumerated(EnumType.STRING)
+    private UserRole role = UserRole.USER;
+
+    @Column(name = "last_login_at")
+    private LocalDateTime lastLoginAt = LocalDateTime.now();
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<UserPaymentCard> userPaymentCardList;

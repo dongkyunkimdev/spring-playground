@@ -5,12 +5,15 @@ use db_user;
 
 CREATE TABLE `user`
 (
-    `user_id`    BIGINT PRIMARY KEY AUTO_INCREMENT,
-    `username`   VARCHAR(255) NOT NULL,
-    `password`   VARCHAR(255) NOT NULL,
-    `nickname`   VARCHAR(255) NOT NULL,
-    `created_at` datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    `updated_at` datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    `user_id`       BIGINT PRIMARY KEY AUTO_INCREMENT,
+    `username`      VARCHAR(255) NOT NULL,
+    `password`      VARCHAR(255) NOT NULL,
+    `nickname`      VARCHAR(255) NOT NULL,
+    `status`        VARCHAR(255) NOT NULL,
+    `role`          VARCHAR(255) NOT NULL,
+    `last_login_at` datetime     NOT NULL,
+    `created_at`    datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at`    datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4;
 

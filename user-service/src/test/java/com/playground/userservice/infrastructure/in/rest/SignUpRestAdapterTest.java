@@ -3,6 +3,8 @@ package com.playground.userservice.infrastructure.in.rest;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.playground.core.exception.dto.ErrorResponse;
 import com.playground.core.exception.dto.SuccessResponse;
+import com.playground.userservice.domain.enums.UserRole;
+import com.playground.userservice.domain.enums.UserStatus;
 import com.playground.userservice.domain.exception.UserErrorCode;
 import com.playground.userservice.infrastructure.in.rest.dto.SignUpRequest;
 import com.playground.userservice.infrastructure.in.rest.dto.SignUpResponse;
@@ -28,7 +30,7 @@ class SignUpRestAdapterTest extends ControllerTest {
     @Test
     void 회원가입_성공() throws Exception {
         // given
-        final SignUpRequest requestDto = new SignUpRequest("ddkds66@gmail.com", "asdf1234!@#$", "mark");
+        final SignUpRequest requestDto = new SignUpRequest("user@playground.com", "asdf1234!@#$", "user");
 
         // when
         MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.POST, "/v1/users/signup")
@@ -47,6 +49,8 @@ class SignUpRestAdapterTest extends ControllerTest {
         assertThat(signUpResponse.userId()).isNotNull();
         assertThat(signUpResponse.username()).isEqualTo(requestDto.username());
         assertThat(signUpResponse.nickname()).isEqualTo(requestDto.nickname());
+        assertThat(signUpResponse.status()).isEqualTo(UserStatus.ACTIVE);
+        assertThat(signUpResponse.role()).isEqualTo(UserRole.USER);
     }
 
     @Test

@@ -9,15 +9,15 @@ public record SignUpRequest(
     @NotBlank(message = "username은 비어있을 수 없습니다.")
     @Email(message = "이메일 형식만 입력할 수 있습니다.")
     @Size(max = 50, message = "username은 최대 50글자까지 입력할 수 있습니다.")
-    @Schema(description = "로그인 아이디", example = "ddkds66@gmail.com") String username,
+    @Schema(description = "로그인 아이디", example = "admin@playground.com") String username,
 
     @NotBlank(message = "password는 비어있을 수 없습니다.")
     @Size(max = 50, message = "password은 최대 50글자까지 입력할 수 있습니다.")
-    @Schema(description = "비밀번호", example = "asdf1234!@#$") String password,
+    @Schema(description = "비밀번호", example = "1234") String password,
 
     @NotBlank(message = "nickname은 비어있을 수 없습니다.")
     @Size(max = 50, message = "nickname은 최대 50글자까지 입력할 수 있습니다.")
-    @Schema(description = "닉네임", example = "mark") String nickname
+    @Schema(description = "닉네임", example = "admin") String nickname
 ) {
 
 }

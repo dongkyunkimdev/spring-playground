@@ -16,7 +16,10 @@ public enum UserErrorCode implements BaseErrorCode {
 
     USERNAME_DUPLICATED(HttpStatus.CONFLICT.value(), "USER_001", "중복된 username 입니다."),
     USER_NOT_FOUND(HttpStatus.NOT_FOUND.value(), "USER_002", "존재하지 않는 유저입니다."),
-    PASSWORD_MISMATCH(HttpStatus.UNAUTHORIZED.value(), "USER_003", "비밀번호가 일치하지 않습니다.");
+    PASSWORD_MISMATCH(HttpStatus.UNAUTHORIZED.value(), "USER_003", "비밀번호가 일치하지 않습니다."),
+    USER_INACTIVE(HttpStatus.FORBIDDEN.value(), "USER_004", "비활성화된 유저입니다."),
+    USER_DELETED(HttpStatus.FORBIDDEN.value(), "USER_005", "삭제된 유저입니다."),
+    USER_BLOCKED(HttpStatus.FORBIDDEN.value(), "USER_006", "블락된 유저입니다.");
 
     private final int status;
     private final String code;

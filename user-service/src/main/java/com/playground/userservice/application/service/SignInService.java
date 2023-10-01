@@ -6,8 +6,8 @@ import com.playground.userservice.application.port.in.usecase.dto.SignInCommand;
 import com.playground.userservice.application.port.in.usecase.dto.SignInInfo;
 import com.playground.userservice.application.port.out.persistence.UserPersistencePort;
 import com.playground.userservice.domain.User;
-import com.playground.userservice.domain.exception.PasswordMismatchException;
-import com.playground.userservice.domain.exception.UserNotFoundException;
+import com.playground.userservice.domain.enums.UserStatus;
+import com.playground.userservice.domain.exception.*;
 import com.playground.userservice.infrastructure.token.JwtProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -31,6 +31,7 @@ public class SignInService implements SignInUseCase {
         User savedUser = getUser(command.username());
 
         validatePassword(command.password(), savedUser.getPassword());
+        validateStatus(savedUser.getStatus());
 
         return generateTokens(savedUser.getUserId());
     }
@@ -51,6 +52,14 @@ public class SignInService implements SignInUseCase {
         String newRefreshToken = jwtProvider.generateRefreshToken(userId);
 
         return new SignInInfo(newAccessToken, newRefreshToken);
+    }
+
+    private void validateStatus(UserStatus status) {
+        switch (status) {
+            case INACTIVE -> throw new UserInactiveException();
+            case DELETED -> throw new UserDeletedException();
+            case BLOCKED -> throw new UserBlockedException();
+        }
     }
 
 }

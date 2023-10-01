@@ -1,7 +1,5 @@
 # spring-playground
 
-> 간소화한 이커머스 요구사항을 기반으로 확장, 변경 및 유지보수가 쉬운 소프트웨어를 설계 및 구축하는 프로젝트입니다.   
-> DDD, Hexagonal Architecture 개념과 Spring Cloud, Apache Kafka 기술을 적용하여 MSA 서버를 구성하였습니다.  
 > [Kotlin으로 구현한 Q-Pang 프로젝트](https://github.com/q-pang/q-pang-api)를 Java로 마이그레이션하고, 살을 붙이며 Java/Spring Playground로 활용하기 위한 프로젝트입니다.
 
 ## 아키텍처

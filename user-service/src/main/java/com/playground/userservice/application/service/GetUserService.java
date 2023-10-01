@@ -1,6 +1,7 @@
-package com.playground.userservice.application.port.in.usecase;
+package com.playground.userservice.application.service;
 
 import com.playground.core.annotation.UseCase;
+import com.playground.userservice.application.port.in.usecase.GetUserUseCase;
 import com.playground.userservice.application.port.in.usecase.dto.GetUserCommand;
 import com.playground.userservice.application.port.in.usecase.dto.GetUserInfo;
 import com.playground.userservice.application.port.out.persistence.UserPersistencePort;

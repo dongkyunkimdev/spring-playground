@@ -28,9 +28,9 @@ public class UpdateProductCategoryService implements UpdateProductCategoryUseCas
     public UpdateProductCategoryInfo execute(UpdateProductCategoryCommand command) {
         ProductCategory savedProductCategory = getProductCategory(command.productCategoryId());
 
-        validateProductCategoryUpdate(command, savedProductCategory);
+        validateDuplicateName(command.name(), savedProductCategory.getName());
 
-        savedProductCategory.update(command);
+        savedProductCategory.updateName(command.name());
 
         return mapper.entityToInfo(savedProductCategory);
     }
@@ -40,9 +40,8 @@ public class UpdateProductCategoryService implements UpdateProductCategoryUseCas
             .orElseThrow(ProductCategoryNotFoundException::new);
     }
 
-    private void validateProductCategoryUpdate(UpdateProductCategoryCommand command, ProductCategory savedProductCategory) {
-        if (!StringUtils.containsIgnoreCase(savedProductCategory.getName(), command.name()) &&
-            productPersistencePort.isExistsProductCategoryByName(command.name())) {
+    private void validateDuplicateName(String enteredName, String savedName) {
+        if (!StringUtils.containsIgnoreCase(enteredName, savedName) && productPersistencePort.isExistsProductCategoryByName(enteredName)) {
             throw new DuplicateProductCategoryNameException();
         }
     }

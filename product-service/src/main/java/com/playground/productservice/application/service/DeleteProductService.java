@@ -26,7 +26,7 @@ public class DeleteProductService implements DeleteProductUseCase {
     public void execute(DeleteProductCommand command) {
         Product savedProduct = getProduct(command.productId());
 
-        validateProductDelete(command);
+        validateProductReferences(command.productId());
         deleteProduct(savedProduct);
     }
 
@@ -35,14 +35,10 @@ public class DeleteProductService implements DeleteProductUseCase {
             .orElseThrow(ProductNotFoundException::new);
     }
 
-    private void validateProductDelete(DeleteProductCommand command) {
-        if (isProductReferenced(command.productId())) {
+    private void validateProductReferences(Long productId) {
+        if (orderServiceExternalPort.isProductReferenced(productId)) {
             throw new ProductReferencedException();
         }
-    }
-
-    private boolean isProductReferenced(Long productId) {
-        return orderServiceExternalPort.isProductReferenced(productId);
     }
 
     private void deleteProduct(Product savedProduct) {

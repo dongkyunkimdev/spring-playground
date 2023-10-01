@@ -25,19 +25,19 @@ public class RegisterProductService implements RegisterProductUseCase {
     @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
     @Override
     public RegisterProductInfo execute(RegisterProductCommand command) {
-        ProductCategory savedProductCategory = getProductCategory(command);
+        ProductCategory savedProductCategory = getProductCategory(command.productCategoryId());
 
-        Product savedProduct = saveProduct(command, savedProductCategory);
+        Product savedProduct = saveProduct(mapper.commandToEntity(command, savedProductCategory));
 
         return mapper.entityToInfo(savedProduct);
     }
 
-    private Product saveProduct(RegisterProductCommand command, ProductCategory savedProductCategory) {
-        return productPersistencePort.saveProduct(mapper.commandToEntity(command, savedProductCategory));
+    private Product saveProduct(Product product) {
+        return productPersistencePort.saveProduct(product);
     }
 
-    private ProductCategory getProductCategory(RegisterProductCommand command) {
-        return productPersistencePort.searchProductCategoryById(command.productCategoryId())
+    private ProductCategory getProductCategory(Long productCategoryId) {
+        return productPersistencePort.searchProductCategoryById(productCategoryId)
             .orElseThrow(ProductCategoryNotFoundException::new);
     }
 

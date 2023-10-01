@@ -6,6 +6,7 @@ import com.playground.productservice.application.port.in.usecase.dto.GetProductC
 import com.playground.productservice.application.port.in.usecase.dto.GetProductCategoryListInfo;
 import com.playground.productservice.application.port.out.persistence.ProductPersistencePort;
 import com.playground.productservice.domain.ProductCategory;
+import com.playground.productservice.infrastructure.dao.dto.GetProductCategoryListSearchCondition;
 import com.playground.productservice.util.mapper.GetProductCategoryListMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -25,13 +26,13 @@ public class GetProductCategoryListService implements GetProductCategoryListUseC
     @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.SUPPORTS, readOnly = true)
     @Override
     public Slice<GetProductCategoryListInfo> execute(GetProductCategoryListCommand command, Pageable pageable) {
-        Slice<ProductCategory> productCategorySlice = getProductCategorySlice(command, pageable);
+        Slice<ProductCategory> productCategorySlice = getProductCategorySlice(mapper.commandToSearchCondition(command), pageable);
 
         return productCategorySlice.map(mapper::entityToInfo);
     }
 
-    private Slice<ProductCategory> getProductCategorySlice(GetProductCategoryListCommand command, Pageable pageable) {
-        return productPersistencePort.searchProductCategoryListBySearchCondition(mapper.commandToSearchCondition(command), pageable);
+    private Slice<ProductCategory> getProductCategorySlice(GetProductCategoryListSearchCondition searchCondition, Pageable pageable) {
+        return productPersistencePort.searchProductCategoryListBySearchCondition(searchCondition, pageable);
     }
 
 }

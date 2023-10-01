@@ -24,21 +24,21 @@ public class SignUpService implements SignUpUseCase {
     @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
     @Override
     public SignUpInfo execute(SignUpCommand command) {
-        validateSignUp(command);
+        validateDuplicateUsername(command.username());
 
-        User savedUser = saveUser(command);
+        User savedUser = saveUser(mapper.commandToEntityWithPasswordEncryption(command));
 
         return mapper.entityToInfo(savedUser);
     }
 
-    private void validateSignUp(SignUpCommand command) {
-        if (userPersistencePort.isExistsUserByUsername(command.username())) {
+    private void validateDuplicateUsername(String username) {
+        if (userPersistencePort.isExistsUserByUsername(username)) {
             throw new DuplicateUsernameException();
         }
     }
 
-    private User saveUser(SignUpCommand command) {
-        return userPersistencePort.saveUser(mapper.commandToEntityWithPasswordEncryption(command));
+    private User saveUser(User user) {
+        return userPersistencePort.saveUser(user);
     }
 
 }

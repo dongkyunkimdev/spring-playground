@@ -6,6 +6,7 @@ import com.playground.productservice.application.port.in.usecase.dto.GetProductL
 import com.playground.productservice.application.port.in.usecase.dto.GetProductListInfo;
 import com.playground.productservice.application.port.out.persistence.ProductPersistencePort;
 import com.playground.productservice.domain.Product;
+import com.playground.productservice.infrastructure.dao.dto.GetProductListSearchCondition;
 import com.playground.productservice.util.mapper.GetProductListMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -25,13 +26,13 @@ public class GetProductListService implements GetProductListUseCase {
     @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.SUPPORTS, readOnly = true)
     @Override
     public Slice<GetProductListInfo> execute(GetProductListCommand command, Pageable pageable) {
-        Slice<Product> productSlice = getProductSlice(command, pageable);
+        Slice<Product> productSlice = getProductSlice(mapper.commandToSearchCondition(command), pageable);
 
         return productSlice.map(mapper::entityToInfo);
     }
 
-    private Slice<Product> getProductSlice(GetProductListCommand command, Pageable pageable) {
-        return productPersistencePort.searchProductListBySearchCondition(mapper.commandToSearchCondition(command), pageable);
+    private Slice<Product> getProductSlice(GetProductListSearchCondition searchCondition, Pageable pageable) {
+        return productPersistencePort.searchProductListBySearchCondition(searchCondition, pageable);
     }
 
 }

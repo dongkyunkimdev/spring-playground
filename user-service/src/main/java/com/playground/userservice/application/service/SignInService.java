@@ -9,7 +9,6 @@ import com.playground.userservice.domain.User;
 import com.playground.userservice.domain.exception.PasswordMismatchException;
 import com.playground.userservice.domain.exception.UserNotFoundException;
 import com.playground.userservice.infrastructure.token.JwtProvider;
-import com.playground.userservice.util.mapper.SignInMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Isolation;
@@ -24,34 +23,32 @@ public class SignInService implements SignInUseCase {
 
     private final PasswordEncoder passwordEncoder;
 
-    private final SignInMapper mapper;
-
     private final JwtProvider jwtProvider;
 
     @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.SUPPORTS, readOnly = true)
     @Override
     public SignInInfo execute(SignInCommand command) {
-        User savedUser = getUser(command);
+        User savedUser = getUser(command.username());
 
-        validateSignIn(command, savedUser);
+        validatePassword(command.password(), savedUser.getPassword());
 
-        return generateTokens(savedUser);
+        return generateTokens(savedUser.getUserId());
     }
 
-    private User getUser(SignInCommand command) {
-        return userPersistencePort.searchUserByUsername(command.username())
+    private User getUser(String username) {
+        return userPersistencePort.searchUserByUsername(username)
             .orElseThrow(UserNotFoundException::new);
     }
 
-    private void validateSignIn(SignInCommand command, User savedUser) {
-        if (!passwordEncoder.matches(command.password(), savedUser.getPassword())) {
+    private void validatePassword(String enteredPassword, String savedPassword) {
+        if (!passwordEncoder.matches(enteredPassword, savedPassword)) {
             throw new PasswordMismatchException();
         }
     }
 
-    private SignInInfo generateTokens(User savedUser) {
-        String newAccessToken = jwtProvider.generateAccessToken(savedUser.getUserId());
-        String newRefreshToken = jwtProvider.generateRefreshToken(savedUser.getUserId());
+    private SignInInfo generateTokens(Long userId) {
+        String newAccessToken = jwtProvider.generateAccessToken(userId);
+        String newRefreshToken = jwtProvider.generateRefreshToken(userId);
 
         return new SignInInfo(newAccessToken, newRefreshToken);
     }

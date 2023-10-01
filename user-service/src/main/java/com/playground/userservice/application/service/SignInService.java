@@ -6,6 +6,7 @@ import com.playground.userservice.application.port.in.usecase.dto.SignInCommand;
 import com.playground.userservice.application.port.in.usecase.dto.SignInInfo;
 import com.playground.userservice.application.port.out.persistence.UserPersistencePort;
 import com.playground.userservice.domain.User;
+import com.playground.userservice.domain.enums.UserRole;
 import com.playground.userservice.domain.enums.UserStatus;
 import com.playground.userservice.domain.exception.*;
 import com.playground.userservice.infrastructure.token.JwtProvider;
@@ -33,7 +34,7 @@ public class SignInService implements SignInUseCase {
         validatePassword(command.password(), savedUser.getPassword());
         validateStatus(savedUser.getStatus());
 
-        return generateTokens(savedUser.getUserId());
+        return generateTokens(savedUser.getUserId(), savedUser.getRole());
     }
 
     private User getUser(String username) {
@@ -47,8 +48,8 @@ public class SignInService implements SignInUseCase {
         }
     }
 
-    private SignInInfo generateTokens(Long userId) {
-        String newAccessToken = jwtProvider.generateAccessToken(userId);
+    private SignInInfo generateTokens(Long userId, UserRole role) {
+        String newAccessToken = jwtProvider.generateAccessToken(userId, role.name());
         String newRefreshToken = jwtProvider.generateRefreshToken(userId);
 
         return new SignInInfo(newAccessToken, newRefreshToken);

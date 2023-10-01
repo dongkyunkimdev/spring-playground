@@ -17,11 +17,11 @@ public class JwtProvider {
 
     private final JwtProperties jwtProperties;
 
-    public String generateAccessToken(Long userId) {
+    public String generateAccessToken(Long userId, String role) {
         final Date issuedAt = new Date();
         final Date accessTokenExpiration = new Date(issuedAt.getTime() + jwtProperties.getAccessTokenValidity() * MILLISECOND_TO_SECOND);
 
-        return buildAccessToken(userId, issuedAt, accessTokenExpiration);
+        return buildAccessToken(userId, issuedAt, accessTokenExpiration, role);
     }
 
     public String generateRefreshToken(Long userId) {
@@ -31,12 +31,13 @@ public class JwtProvider {
         return buildRefreshToken(userId, issuedAt, refreshTokenExpiration);
     }
 
-    private String buildAccessToken(Long userId, Date issuedAt, Date accessTokenExpiration) {
+    private String buildAccessToken(Long userId, Date issuedAt, Date accessTokenExpiration, String role) {
         return Jwts.builder()
             .setIssuer(TOKEN_ISSUER)
             .setIssuedAt(issuedAt)
             .setSubject(String.valueOf(userId))
             .claim(TOKEN_TYPE, ACCESS_TOKEN)
+            .claim(TOKEN_ROLE, role)
             .setExpiration(accessTokenExpiration)
             .signWith(getSecretKey())
             .compact();

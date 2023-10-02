@@ -13,7 +13,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-import static com.playground.productservice.infrastructure.dao.support.ConditionBuilder.productCategoryIdInRange;
 import static com.playground.productservice.infrastructure.dao.support.ConditionBuilder.productCategoryNameContains;
 
 @Repository
@@ -25,7 +24,6 @@ public class ProductCategoryRepositorySupport {
     public Slice<ProductCategory> findListBySearchCondition(GetProductCategoryListSearchCondition searchCondition, Pageable pageable) {
         List<ProductCategory> content = queryFactory.selectFrom(QProductCategory.productCategory)
             .where(
-                productCategoryIdInRange(searchCondition.fromProductCategoryId(), searchCondition.toProductCategoryId()),
                 productCategoryNameContains(searchCondition.productCategoryName())
             )
             .orderBy(QueryDslUtil.createOrderSpecifiers(ProductCategory.class, pageable))

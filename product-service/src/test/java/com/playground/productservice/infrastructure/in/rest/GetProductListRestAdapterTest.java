@@ -65,80 +65,6 @@ class GetProductListRestAdapterTest extends ControllerTest {
     }
 
     @Test
-    void 상품_리스트_조회_성공_fromProductId_필터링() throws Exception {
-        // given
-        final Long fromProductId = 5L;
-
-        // when
-        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.GET, "/v1/products")
-            .param("fromProductId", String.valueOf(fromProductId));
-
-        ResultActions result = mvc.perform(requestBuilder);
-
-        // then
-        result.andExpect(status().isOk());
-
-        SuccessResponse responseDto = getSuccessResponse(result);
-        assertSuccessResponse(responseDto, HttpStatus.OK);
-
-        SliceResponse<GetProductListResponse> sliceResponse = objectMapper.convertValue(responseDto.getData(), new TypeReference<>() {
-        });
-
-        List<GetProductListResponse> productResponseList = sliceResponse.getContent();
-        productResponseList.forEach(product -> assertThat(product.productId()).isGreaterThanOrEqualTo(fromProductId));
-    }
-
-    @Test
-    void 상품_리스트_조회_성공_toProductId_필터링() throws Exception {
-        // given
-        final Long toProductId = 15L;
-
-        // when
-        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.GET, "/v1/products")
-            .param("toProductId", String.valueOf(toProductId));
-
-        ResultActions result = mvc.perform(requestBuilder);
-
-        // then
-        result.andExpect(status().isOk());
-
-        SuccessResponse responseDto = getSuccessResponse(result);
-        assertSuccessResponse(responseDto, HttpStatus.OK);
-
-        SliceResponse<GetProductListResponse> sliceResponse = objectMapper.convertValue(responseDto.getData(), new TypeReference<>() {
-        });
-
-        List<GetProductListResponse> productResponseList = sliceResponse.getContent();
-        productResponseList.forEach(product -> assertThat(product.productId()).isLessThanOrEqualTo(toProductId));
-    }
-
-    @Test
-    void 상품_리스트_조회_성공_productIdInRange_필터링() throws Exception {
-        // given
-        final Long fromProductId = 5L;
-        final Long toProductId = 20L;
-
-        // when
-        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.GET, "/v1/products")
-            .param("fromProductId", String.valueOf(fromProductId))
-            .param("toProductId", String.valueOf(toProductId));
-
-        ResultActions result = mvc.perform(requestBuilder);
-
-        // then
-        result.andExpect(status().isOk());
-
-        SuccessResponse responseDto = getSuccessResponse(result);
-        assertSuccessResponse(responseDto, HttpStatus.OK);
-
-        SliceResponse<GetProductListResponse> sliceResponse = objectMapper.convertValue(responseDto.getData(), new TypeReference<>() {
-        });
-
-        List<GetProductListResponse> productResponseList = sliceResponse.getContent();
-        productResponseList.forEach(product -> assertThat(product.productId()).isBetween(fromProductId, toProductId));
-    }
-
-    @Test
     void 상품_리스트_조회_성공_productName_필터링() throws Exception {
         // given
         final String productName = "b";
@@ -237,80 +163,6 @@ class GetProductListRestAdapterTest extends ControllerTest {
     }
 
     @Test
-    void 상품_리스트_조회_성공_fromProductCategoryId_필터링() throws Exception {
-        // given
-        final Long fromProductCategoryId = 20L;
-
-        // when
-        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.GET, "/v1/products")
-            .param("fromProductCategoryId", String.valueOf(fromProductCategoryId));
-
-        ResultActions result = mvc.perform(requestBuilder);
-
-        // then
-        result.andExpect(status().isOk());
-
-        SuccessResponse responseDto = getSuccessResponse(result);
-        assertSuccessResponse(responseDto, HttpStatus.OK);
-
-        SliceResponse<GetProductListResponse> sliceResponse = objectMapper.convertValue(responseDto.getData(), new TypeReference<>() {
-        });
-
-        List<GetProductListResponse> productResponseList = sliceResponse.getContent();
-        productResponseList.forEach(product -> assertThat(product.productCategory().productCategoryId()).isGreaterThanOrEqualTo(fromProductCategoryId));
-    }
-
-    @Test
-    void 상품_리스트_조회_성공_toProductCategoryId_필터링() throws Exception {
-        // given
-        final Long toProductCategoryId = 10L;
-
-        // when
-        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.GET, "/v1/products")
-            .param("toProductCategoryId", String.valueOf(toProductCategoryId));
-
-        ResultActions result = mvc.perform(requestBuilder);
-
-        // then
-        result.andExpect(status().isOk());
-
-        SuccessResponse responseDto = getSuccessResponse(result);
-        assertSuccessResponse(responseDto, HttpStatus.OK);
-
-        SliceResponse<GetProductListResponse> sliceResponse = objectMapper.convertValue(responseDto.getData(), new TypeReference<>() {
-        });
-
-        List<GetProductListResponse> productResponseList = sliceResponse.getContent();
-        productResponseList.forEach(product -> assertThat(product.productCategory().productCategoryId()).isLessThanOrEqualTo(toProductCategoryId));
-    }
-
-    @Test
-    void 상품_리스트_조회_성공_productCategoryIdInRange_필터링() throws Exception {
-        // given
-        final Long fromProductCategoryId = 10L;
-        final Long toProductCategoryId = 20L;
-
-        // when
-        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.GET, "/v1/products")
-            .param("fromProductCategoryId", String.valueOf(fromProductCategoryId))
-            .param("toProductCategoryId", String.valueOf(toProductCategoryId));
-
-        ResultActions result = mvc.perform(requestBuilder);
-
-        // then
-        result.andExpect(status().isOk());
-
-        SuccessResponse responseDto = getSuccessResponse(result);
-        assertSuccessResponse(responseDto, HttpStatus.OK);
-
-        SliceResponse<GetProductListResponse> sliceResponse = objectMapper.convertValue(responseDto.getData(), new TypeReference<>() {
-        });
-
-        List<GetProductListResponse> productResponseList = sliceResponse.getContent();
-        productResponseList.forEach(product -> assertThat(product.productCategory().productCategoryId()).isBetween(fromProductCategoryId, toProductCategoryId));
-    }
-
-    @Test
     void 상품_리스트_조회_성공_productCategoryName_필터링() throws Exception {
         // given
         final String productCategoryName = "ac";
@@ -337,24 +189,16 @@ class GetProductListRestAdapterTest extends ControllerTest {
     @Test
     void 상품_리스트_조회_성공_all_필터링() throws Exception {
         // given
-        final Long fromProductId = 5L;
-        final Long toProductId = 10L;
         final String productName = "apt";
         final BigDecimal minPrice = BigDecimal.valueOf(500);
         final BigDecimal maxPrice = BigDecimal.valueOf(1000);
-        final Long fromProductCategoryId = 1L;
-        final Long toProductCategoryId = 5L;
         final String productCategoryName = "tron";
 
         // when
         MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.GET, "/v1/products")
-            .param("fromProductId", String.valueOf(fromProductId))
-            .param("toProductId", String.valueOf(toProductId))
             .param("productName", productName)
             .param("minPrice", String.valueOf(minPrice))
             .param("maxPrice", String.valueOf(maxPrice))
-            .param("fromProductCategoryId", String.valueOf(fromProductCategoryId))
-            .param("toProductCategoryId", String.valueOf(toProductCategoryId))
             .param("productCategoryName", productCategoryName);
 
         ResultActions result = mvc.perform(requestBuilder);
@@ -370,10 +214,8 @@ class GetProductListRestAdapterTest extends ControllerTest {
 
         List<GetProductListResponse> productResponseList = sliceResponse.getContent();
         productResponseList.forEach(product -> {
-            assertThat(product.productId()).isBetween(fromProductId, toProductId);
             assertThat(product.name()).containsIgnoringCase(productName);
             assertThat(product.price()).isBetween(minPrice, maxPrice);
-            assertThat(product.productCategory().productCategoryId()).isBetween(fromProductCategoryId, toProductCategoryId);
             assertThat(product.productCategory().name()).containsIgnoringCase(productCategoryName);
         });
     }

@@ -24,10 +24,8 @@ public class ProductRepositorySupport {
     public Slice<Product> findListBySearchCondition(GetProductListSearchCondition searchCondition, Pageable pageable) {
         List<Product> content = queryFactory.selectFrom(QProduct.product)
             .where(
-                productIdInRange(searchCondition.fromProductId(), searchCondition.toProductId()),
                 productNameContains(searchCondition.productName()),
                 priceInRange(searchCondition.minPrice(), searchCondition.maxPrice()),
-                productCategoryIdInRange(searchCondition.fromProductCategoryId(), searchCondition.toProductCategoryId()),
                 productCategoryNameContains(searchCondition.productCategoryName())
             )
             .orderBy(QueryDslUtil.createOrderSpecifiers(Product.class, pageable))

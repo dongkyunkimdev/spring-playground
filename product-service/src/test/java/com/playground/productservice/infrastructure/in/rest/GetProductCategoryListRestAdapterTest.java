@@ -55,88 +55,13 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
     }
 
     @Test
-    void 상품_카테고리_리스트_조회_성공_fromProductCategoryId_필터링() throws Exception {
-        // given
-        final Long fromProductCategoryId = 5L;
-
-        // when
-        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.GET, "/v1/products/categories")
-            .param("fromProductCategoryId", String.valueOf(fromProductCategoryId));
-
-        ResultActions result = mvc.perform(requestBuilder);
-
-        // then
-        result.andExpect(status().isOk());
-
-        SuccessResponse responseDto = getSuccessResponse(result);
-        assertSuccessResponse(responseDto, HttpStatus.OK);
-
-        SliceResponse<GetProductCategoryListResponse> sliceResponse = objectMapper.convertValue(responseDto.getData(), new TypeReference<>() {
-        });
-
-        List<GetProductCategoryListResponse> productCategoryResponseList = sliceResponse.getContent();
-        productCategoryResponseList.forEach(productCategory -> assertThat(productCategory.productCategoryId()).isGreaterThanOrEqualTo(fromProductCategoryId));
-    }
-
-    @Test
-    void 상품_카테고리_리스트_조회_성공_toProductCategoryId_필터링() throws Exception {
-        // given
-        final Long toProductCategoryId = 11L;
-
-        // when
-        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.GET, "/v1/products/categories")
-            .param("toProductCategoryId", String.valueOf(toProductCategoryId));
-
-        ResultActions result = mvc.perform(requestBuilder);
-
-        // then
-        result.andExpect(status().isOk());
-
-        SuccessResponse responseDto = getSuccessResponse(result);
-        assertSuccessResponse(responseDto, HttpStatus.OK);
-
-        SliceResponse<GetProductCategoryListResponse> sliceResponse = objectMapper.convertValue(responseDto.getData(), new TypeReference<>() {
-        });
-
-        List<GetProductCategoryListResponse> productCategoryResponseList = sliceResponse.getContent();
-        productCategoryResponseList.forEach(productCategory -> assertThat(productCategory.productCategoryId()).isLessThanOrEqualTo(toProductCategoryId));
-    }
-
-    @Test
-    void 상품_카테고리_리스트_조회_성공_productCategoryIdInRange_필터링() throws Exception {
-        // given
-        final Long fromProductCategoryId = 5L;
-        final Long toProductCategoryId = 11L;
-
-        // when
-        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.GET, "/v1/products/categories")
-            .param("fromProductCategoryId", String.valueOf(fromProductCategoryId))
-            .param("toProductCategoryId", String.valueOf(toProductCategoryId));
-
-        ResultActions result = mvc.perform(requestBuilder);
-
-        // then
-        result.andExpect(status().isOk());
-
-        SuccessResponse responseDto = getSuccessResponse(result);
-        assertSuccessResponse(responseDto, HttpStatus.OK);
-
-        SliceResponse<GetProductCategoryListResponse> sliceResponse = objectMapper.convertValue(responseDto.getData(), new TypeReference<>() {
-        });
-
-        List<GetProductCategoryListResponse> productCategoryResponseList = sliceResponse.getContent();
-        productCategoryResponseList.forEach(productCategory -> assertThat(productCategory.productCategoryId()).isBetween(fromProductCategoryId, toProductCategoryId));
-    }
-
-    @Test
     void 상품_카테고리_리스트_조회_성공_productCategoryName_필터링() throws Exception {
         // given
         final String productCategoryName = "co";
 
         // when
         MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.GET, "/v1/products/categories")
-            .param("productCategoryName", productCategoryName)
-            .param("size", String.valueOf(1));
+            .param("productCategoryName", productCategoryName);
 
         ResultActions result = mvc.perform(requestBuilder);
 
@@ -154,18 +79,13 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
     }
 
     @Test
-    void 상품_카테고리_리스트_조회_성공_fromId_toId_name_필터링() throws Exception {
+    void 상품_카테고리_리스트_조회_성공_name_asc_정렬() throws Exception {
         // given
-        final Long fromProductCategoryId = 1L;
-        final Long toProductCategoryId = 10L;
-        final String productCategoryName = "es";
+        final String order = "name,ASC";
 
         // when
         MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.GET, "/v1/products/categories")
-            .param("fromProductCategoryId", String.valueOf(fromProductCategoryId))
-            .param("toProductCategoryId", String.valueOf(toProductCategoryId))
-            .param("productCategoryName", productCategoryName)
-            .param("size", String.valueOf(1));
+            .param("sort", order);
 
         ResultActions result = mvc.perform(requestBuilder);
 
@@ -179,17 +99,19 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
         });
 
         List<GetProductCategoryListResponse> productCategoryResponseList = sliceResponse.getContent();
-        productCategoryResponseList.forEach(productCategory -> {
-            assertThat(productCategory.productCategoryId()).isBetween(fromProductCategoryId, toProductCategoryId);
-            assertThat(productCategory.name()).containsIgnoringCase(productCategoryName);
-        });
+        assertThat(productCategoryResponseList.get(0).name()).startsWithIgnoringCase("A");
     }
 
     @Test
-    void 상품_카테고리_리스트_조회_성공_name_asc_정렬() throws Exception {
+    void 상품_카테고리_리스트_조회_성공_productCategoryName_필터링_name_asc_정렬() throws Exception {
+        // given
+        final String productCategoryName = "c";
+        final String order = "name,ASC";
+
         // when
         MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.GET, "/v1/products/categories")
-            .param("sort", "name,ASC");
+            .param("productCategoryName", productCategoryName)
+            .param("sort", order);
 
         ResultActions result = mvc.perform(requestBuilder);
 
@@ -203,7 +125,8 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
         });
 
         List<GetProductCategoryListResponse> productCategoryResponseList = sliceResponse.getContent();
-        assertThat(productCategoryResponseList.get(0).name()).startsWith("A");
+        productCategoryResponseList.forEach(productCategory -> assertThat(productCategory.name()).containsIgnoringCase(productCategoryName));
+        assertThat(productCategoryResponseList.get(0).name()).startsWithIgnoringCase("A");
     }
 
 }

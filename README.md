@@ -41,13 +41,13 @@
 - 마지막 로그인 시간을 기준으로 유저를 비활성화 시키기(WIP)
 - 가상의 트래픽을 상정하여 Thread Pool, DB Connection Pool 최적화(WIP)
 
-# Run Configuration
+## Run Configuration
 
 - flyway: `core:flywayClean core:flywayMigrate`
 - test : `clean core:flywayClean core:flywayMigrate test --continue`
 - all module build : `clean bootJar -x test`
 
-# 실행하기
+## 실행하기
 
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/) 설치
 - 프로젝트 root 경로에서 아래 순서대로 실행

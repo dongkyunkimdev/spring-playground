@@ -23,12 +23,6 @@
 - [#3 이벤트 스토밍을 통한 마이크로서비스 도출](https://velog.io/@ddkds66/%EC%9D%B4%EC%BB%A4%EB%A8%B8%EC%8A%A4-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EC%8A%A4%ED%86%A0%EB%B0%8D%EC%9D%84-%ED%86%B5%ED%95%9C-%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%84%9C%EB%B9%84%EC%8A%A4-%EB%8F%84%EC%B6%9C)
 - [#4 헥사고날 아키텍처를 적용한 마이크로서비스 상세 설계](https://velog.io/@ddkds66/%EC%9D%B4%EC%BB%A4%EB%A8%B8%EC%8A%A4-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%84%9C%EB%B9%84%EC%8A%A4-%EC%83%81%EC%84%B8-%EC%84%A4%EA%B3%84)
 - [#5 프로젝트 마무리 및 회고](https://velog.io/@ddkds66/%EC%9D%B4%EC%BB%A4%EB%A8%B8%EC%8A%A4-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EB%A7%88%EB%AC%B4%EB%A6%AC-%EB%B0%8F-%ED%9A%8C%EA%B3%A0)
-- DB 다중화를 통한 SPOF 방지 및 부하 분산(WIP)
-- 빈번하게 조회되고 실시간성 조건이 존재하지 않는 데이터를 대상으로 캐싱 전략을 도입하여 DB 부하 분산(WIP)
-- 최종 일관성이 보장되도록 분산 트랜잭션 관리 전략 도입(WIP)
-- 마이크로서비스간 트랜잭션 추적을 고려한 로그 시스템 구축(WIP)
-- 마지막 로그인 시간을 기준으로 유저를 비활성화 시키기(WIP)
-- 가상의 트래픽을 상정하여 Thread Pool, DB Connection Pool 최적화(WIP)
 
 ## 프로젝트 주요 관심사
 
@@ -37,6 +31,15 @@
 - Apache Kafka를 사용하여 이벤트 기반의 비동기 호출을 통해 마이크로서비스간의 최종 일관성 유지
 - JUnit5를 사용하여 예측 가능한 모든 케이스에 대한 Integration Test Code 작성
 - Spring Cloud, Docker를 사용하여 Cloud Native Application 구성
+
+## 개선사항
+
+- DB 다중화를 통한 SPOF 방지 및 부하 분산(WIP)
+- 빈번하게 조회되고 실시간성 조건이 존재하지 않는 데이터를 대상으로 캐싱 전략을 도입하여 DB 부하 분산(WIP)
+- 최종 일관성이 보장되도록 분산 트랜잭션 관리 전략 도입(WIP)
+- 마이크로서비스간 트랜잭션 추적을 고려한 로그 시스템 구축(WIP)
+- 마지막 로그인 시간을 기준으로 유저를 비활성화 시키기(WIP)
+- 가상의 트래픽을 상정하여 Thread Pool, DB Connection Pool 최적화(WIP)
 
 # Run Configuration
 

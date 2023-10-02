@@ -5,8 +5,8 @@ import com.playground.core.exception.dto.ErrorResponse;
 import com.playground.core.exception.dto.SuccessResponse;
 import com.playground.productservice.domain.exception.ProductErrorCode;
 import com.playground.productservice.infrastructure.in.rest.dto.CommonProductCategoryResponse;
-import com.playground.productservice.infrastructure.in.rest.dto.RegisterProductResponse;
 import com.playground.productservice.infrastructure.in.rest.dto.UpdateProductRequest;
+import com.playground.productservice.infrastructure.in.rest.dto.UpdateProductResponse;
 import com.playground.productservice.support.ControllerTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpMethod;
@@ -51,16 +51,20 @@ class UpdateProductRestAdapterTest extends ControllerTest {
         SuccessResponse responseDto = getSuccessResponse(result);
         assertSuccessResponse(responseDto, HttpStatus.OK);
 
-        RegisterProductResponse productResponse = objectMapper.convertValue(responseDto.getData(), new TypeReference<>() {
+        UpdateProductResponse productResponse = objectMapper.convertValue(responseDto.getData(), new TypeReference<>() {
         });
         assertThat(productResponse.productId()).isEqualTo(productId);
         assertThat(productResponse.name()).isEqualTo(requestDto.name());
         assertThat(productResponse.stock()).isEqualTo(requestDto.stock());
         assertThat(productResponse.price()).isEqualTo(requestDto.price());
+        assertThat(productResponse.createdAt()).isNotNull();
+        assertThat(productResponse.updatedAt()).isNotNull();
 
         CommonProductCategoryResponse productCategoryResponse = productResponse.productCategory();
         assertThat(productCategoryResponse.productCategoryId()).isEqualTo(requestDto.productCategoryId());
-        assertThat(productResponse.productCategory().name()).isEqualTo("Clothing");
+        assertThat(productCategoryResponse.name()).isEqualTo("Clothing");
+        assertThat(productCategoryResponse.createdAt()).isNotNull();
+        assertThat(productCategoryResponse.updatedAt()).isNotNull();
     }
 
     @Test

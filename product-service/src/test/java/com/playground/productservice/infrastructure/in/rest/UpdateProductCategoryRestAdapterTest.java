@@ -47,6 +47,8 @@ class UpdateProductCategoryRestAdapterTest extends ControllerTest {
         });
         assertThat(productCategoryResponse.productCategoryId()).isEqualTo(productCategoryId);
         assertThat(productCategoryResponse.name()).isEqualTo(requestDto.name());
+        assertThat(productCategoryResponse.createdAt()).isNotNull();
+        assertThat(productCategoryResponse.updatedAt()).isNotNull();
     }
 
     @Test

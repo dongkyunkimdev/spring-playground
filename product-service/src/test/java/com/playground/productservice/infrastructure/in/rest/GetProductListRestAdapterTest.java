@@ -53,10 +53,14 @@ class GetProductListRestAdapterTest extends ControllerTest {
             assertThat(product.name()).isNotNull();
             assertThat(product.stock()).isNotNull();
             assertThat(product.price()).isNotNull();
+            assertThat(product.createdAt()).isNotNull();
+            assertThat(product.updatedAt()).isNotNull();
 
             CommonProductCategoryResponse productCategory = product.productCategory();
             assertThat(productCategory.productCategoryId()).isNotNull();
             assertThat(productCategory.name()).isNotNull();
+            assertThat(productCategory.createdAt()).isNotNull();
+            assertThat(productCategory.updatedAt()).isNotNull();
         });
     }
 

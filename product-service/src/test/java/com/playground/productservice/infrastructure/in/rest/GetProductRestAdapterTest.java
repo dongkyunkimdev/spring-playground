@@ -49,6 +49,8 @@ class GetProductRestAdapterTest extends ControllerTest {
         assertThat(productResponse.name()).isEqualTo("T-shirt");
         assertThat(productResponse.stock()).isEqualTo(100);
         assertThat(productResponse.price()).isEqualTo(BigDecimal.valueOf(19.99));
+        assertThat(productResponse.createdAt()).isNotNull();
+        assertThat(productResponse.updatedAt()).isNotNull();
 
         CommonProductCategoryResponse productCategoryResponse = productResponse.productCategory();
         assertThat(productCategoryResponse.productCategoryId()).isEqualTo(1);

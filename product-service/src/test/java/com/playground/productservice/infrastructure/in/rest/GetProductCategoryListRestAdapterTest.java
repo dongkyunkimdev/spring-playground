@@ -49,6 +49,8 @@ class GetProductCategoryListRestAdapterTest extends ControllerTest {
         productCategoryResponseList.forEach(productCategory -> {
             assertThat(productCategory.productCategoryId()).isNotNull();
             assertThat(productCategory.name()).isNotNull();
+            assertThat(productCategory.createdAt()).isNotNull();
+            assertThat(productCategory.updatedAt()).isNotNull();
         });
     }
 

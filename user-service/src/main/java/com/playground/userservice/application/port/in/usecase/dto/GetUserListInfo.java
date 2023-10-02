@@ -11,7 +11,9 @@ public record GetUserListInfo(
     String nickname,
     UserStatus status,
     UserRole role,
-    LocalDateTime lastLoginAt
+    LocalDateTime lastLoginAt,
+    LocalDateTime createdAt,
+    LocalDateTime updatedAt
 ) {
 
 }

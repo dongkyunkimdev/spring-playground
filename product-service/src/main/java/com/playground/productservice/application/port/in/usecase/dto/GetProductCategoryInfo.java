@@ -1,8 +1,12 @@
 package com.playground.productservice.application.port.in.usecase.dto;
 
+import java.time.LocalDateTime;
+
 public record GetProductCategoryInfo(
     Long productCategoryId,
-    String name
+    String name,
+    LocalDateTime createdAt,
+    LocalDateTime updatedAt
 ) {
 
 }

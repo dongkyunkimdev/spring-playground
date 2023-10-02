@@ -12,7 +12,9 @@ public record GetUserResponse(
     @Schema(description = "닉네임", example = "admin") String nickname,
     @Schema(description = "상태", example = "ACTIVE") UserStatus status,
     @Schema(description = "역할", example = "ADMIN") UserRole role,
-    @Schema(description = "마지막 로그인 일시", example = "2023-10-02T08:54:15") LocalDateTime lastLoginAt
+    @Schema(description = "마지막 로그인 일시", example = "2023-10-02T08:54:15") LocalDateTime lastLoginAt,
+    @Schema(description = "생성 일시", example = "2023-10-01T00:00:00") LocalDateTime createdAt,
+    @Schema(description = "수정 일시", example = "2023-10-02T00:00:00") LocalDateTime updatedAt
 ) {
 
 }

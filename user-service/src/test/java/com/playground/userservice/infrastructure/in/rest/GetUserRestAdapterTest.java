@@ -50,6 +50,8 @@ class GetUserRestAdapterTest extends ControllerTest {
         assertThat(userResponse.status()).isEqualTo(UserStatus.ACTIVE);
         assertThat(userResponse.role()).isEqualTo(UserRole.ADMIN);
         assertThat(userResponse.lastLoginAt()).isEqualTo("2023-10-02T08:54:15");
+        assertThat(userResponse.createdAt()).isNotNull();
+        assertThat(userResponse.updatedAt()).isNotNull();
     }
 
     @Test

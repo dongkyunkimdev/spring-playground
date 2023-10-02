@@ -87,7 +87,7 @@ class SignInRestAdapterTest extends ControllerTest {
     @Test
     void 로그인_실패_비활성화된_유저() throws Exception {
         // given
-        final SignInRequest requestDto = new SignInRequest("inactive@playground.com", "1234");
+        final SignInRequest requestDto = new SignInRequest("inactiveUser@playground.com", "1234");
 
         // when
         MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.POST, "/v1/users/signin")
@@ -105,7 +105,7 @@ class SignInRestAdapterTest extends ControllerTest {
     @Test
     void 로그인_실패_삭제된_유저() throws Exception {
         // given
-        final SignInRequest requestDto = new SignInRequest("deleted@playground.com", "1234");
+        final SignInRequest requestDto = new SignInRequest("deletedUser@playground.com", "1234");
 
         // when
         MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.POST, "/v1/users/signin")
@@ -123,7 +123,7 @@ class SignInRestAdapterTest extends ControllerTest {
     @Test
     void 로그인_실패_블락된_유저() throws Exception {
         // given
-        final SignInRequest requestDto = new SignInRequest("blocked@playground.com", "1234");
+        final SignInRequest requestDto = new SignInRequest("blockedUser@playground.com", "1234");
 
         // when
         MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.POST, "/v1/users/signin")

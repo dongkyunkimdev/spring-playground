@@ -71,4 +71,22 @@ class SignUpRestAdapterTest extends ControllerTest {
         assertErrorResponse(responseDto, UserErrorCode.USERNAME_DUPLICATED);
     }
 
+    @Test
+    void 회원가입_실패_nickname이_중복됨() throws Exception {
+        // given
+        final SignUpRequest requestDto = new SignUpRequest("admin121312@playground.com", "1234", "admin");
+
+        // when
+        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.POST, "/v1/users/signup")
+            .content(objectMapper.writeValueAsString(requestDto));
+
+        ResultActions result = mvc.perform(requestBuilder);
+
+        // then
+        result.andExpect(status().isConflict());
+
+        ErrorResponse responseDto = getErrorResponse(result);
+        assertErrorResponse(responseDto, UserErrorCode.NICKNAME_DUPLICATED);
+    }
+
 }

@@ -13,7 +13,9 @@ CREATE TABLE `user`
     `role`          VARCHAR(255) NOT NULL,
     `last_login_at` datetime     NOT NULL,
     `created_at`    datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    `updated_at`    datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    `updated_at`    datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    UNIQUE KEY `uix_username` (`username`),
+    UNIQUE KEY `uix_nickname` (`nickname`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4;
 

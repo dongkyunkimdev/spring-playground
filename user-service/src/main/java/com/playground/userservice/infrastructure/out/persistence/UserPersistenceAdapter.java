@@ -41,6 +41,11 @@ public class UserPersistenceAdapter implements UserPersistencePort {
     }
 
     @Override
+    public boolean isExistsUserByNickname(String nickname) {
+        return userRepository.existsByNickname(nickname);
+    }
+
+    @Override
     public User saveUser(User user) {
         return userRepository.save(user);
     }

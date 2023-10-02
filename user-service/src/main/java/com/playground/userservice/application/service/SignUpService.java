@@ -6,6 +6,7 @@ import com.playground.userservice.application.port.in.usecase.dto.SignUpCommand;
 import com.playground.userservice.application.port.in.usecase.dto.SignUpInfo;
 import com.playground.userservice.application.port.out.persistence.UserPersistencePort;
 import com.playground.userservice.domain.User;
+import com.playground.userservice.domain.exception.DuplicateNicknameException;
 import com.playground.userservice.domain.exception.DuplicateUsernameException;
 import com.playground.userservice.util.mapper.SignUpMapper;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,7 @@ public class SignUpService implements SignUpUseCase {
     @Override
     public SignUpInfo execute(SignUpCommand command) {
         validateDuplicateUsername(command.username());
+        validateDuplicateNickname(command.nickname());
 
         User savedUser = saveUser(mapper.commandToEntityWithPasswordEncryption(command));
 
@@ -34,6 +36,12 @@ public class SignUpService implements SignUpUseCase {
     private void validateDuplicateUsername(String username) {
         if (userPersistencePort.isExistsUserByUsername(username)) {
             throw new DuplicateUsernameException();
+        }
+    }
+
+    private void validateDuplicateNickname(String nickname) {
+        if (userPersistencePort.isExistsUserByNickname(nickname)) {
+            throw new DuplicateNicknameException();
         }
     }
 

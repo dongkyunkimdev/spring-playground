@@ -17,6 +17,8 @@ public interface UserPersistencePort {
 
     boolean isExistsUserByUsername(String username);
 
+    boolean isExistsUserByNickname(String nickname);
+
     User saveUser(User user);
 
 }

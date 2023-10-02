@@ -32,7 +32,7 @@ class GetUserRestAdapterTest extends ControllerTest {
         final Long userId = 1L;
 
         // when
-        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.POST, "/v1/users/{userId}", userId);
+        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.GET, "/v1/users/{userId}", userId);
 
         ResultActions result = mvc.perform(requestBuilder);
 
@@ -58,7 +58,7 @@ class GetUserRestAdapterTest extends ControllerTest {
         final Long userId = 182371L;
 
         // when
-        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.POST, "/v1/users/{userId}", userId);
+        MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.GET, "/v1/users/{userId}", userId);
 
         ResultActions result = mvc.perform(requestBuilder);
 

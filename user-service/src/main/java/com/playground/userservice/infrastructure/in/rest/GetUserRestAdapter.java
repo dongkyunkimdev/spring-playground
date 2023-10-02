@@ -12,8 +12,8 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @RestAdapter
@@ -25,9 +25,9 @@ public class GetUserRestAdapter {
     private final GetUserMapper mapper;
 
     @Operation(summary = "유저 조회.")
-    @Tag(name = "1-3. [유저 조회]")
+    @Tag(name = "1-4. [유저 조회]")
     @ApiExceptionExample(GetUserExceptionDocs.class)
-    @PostMapping("/v1/users/{userId}")
+    @GetMapping("/v1/users/{userId}")
     @ResponseStatus(HttpStatus.OK)
     public GetUserResponse getUser(
         @Parameter(description = "유저 ID.", example = "1") @PathVariable("userId") final Long userId

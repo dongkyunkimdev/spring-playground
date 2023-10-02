@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @RequiredArgsConstructor
 public class SignUpRestAdapter {
 
-    private final SignUpUseCase signUpUseCase;
+    private final SignUpUseCase useCase;
 
     private final SignUpMapper mapper;
 
@@ -32,7 +32,7 @@ public class SignUpRestAdapter {
     public SignUpResponse signUp(
         @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "회원가입 정보.") @RequestBody(required = true) @Valid final SignUpRequest request
     ) {
-        return mapper.infoToResponse(signUpUseCase.execute(mapper.requestToCommand(request)));
+        return mapper.infoToResponse(useCase.execute(mapper.requestToCommand(request)));
     }
 
 }

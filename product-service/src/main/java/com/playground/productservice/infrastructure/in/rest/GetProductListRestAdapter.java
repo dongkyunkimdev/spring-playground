@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @RequiredArgsConstructor
 public class GetProductListRestAdapter {
 
-    private final GetProductListUseCase getProductListUseCase;
+    private final GetProductListUseCase useCase;
 
     private final GetProductListMapper mapper;
 
@@ -35,7 +35,7 @@ public class GetProductListRestAdapter {
         @ParameterObject GetProductListRequest request,
         @ParameterObject @PageableDefault(size = 10, sort = "productId", direction = Sort.Direction.DESC) Pageable pageable
     ) {
-        Slice<GetProductListInfo> getProductListInfoSlice = getProductListUseCase.execute(mapper.requestToCommand(request), pageable);
+        Slice<GetProductListInfo> getProductListInfoSlice = useCase.execute(mapper.requestToCommand(request), pageable);
 
         return SliceResponse.of(getProductListInfoSlice.map(mapper::infoToResponse));
     }

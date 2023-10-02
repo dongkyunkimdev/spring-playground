@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @RequiredArgsConstructor
 public class SignInRestAdapter {
 
-    private final SignInUseCase signInUseCase;
+    private final SignInUseCase useCase;
 
     private final SignInMapper mapper;
 
@@ -32,7 +32,7 @@ public class SignInRestAdapter {
     public SignInResponse signIn(
         @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "로그인 정보.") @RequestBody(required = true) @Valid final SignInRequest request
     ) {
-        return mapper.infoToResponse(signInUseCase.execute(mapper.requestToCommand(request)));
+        return mapper.infoToResponse(useCase.execute(mapper.requestToCommand(request)));
     }
 
 }

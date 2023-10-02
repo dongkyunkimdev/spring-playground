@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @RequiredArgsConstructor
 public class RegisterProductRestAdapter {
 
-    private final RegisterProductUseCase registerProductUseCase;
+    private final RegisterProductUseCase useCase;
 
     private final RegisterProductMapper mapper;
 
@@ -32,7 +32,7 @@ public class RegisterProductRestAdapter {
     public RegisterProductResponse registerProduct(
         @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "상품 등록 정보.") @RequestBody(required = true) @Valid final RegisterProductRequest request
     ) {
-        return mapper.infoToResponse(registerProductUseCase.execute(mapper.requestToCommand(request)));
+        return mapper.infoToResponse(useCase.execute(mapper.requestToCommand(request)));
     }
 
 }

@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @RequiredArgsConstructor
 public class GetUserRestAdapter {
 
-    private final GetUserUseCase getUserUseCase;
+    private final GetUserUseCase useCase;
 
     private final GetUserMapper mapper;
 
@@ -32,7 +32,7 @@ public class GetUserRestAdapter {
     public GetUserResponse getUser(
         @Parameter(description = "유저 ID.", example = "1") @PathVariable("userId") final Long userId
     ) {
-        return mapper.infoToResponse(getUserUseCase.execute(new GetUserCommand(userId)));
+        return mapper.infoToResponse(useCase.execute(new GetUserCommand(userId)));
     }
 
 }

@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @RequiredArgsConstructor
 public class GetProductRestAdapter {
 
-    private final GetProductUseCase getProductUseCase;
+    private final GetProductUseCase useCase;
 
     private final GetProductMapper mapper;
 
@@ -32,7 +32,7 @@ public class GetProductRestAdapter {
     public GetProductResponse getProduct(
         @Parameter(description = "상품 ID.", example = "1") @PathVariable("productId") final Long productId
     ) {
-        return mapper.infoToResponse(getProductUseCase.execute(new GetProductCommand(productId)));
+        return mapper.infoToResponse(useCase.execute(new GetProductCommand(productId)));
     }
 
 }

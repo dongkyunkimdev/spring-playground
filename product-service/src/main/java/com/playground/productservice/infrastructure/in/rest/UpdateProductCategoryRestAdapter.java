@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @RequiredArgsConstructor
 public class UpdateProductCategoryRestAdapter {
 
-    private final UpdateProductCategoryUseCase updateProductCategoryUseCase;
+    private final UpdateProductCategoryUseCase useCase;
 
     private final UpdateProductCategoryMapper mapper;
 
@@ -35,7 +35,7 @@ public class UpdateProductCategoryRestAdapter {
         @Parameter(description = "상품 카테고리 ID.", example = "1") @PathVariable("productCategoryId") final Long productCategoryId,
         @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "상품 카테고리 수정 정보.") @RequestBody(required = true) @Valid final UpdateProductCategoryRequest request
     ) {
-        return mapper.infoToResponse(updateProductCategoryUseCase.execute(mapper.requestToCommand(productCategoryId, request)));
+        return mapper.infoToResponse(useCase.execute(mapper.requestToCommand(productCategoryId, request)));
     }
 
 }

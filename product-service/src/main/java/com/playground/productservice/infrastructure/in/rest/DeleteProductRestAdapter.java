@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @RequiredArgsConstructor
 public class DeleteProductRestAdapter {
 
-    private final DeleteProductUseCase deleteProductUseCase;
+    private final DeleteProductUseCase useCase;
 
     @Operation(summary = "상품 삭제.")
     @Tag(name = "2-5. [상품 삭제]")
@@ -28,7 +28,7 @@ public class DeleteProductRestAdapter {
     public void deleteProduct(
         @Parameter(description = "상품 ID.", example = "1") @PathVariable("productId") final Long productId
     ) {
-        deleteProductUseCase.execute(new DeleteProductCommand(productId));
+        useCase.execute(new DeleteProductCommand(productId));
     }
 
 }

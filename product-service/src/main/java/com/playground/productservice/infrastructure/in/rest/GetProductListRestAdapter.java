@@ -35,9 +35,9 @@ public class GetProductListRestAdapter {
         @ParameterObject GetProductListRequest request,
         @ParameterObject @PageableDefault(size = 10, sort = "productId", direction = Sort.Direction.DESC) Pageable pageable
     ) {
-        Slice<GetProductListInfo> getProductListInfoSlice = useCase.execute(mapper.requestToCommand(request), pageable);
+        Slice<GetProductListInfo> infoSlice = useCase.execute(mapper.requestToCommand(request), pageable);
 
-        return SliceResponse.of(getProductListInfoSlice.map(mapper::infoToResponse));
+        return SliceResponse.of(infoSlice.map(mapper::infoToResponse));
     }
 
 }

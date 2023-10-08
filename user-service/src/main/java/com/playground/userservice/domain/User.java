@@ -32,6 +32,12 @@ public class User extends BaseTimeEntity {
     @Column(name = "nickname")
     private String nickname;
 
+    @Column(name = "first_name")
+    private String firstName;
+
+    @Column(name = "last_name")
+    private String lastName;
+
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private UserStatus status = UserStatus.ACTIVE;
@@ -47,10 +53,12 @@ public class User extends BaseTimeEntity {
     private List<UserPaymentCard> userPaymentCardList;
 
     @Builder
-    public User(String username, String password, String nickname) {
+    public User(String username, String password, String nickname, String firstName, String lastName) {
         this.username = username;
         this.password = password;
         this.nickname = nickname;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
 }

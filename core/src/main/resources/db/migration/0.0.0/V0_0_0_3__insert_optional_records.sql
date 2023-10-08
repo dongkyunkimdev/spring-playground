@@ -85,3 +85,22 @@ VALUES (1, 'T-shirt', 100, 19.99, 1),
        (51, 'Party Hats', 100, 2.99, 28),
        (52, 'Wireless Charger', 25, 19.99, 29)
 ;
+
+use db_user;
+
+INSERT INTO `user`(user_id, username, password, nickname, first_name, last_name, status, role, last_login_at)
+VALUES (2, 'inactiveUser@playground.com', '$2a$10$Tu7KuI7Ctw90fGwALAoEQuzFT0/2zV7J2mqZeTcV.x3eioMw7rtDC', 'inactiveUser', 'gildong', 'hong', 'INACTIVE', 'USER', '2023-10-01 23:54:15'),
+       (3, 'deletedUser@playground.com', '$2a$10$Tu7KuI7Ctw90fGwALAoEQuzFT0/2zV7J2mqZeTcV.x3eioMw7rtDC', 'deletedUser', 'gildong', 'hong', 'DELETED', 'USER', '2023-10-01 23:54:15'),
+       (4, 'blockedUser@playground.com', '$2a$10$Tu7KuI7Ctw90fGwALAoEQuzFT0/2zV7J2mqZeTcV.x3eioMw7rtDC', 'blockedUser', 'gildong', 'hong', 'BLOCKED', 'USER', '2023-10-01 23:54:15'),
+       (5, 'activeUser1@playground.com', '$2a$10$Tu7KuI7Ctw90fGwALAoEQuzFT0/2zV7J2mqZeTcV.x3eioMw7rtDC', 'activeUser1', 'gildong', 'hong', 'ACTIVE', 'USER', '2023-10-02 00:00:00'),
+       (6, 'activeUser2@playground.com', '$2a$10$Tu7KuI7Ctw90fGwALAoEQuzFT0/2zV7J2mqZeTcV.x3eioMw7rtDC', 'activeUser2', 'gildong', 'hong', 'ACTIVE', 'USER', '2023-10-02 00:00:00'),
+       (7, 'activeUser3@playground.com', '$2a$10$Tu7KuI7Ctw90fGwALAoEQuzFT0/2zV7J2mqZeTcV.x3eioMw7rtDC', 'activeUser3', 'gildong', 'hong', 'ACTIVE', 'USER', '2023-10-02 00:00:00'),
+       (8, 'activeUser4@playground.com', '$2a$10$Tu7KuI7Ctw90fGwALAoEQuzFT0/2zV7J2mqZeTcV.x3eioMw7rtDC', 'activeUser4', 'gildong', 'hong', 'ACTIVE', 'USER', '2023-10-02 00:00:00'),
+       (9, 'activeUser5@playground.com', '$2a$10$Tu7KuI7Ctw90fGwALAoEQuzFT0/2zV7J2mqZeTcV.x3eioMw7rtDC', 'activeUser5', 'gildong', 'hong', 'ACTIVE', 'USER', '2023-10-02 00:00:00'),
+       (10, 'activeUser6@playground.com', '$2a$10$Tu7KuI7Ctw90fGwALAoEQuzFT0/2zV7J2mqZeTcV.x3eioMw7rtDC', 'activeUser6', 'gildong', 'hong', 'ACTIVE', 'USER', '2023-10-02 00:00:00'),
+       (11, 'activeUser7@playground.com', '$2a$10$Tu7KuI7Ctw90fGwALAoEQuzFT0/2zV7J2mqZeTcV.x3eioMw7rtDC', 'activeUser7', 'gildong', 'hong', 'ACTIVE', 'USER', '2023-10-02 00:00:00')
+;
+
+INSERT INTO `user_payment_card`(user_payment_card_id, type, provider, number, user_id)
+VALUES (1, 'CREDIT_CARD', 'SAMSUNG', '1234567890', '5')
+;

@@ -5,6 +5,8 @@ import com.playground.userservice.application.port.in.usecase.dto.RegisterUserPa
 import com.playground.userservice.application.port.in.usecase.dto.RegisterUserPaymentCardInfo;
 import com.playground.userservice.domain.User;
 import com.playground.userservice.domain.UserPaymentCard;
+import com.playground.userservice.infrastructure.in.rest.dto.RegisterUserPaymentCardRequest;
+import com.playground.userservice.infrastructure.in.rest.dto.RegisterUserPaymentCardResponse;
 import com.playground.userservice.util.mapper.mapstruct.RegisterUserPaymentCardMapStruct;
 import lombok.RequiredArgsConstructor;
 
@@ -13,6 +15,10 @@ import lombok.RequiredArgsConstructor;
 public class RegisterUserPaymentCardMapper {
 
     private final RegisterUserPaymentCardMapStruct mapStruct;
+
+    public RegisterUserPaymentCardCommand requestToCommand(Long userId, RegisterUserPaymentCardRequest request) {
+        return mapStruct.requestToCommand(userId, request);
+    }
 
     public UserPaymentCard commandToEntity(RegisterUserPaymentCardCommand command, User user) {
         return UserPaymentCard.builder()
@@ -25,6 +31,10 @@ public class RegisterUserPaymentCardMapper {
 
     public RegisterUserPaymentCardInfo entityToInfo(UserPaymentCard userPaymentCard) {
         return mapStruct.entityToInfo(userPaymentCard);
+    }
+
+    public RegisterUserPaymentCardResponse infoToResponse(RegisterUserPaymentCardInfo info) {
+        return mapStruct.infoToResponse(info);
     }
 
 }

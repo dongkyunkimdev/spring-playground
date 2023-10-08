@@ -29,7 +29,7 @@
 - DDD의 전략적 설계를 적용하여 마이크로서비스 도출
 - Hexagonal Architecture를 적용하여 비즈니스 로직이 외부 요소에 의존하지 않도록 설계 및 구현
 - Apache Kafka를 사용하여 이벤트 기반의 비동기 호출을 통해 마이크로서비스간의 최종 일관성 유지
-- JUnit5를 사용하여 예측 가능한 모든 케이스에 대한 Integration Test Code 작성
+- JUnit5를 사용하여 예측 가능한 모든 케이스에 대한 테스트 코드 작성
 - Spring Cloud, Docker를 사용하여 Cloud Native Application 구성
 
 ## 개선사항

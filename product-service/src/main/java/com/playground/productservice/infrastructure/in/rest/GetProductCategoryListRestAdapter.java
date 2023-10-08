@@ -16,6 +16,7 @@ import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
@@ -29,7 +30,7 @@ public class GetProductCategoryListRestAdapter {
 
     @Operation(summary = "상품 카테고리 리스트 조회.")
     @Tag(name = "1-1. [상품 카테고리 리스트 조회]")
-    @GetMapping("/v1/products/categories")
+    @GetMapping(value = "/v1/products/categories", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     public SliceResponse<GetProductCategoryListResponse> getProductCategoryList(
         @ParameterObject GetProductCategoryListRequest request,

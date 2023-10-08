@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -27,7 +28,7 @@ public class RegisterProductRestAdapter {
     @Operation(summary = "상품 등록.")
     @Tag(name = "2-3. [상품 등록]")
     @ApiExceptionExample(RegisterProductExceptionDocs.class)
-    @PostMapping("/v1/products")
+    @PostMapping(value = "/v1/products", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public RegisterProductResponse registerProduct(
         @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "상품 등록 정보.") @RequestBody(required = true) @Valid final RegisterProductRequest request

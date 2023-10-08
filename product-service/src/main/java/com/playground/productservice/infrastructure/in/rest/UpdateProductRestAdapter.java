@@ -13,6 +13,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,7 +30,7 @@ public class UpdateProductRestAdapter {
     @Operation(summary = "상품 수정.")
     @Tag(name = "2-4. [상품 수정]")
     @ApiExceptionExample(UpdateProductExceptionDocs.class)
-    @PatchMapping("/v1/products/{productId}")
+    @PatchMapping(value = "/v1/products/{productId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     public UpdateProductResponse updateProduct(
         @Parameter(description = "상품 ID.", example = "1") @PathVariable("productId") final Long productId,

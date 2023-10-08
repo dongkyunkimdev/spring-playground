@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -27,7 +28,7 @@ public class GetProductCategoryRestAdapter {
     @Operation(summary = "상품 카테고리 조회.")
     @Tag(name = "1-2. [상품 카테고리 조회]")
     @ApiExceptionExample(GetProductCategoryExceptionDocs.class)
-    @GetMapping("/v1/products/categories/{productCategoryId}")
+    @GetMapping(value = "/v1/products/categories/{productCategoryId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     public GetProductCategoryResponse getProductCategory(
         @Parameter(description = "상품 카테고리 ID.", example = "1") @PathVariable("productCategoryId") final Long productCategoryId

@@ -8,7 +8,7 @@ public class OrderServiceExternalRestAdapter implements OrderServiceExternalPort
 
     @Override
     public boolean isProductReferenced(Long productId) {
-        // TODO: Order-Service 모듈 구현 이후 작업 예정, isProductReferenced true로 ProductReferencedException가 발생하는 Integration 테스트 케이스도 작성 예정
+        // TODO: Order-Service 모듈 구현 이후 작성, isProductReferenced true로 ProductReferencedException가 발생하는 Integration 테스트 케이스도 작성
         return false;
     }
 

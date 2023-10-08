@@ -27,6 +27,8 @@ public class SignUpMapper {
             .username(command.username())
             .password(passwordEncoder.encode(command.password()))
             .nickname(command.nickname())
+            .firstName(command.firstName())
+            .lastName(command.lastName())
             .build();
     }
 

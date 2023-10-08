@@ -9,6 +9,8 @@ public record GetUserListInfo(
     Long userId,
     String username,
     String nickname,
+    String firstName,
+    String lastName,
     UserStatus status,
     UserRole role,
     LocalDateTime lastLoginAt,

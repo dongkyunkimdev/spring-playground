@@ -47,6 +47,8 @@ class GetUserRestAdapterTest extends ControllerTest {
         assertThat(userResponse.userId()).isEqualTo(userId);
         assertThat(userResponse.username()).isEqualTo("admin@playground.com");
         assertThat(userResponse.nickname()).isEqualTo("admin");
+        assertThat(userResponse.firstName()).isEqualTo("gildong");
+        assertThat(userResponse.lastName()).isEqualTo("hong");
         assertThat(userResponse.status()).isEqualTo(UserStatus.ACTIVE);
         assertThat(userResponse.role()).isEqualTo(UserRole.ADMIN);
         assertThat(userResponse.lastLoginAt()).isEqualTo("2023-10-02T08:54:15");

@@ -30,7 +30,7 @@ class SignUpRestAdapterTest extends ControllerTest {
     @Test
     void 회원가입_성공() throws Exception {
         // given
-        final SignUpRequest requestDto = new SignUpRequest("user@playground.com", "asdf1234!@#$", "user");
+        final SignUpRequest requestDto = new SignUpRequest("user@playground.com", "asdf1234!@#$", "user", "gildong", "hong");
 
         // when
         MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.POST, "/v1/users/signup")
@@ -49,6 +49,8 @@ class SignUpRestAdapterTest extends ControllerTest {
         assertThat(signUpResponse.userId()).isNotNull();
         assertThat(signUpResponse.username()).isEqualTo(requestDto.username());
         assertThat(signUpResponse.nickname()).isEqualTo(requestDto.nickname());
+        assertThat(signUpResponse.firstName()).isEqualTo(requestDto.firstName());
+        assertThat(signUpResponse.lastName()).isEqualTo(requestDto.lastName());
         assertThat(signUpResponse.status()).isEqualTo(UserStatus.ACTIVE);
         assertThat(signUpResponse.role()).isEqualTo(UserRole.USER);
     }
@@ -56,7 +58,7 @@ class SignUpRestAdapterTest extends ControllerTest {
     @Test
     void 회원가입_실패_username이_중복됨() throws Exception {
         // given
-        final SignUpRequest requestDto = new SignUpRequest("admin@playground.com", "1234", "admin");
+        final SignUpRequest requestDto = new SignUpRequest("admin@playground.com", "1234", "admin", "gildong", "hong");
 
         // when
         MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.POST, "/v1/users/signup")
@@ -74,7 +76,7 @@ class SignUpRestAdapterTest extends ControllerTest {
     @Test
     void 회원가입_실패_nickname이_중복됨() throws Exception {
         // given
-        final SignUpRequest requestDto = new SignUpRequest("admin121312@playground.com", "1234", "admin");
+        final SignUpRequest requestDto = new SignUpRequest("admin121312@playground.com", "1234", "admin", "gildong", "hong");
 
         // when
         MockHttpServletRequestBuilder requestBuilder = createRequestBuilder(HttpMethod.POST, "/v1/users/signup")

@@ -54,6 +54,8 @@ class GetUserListRestAdapterTest extends ControllerTest {
             assertThat(user.userId()).isNotNull();
             assertThat(user.username()).isNotNull();
             assertThat(user.nickname()).isNotNull();
+            assertThat(user.firstName()).isNotNull();
+            assertThat(user.lastName()).isNotNull();
             assertThat(user.status()).isNotNull();
             assertThat(user.role()).isNotNull();
             assertThat(user.lastLoginAt()).isNotNull();

@@ -5,6 +5,7 @@ import com.playground.userservice.domain.enums.CardProvider;
 import com.playground.userservice.domain.enums.CardType;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -33,5 +34,13 @@ public class UserPaymentCard extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id")
     private User user;
+
+    @Builder
+    public UserPaymentCard(CardType type, CardProvider provider, String number, User user) {
+        this.type = type;
+        this.provider = provider;
+        this.number = number;
+        this.user = user;
+    }
 
 }

@@ -1,6 +1,7 @@
 package com.playground.userservice.application.port.out.persistence;
 
 import com.playground.userservice.domain.User;
+import com.playground.userservice.domain.UserPaymentCard;
 import com.playground.userservice.infrastructure.dao.dto.GetUserListSearchCondition;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
@@ -19,6 +20,10 @@ public interface UserPersistencePort {
 
     boolean isExistsUserByNickname(String nickname);
 
+    boolean isExistsUserPaymentCardByUserIdAndCardNumber(Long userId, String number);
+
     User saveUser(User user);
+
+    UserPaymentCard saveUserPaymentCard(UserPaymentCard userPaymentCard);
 
 }

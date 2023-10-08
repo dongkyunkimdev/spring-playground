@@ -3,6 +3,8 @@ package com.playground.userservice.infrastructure.out.persistence;
 import com.playground.core.annotation.PersistenceAdapter;
 import com.playground.userservice.application.port.out.persistence.UserPersistencePort;
 import com.playground.userservice.domain.User;
+import com.playground.userservice.domain.UserPaymentCard;
+import com.playground.userservice.infrastructure.dao.UserPaymentCardRepository;
 import com.playground.userservice.infrastructure.dao.UserRepository;
 import com.playground.userservice.infrastructure.dao.UserRepositorySupport;
 import com.playground.userservice.infrastructure.dao.dto.GetUserListSearchCondition;
@@ -17,6 +19,8 @@ import java.util.Optional;
 public class UserPersistenceAdapter implements UserPersistencePort {
 
     private final UserRepository userRepository;
+
+    private final UserPaymentCardRepository userPaymentCardRepository;
 
     private final UserRepositorySupport userRepositorySupport;
 
@@ -46,8 +50,18 @@ public class UserPersistenceAdapter implements UserPersistencePort {
     }
 
     @Override
+    public boolean isExistsUserPaymentCardByUserIdAndCardNumber(Long userId, String number) {
+        return userPaymentCardRepository.existsByUserUserIdAndNumber(userId, number);
+    }
+
+    @Override
     public User saveUser(User user) {
         return userRepository.save(user);
+    }
+
+    @Override
+    public UserPaymentCard saveUserPaymentCard(UserPaymentCard userPaymentCard) {
+        return userPaymentCardRepository.save(userPaymentCard);
     }
 
 }

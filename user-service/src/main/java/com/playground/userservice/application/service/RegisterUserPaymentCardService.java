@@ -5,7 +5,7 @@ import com.playground.userservice.application.port.in.usecase.RegisterUserPaymen
 import com.playground.userservice.application.port.in.usecase.dto.RegisterUserPaymentCardCommand;
 import com.playground.userservice.application.port.in.usecase.dto.RegisterUserPaymentCardInfo;
 import com.playground.userservice.application.port.out.persistence.UserPersistencePort;
-import com.playground.userservice.application.port.out.rest.PaymentCardExternalPort;
+import com.playground.userservice.application.port.out.external.PaymentCardExternalPort;
 import com.playground.userservice.domain.User;
 import com.playground.userservice.domain.exception.AlreadyRegisteredUserPaymentCardException;
 import com.playground.userservice.domain.exception.UserNotFoundException;

@@ -1,4 +1,4 @@
-package com.playground.productservice.application.port.out.rest;
+package com.playground.productservice.application.port.out.external;
 
 public interface OrderServiceExternalPort {
 

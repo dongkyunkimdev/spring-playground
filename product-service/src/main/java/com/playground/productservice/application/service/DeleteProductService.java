@@ -4,7 +4,7 @@ import com.playground.core.annotation.UseCase;
 import com.playground.productservice.application.port.in.usecase.DeleteProductUseCase;
 import com.playground.productservice.application.port.in.usecase.dto.DeleteProductCommand;
 import com.playground.productservice.application.port.out.persistence.ProductPersistencePort;
-import com.playground.productservice.application.port.out.rest.OrderServiceExternalPort;
+import com.playground.productservice.application.port.out.external.OrderServiceExternalPort;
 import com.playground.productservice.domain.Product;
 import com.playground.productservice.domain.exception.ProductNotFoundException;
 import com.playground.productservice.domain.exception.ProductReferencedException;

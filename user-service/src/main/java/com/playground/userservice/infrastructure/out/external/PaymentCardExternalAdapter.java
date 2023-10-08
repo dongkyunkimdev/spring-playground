@@ -1,7 +1,7 @@
 package com.playground.userservice.infrastructure.out.external;
 
 import com.playground.core.annotation.ExternalAdapter;
-import com.playground.userservice.application.port.out.rest.PaymentCardExternalPort;
+import com.playground.userservice.application.port.out.external.PaymentCardExternalPort;
 import com.playground.userservice.domain.enums.CardProvider;
 import com.playground.userservice.domain.enums.CardType;
 

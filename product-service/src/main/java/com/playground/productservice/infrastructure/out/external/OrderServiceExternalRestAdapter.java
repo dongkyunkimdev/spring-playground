@@ -1,7 +1,7 @@
-package com.playground.productservice.infrastructure.out.rest;
+package com.playground.productservice.infrastructure.out.external;
 
 import com.playground.core.annotation.ExternalAdapter;
-import com.playground.productservice.application.port.out.rest.OrderServiceExternalPort;
+import com.playground.productservice.application.port.out.external.OrderServiceExternalPort;
 
 @ExternalAdapter
 public class OrderServiceExternalRestAdapter implements OrderServiceExternalPort {

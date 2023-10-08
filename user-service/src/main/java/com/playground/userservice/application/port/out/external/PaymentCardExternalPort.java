@@ -1,4 +1,4 @@
-package com.playground.userservice.application.port.out.rest;
+package com.playground.userservice.application.port.out.external;
 
 import com.playground.userservice.domain.enums.CardProvider;
 import com.playground.userservice.domain.enums.CardType;
